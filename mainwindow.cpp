@@ -274,7 +274,7 @@ void MainWindow::reset(){
 
 //DATA stuff
 void MainWindow::openCSV(){
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open csv"), defaultDirectory, "CSV files (*.csv)");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open csv"), DEFAULTDIRECTORY, "CSV files (*.csv)");
     if ( fileName == ""){
         return;
     }
@@ -349,7 +349,12 @@ void MainWindow::openCSV(){
 
 }
 void MainWindow::openGDX(){
-
+    Wizard * wiz = new Wizard(this);
+    connect(wiz, SIGNAL(addFlow(QString,QString,QString,QString,float,float,float)), this, SLOT(addFlow(QString,QString,QString,QString,float,float,float)));
+    connect(wiz, SIGNAL(addTask(QString,QString,float,float,float,QString)), this, SLOT(addTask(QString,QString,float,float,float,QString)));
+    connect(wiz, SIGNAL(reset()), this, SLOT(reset()));
+    connect(wiz, SIGNAL(createRepresentation()), this, SLOT(createRepresentation()));
+    wiz->show();
 }
 
 

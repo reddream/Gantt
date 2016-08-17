@@ -58,15 +58,7 @@ public:
     ~MainWindow();
     bool eventFilter(QObject *watched, QEvent *event);
 
-    // public functions for the csv Wizard
-    /// Creates the graphical representation of the gantt chart
-    void createRepresentation();
-    /// Adds a Flow to the flows list
-    void addFlow(QString unit1name, QString op1name, QString unit2name, QString op2name, float pr, float cr, float amount);
-    /// Adds a Task to the tasks list. color is a color name in hex format, if none is given a random color will be generated.
-    void addTask(QString unitName, QString taskName, float start, float end, float amount, QString color = "random");
-    /// reset the window (important for loading new files)
-    void reset();
+
 private:
     Ui::MainWindow *ui;
     float verticalZoom = 1;
@@ -114,8 +106,6 @@ private:
     void createMenu();
     /// returns a readable description of a Task
     QString describeTask(Task task);
-    ///Directory in which the open file prompt will start in
-    QString defaultDirectory = "/Users/juliusnaeumann/Downloads/examples-CSV";
     /// The currently opened file
     QString openFile;
     /// File menu
@@ -215,6 +205,15 @@ private slots:
     void ruleChangedEnd(int index);
     void applyFilter();
     void clearFilter();
+    // public functions for the csv Wizard
+    /// Creates the graphical representation of the gantt chart
+    void createRepresentation();
+    /// Adds a Flow to the flows list
+    void addFlow(QString unit1name, QString op1name, QString unit2name, QString op2name, float pr, float cr, float amount);
+    /// Adds a Task to the tasks list. color is a color name in hex format, if none is given a random color will be generated.
+    void addTask(QString unitName, QString taskName, float start, float end, float amount, QString color = "random");
+    /// reset the window (important for loading new files)
+    void reset();
 protected:
     void resizeEvent(QResizeEvent * event);
     void keyPressEvent(QKeyEvent * e);

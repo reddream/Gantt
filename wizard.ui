@@ -13,28 +13,71 @@
   <property name="windowTitle">
    <string>Wizard</string>
   </property>
-  <widget class="QWizardPage" name="wizardPage">
+  <property name="wizardStyle">
+   <enum>QWizard::ClassicStyle</enum>
+  </property>
+  <property name="options">
+   <set>QWizard::NoCancelButton|QWizard::NoDefaultButton</set>
+  </property>
+  <widget class="QWizardPage" name="wizardPageLoad">
    <property name="title">
     <string>Select file</string>
    </property>
    <property name="subTitle">
-    <string>Select the GDX file to load.</string>
+    <string>Select the GDX file to load, the GAMS Sysdir and an optional config file.</string>
    </property>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>113</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Load...</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout_5">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="loadFileButton">
+      <property name="maximumSize">
+       <size>
+        <width>80</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Load...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="loadConfigButton">
+      <property name="text">
+       <string>Load...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="loadedConfigFileLabel">
+      <property name="text">
+       <string>No config file loaded. (optional)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="sysdirLabel">
+      <property name="text">
+       <string>No Sysdir selected.  (obligatory)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="loadedFileLabel">
+      <property name="text">
+       <string>No file loaded. (obligatory)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="loadSysdirButton">
+      <property name="text">
+       <string>Load...</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPage1">
+  <widget class="QWizardPage" name="wizardPageTasks">
    <property name="title">
     <string>Select symbols</string>
    </property>
@@ -88,7 +131,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPage2">
+  <widget class="QWizardPage" name="wizardPageFlows">
    <property name="title">
     <string>Select Flow Symbols</string>
    </property>
@@ -96,7 +139,7 @@
     <string>Select the symbol for each task attribute from a list of available symbols</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
+    <item row="2" column="0">
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QLabel" name="label_5">
@@ -129,6 +172,33 @@
        <widget class="QComboBox" name="selectCr"/>
       </item>
      </layout>
+    </item>
+    <item row="0" column="0">
+     <widget class="QCheckBox" name="checkBox">
+      <property name="text">
+       <string>Add flows</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="wizardPageSaveConfig">
+   <property name="title">
+    <string>Save configuration</string>
+   </property>
+   <property name="subTitle">
+    <string>Save this configuration for later. (optional)</string>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="saveConfigButton">
+      <property name="text">
+       <string>Save...</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
