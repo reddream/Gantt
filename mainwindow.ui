@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>992</width>
+    <width>1072</width>
     <height>641</height>
    </rect>
   </property>
@@ -81,7 +81,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tasksTab">
            <attribute name="title">
@@ -100,7 +100,7 @@
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>7</number>
+               <number>8</number>
               </property>
               <attribute name="horizontalHeaderDefaultSectionSize">
                <number>68</number>
@@ -139,6 +139,11 @@
               <column>
                <property name="text">
                 <string>Amount</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Type</string>
                </property>
               </column>
               <column>
@@ -621,7 +626,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>992</width>
+     <width>1072</width>
      <height>22</height>
     </rect>
    </property>

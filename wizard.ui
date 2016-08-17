@@ -13,6 +13,27 @@
   <property name="windowTitle">
    <string>Wizard</string>
   </property>
+  <widget class="QWizardPage" name="wizardPage">
+   <property name="title">
+    <string>Select file</string>
+   </property>
+   <property name="subTitle">
+    <string>Select the GDX file to load.</string>
+   </property>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load...</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QWizardPage" name="wizardPage1">
    <property name="title">
     <string>Select symbols</string>

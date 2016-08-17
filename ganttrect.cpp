@@ -15,7 +15,7 @@ QVariant blinker(const QBrush  &original, const QBrush &trash, qreal progress){
 
 }
 
-GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float start, float end, float amount, QColor color, QGraphicsItem *parent) : QGraphicsRectItem( start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start + UNITNAMEBARWIDTH,  DEFAULTTASKHEIGHT*2,  parent)
+GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float start, float end, float amount, QColor color, QGraphicsItem *parent) : QGraphicsRectItem( start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start ,  DEFAULTTASKHEIGHT*2,  parent)
 {
     this->taskIndex = taskIndex;
     this->unitIndex = unitIndex;
@@ -32,6 +32,7 @@ GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float s
 void GanttRect::isSelected(){
 
     pen.setStyle(Qt::DashLine);
+    pen.setColor(Qt::white);
     setPen(pen);
     setZValue(1);
 
@@ -58,6 +59,7 @@ void GanttRect::blink(){
 
 void GanttRect::isNotSelected(){
     pen.setStyle(Qt::SolidLine);
+    pen.setColor(Qt::black);
     setPen(pen);
     setZValue(0);
 }
@@ -72,9 +74,9 @@ void GanttRect::isNotMarkedInFlow(){
 }
 void GanttRect::showAmount(bool yes){
     if (yes){
-        setRect(start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT - UNITREPHEIGHT * amount / largestAmount,  end-start + UNITNAMEBARWIDTH, UNITREPHEIGHT * amount / largestAmount);
+        setRect(start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT - UNITREPHEIGHT * amount / largestAmount,  end-start, UNITREPHEIGHT * amount / largestAmount);
     } else {
-        setRect(start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start + UNITNAMEBARWIDTH,  DEFAULTTASKHEIGHT*2);
+        setRect(start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start ,  DEFAULTTASKHEIGHT*2);
     }
 }
 

@@ -6,6 +6,7 @@
 #include <QActionGroup>
 #include "ganttflow.h"
 #include "ganttrect.h"
+#include "wizard.h"
 /// representation of a task
 struct Task{
     /// Task name
@@ -57,6 +58,15 @@ public:
     ~MainWindow();
     bool eventFilter(QObject *watched, QEvent *event);
 
+    // public functions for the csv Wizard
+    /// Creates the graphical representation of the gantt chart
+    void createRepresentation();
+    /// Adds a Flow to the flows list
+    void addFlow(QString unit1name, QString op1name, QString unit2name, QString op2name, float pr, float cr, float amount);
+    /// Adds a Task to the tasks list. color is a color name in hex format, if none is given a random color will be generated.
+    void addTask(QString unitName, QString taskName, float start, float end, float amount, QString color = "random");
+    /// reset the window (important for loading new files)
+    void reset();
 private:
     Ui::MainWindow *ui;
     float verticalZoom = 1;
@@ -66,8 +76,6 @@ private:
     void showFlows(int taskIndex);
     void recursivelyActivateFlowsToTheRight(int taskIndex);
     void recursivelyActivateFlowsToTheLeft(int taskIndex);
-    /// Creates the graphical representation of the gantt chart
-    void createRepresentation();
     /// A list of all tasks
     QList<Task> * tasks;
     /// A list of all flows
@@ -88,15 +96,12 @@ private:
     QList<QGraphicsTextItem*> * unitLabels;
     /// The scene to which everything is drawn
     QGraphicsScene * scene;
-    /// read the Sysdir from the config file
-    QString getSysdir();
-    /// Adds a Flow to the flows list
-    void addFlow(QString unit1name, QString op1name, QString unit2name, QString op2name, float pr, float cr, float amount);
-    /// Adds a Task to the tasks list. color is a color name in hex format, if none is given a random color will be generated.
-    void addTask(QString unitName, QString taskName, float start, float end, float amount, QString color = "random");
     /// The time when the longest task ends.
     float longestTask;
+    /// The largest amount (For scaling the view)
     float largestAmount;
+    /// Largest amount for each task, for the coloring option
+    QList<float> * largestAmounts;
     /// Set wether to visualize amounts by height
     void showAmount(bool yes);
     int currentClickedTaskIndex = -1;
@@ -113,10 +118,6 @@ private:
     QString defaultDirectory = "/Users/juliusnaeumann/Downloads/examples-CSV";
     /// The currently opened file
     QString openFile;
-    /// parse a CSV file
-    void openCSV(QString filename);
-    /// read a GDX file
-    void openGDX(QString filename);
     /// File menu
     QMenu * fileMenu;
     /// Check menu
@@ -129,11 +130,9 @@ private:
     QActionGroup * taskColoringMenu;
     //Menu Actions
     /// Menu action for opening a new file
-    QAction *  openAct;
+    QAction *  openCSVAct;
     /// Menu action for resetting the view
-    QAction *  resetAct;
-    /// Menu action for  selecting GAMS Sysdir
-    QAction * selectSysdirAct;
+    QAction *  openGDXAct;
     /// Menu action for visualizing amounts
     QAction *  visualizeamountsAct;
     /// Menu action for showing all flows
@@ -188,12 +187,10 @@ private slots:
     /// called when a task has been selected in the table
     void taskTableClicked(int index, int _);
     //Menu
-    /// called by openAct, opens a File selection window. Recognizes wether a CSV or a CSV file was opened and calls openCSV() and openGDX(),  respectively.
-    void open();
-    /// reset the window
-    void reset();
-    /// called by selectSysdirAct, writes a new Sysdir to the config file
-    void selectSysdir();
+    /// called by openCSVAct, opens a File selection window and parses the selected CSV file.
+    void openCSV();
+    /// called by openGDXAct, opens a Wizard for reading GDX files.
+    void openGDX();
     /// called by visualizeAmountsAct
     void visualizeamounts();
     /// called by showAllFlowsAct

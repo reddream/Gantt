@@ -8,9 +8,9 @@
 
 #define GDXAPIVERSION 7
 
-#if defined(UNICODE) || defined (_UNICODE)
-#error Cannot run when UNICODE is defined
-#endif
+//#if defined(UNICODE) || defined (_UNICODE)
+//#error Cannot run when UNICODE is defined
+//#endif
 
 
 #if defined(_WIN32) && defined(__GNUC__)

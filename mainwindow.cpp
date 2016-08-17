@@ -34,8 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gclgms.h"
-#include "gdxcc.h"
+
 //INIT stuff
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -61,6 +60,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->filterApplyButton, SIGNAL(pressed()),this, SLOT(applyFilter()));
     connect(ui->filterClearButton, SIGNAL(pressed()),this, SLOT(clearFilter()));
 
+    connect(ui->filter1amount, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter2amount, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter1start, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter2start, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter1end, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter2end, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter1duration, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filter2duration, SIGNAL(valueChanged(double)), this, SLOT(applyFilter()));
+    connect(ui->filterTask, SIGNAL(textChanged(QString)), this, SLOT(applyFilter()));
+    connect(ui->filterUnit, SIGNAL(textChanged(QString)), this, SLOT(applyFilter()));
+
     //loadData();
 
     ui->allTasksTable->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
@@ -70,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->allTasksTable->horizontalHeader()->setSectionResizeMode(4,QHeaderView::Stretch);
     ui->allTasksTable->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
     ui->allTasksTable->horizontalHeader()->setSectionResizeMode(6,QHeaderView::Stretch);
-    ui->allTasksTable->horizontalHeader()->hideSection(6);
+    ui->allTasksTable->horizontalHeader()->hideSection(7);
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(0,QHeaderView::ResizeToContents);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
@@ -79,36 +89,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createMenu();
     reset();
-    if (getSysdir() == ""){
-        selectSysdir();
-    }
+
 }
 
 
 //create Menu (File, Edit...)
 void MainWindow::createMenu(){
-    openAct = new QAction(tr("&Open"),this);
-    openAct->setShortcuts(QKeySequence::Open);
-    openAct->setStatusTip(tr("Load a csv or gdx file"));
-    connect(openAct, &QAction::triggered, this, &MainWindow::open);
+    openCSVAct = new QAction(tr("&Open CSV"),this);
+    //openCSVAct->setShortcuts(QKeySequence::Open);
+    openCSVAct->setStatusTip(tr("Load a csvfile"));
+    connect(openCSVAct, &QAction::triggered, this, &MainWindow::openCSV);
 
-    resetAct = new QAction(tr("&Reset"),this);
-    resetAct->setShortcuts(QKeySequence::Refresh);
-    resetAct->setStatusTip(tr("Reset"));
-    connect(resetAct, &QAction::triggered, this, &MainWindow::reset);
+    openGDXAct = new QAction(tr("&Open GDX..."),this);
+    //openGDXAct->setShortcuts(QKeySequence::Open);
+    openGDXAct->setStatusTip(tr("Load a GDX file with the help of a wizard"));
+    connect(openGDXAct, &QAction::triggered, this, &MainWindow::openGDX);
 
-    selectSysdirAct = new QAction(tr("&Select GAMS Sysdir"),this);
-    selectSysdirAct->setShortcuts(QKeySequence::Save);
-    selectSysdirAct->setStatusTip(tr("Select the location of the GAMS Sysdir"));
-    connect(selectSysdirAct, &QAction::triggered, this, &MainWindow::selectSysdir);
+
 
     fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(resetAct);
-    fileMenu->addAction(selectSysdirAct);
+    fileMenu->addAction(openCSVAct);
+    fileMenu->addAction(openGDXAct);
 
     checkAct = new QAction(tr("&Check"),this);
-    checkAct->setShortcut(QKeySequence::New);
+    //checkAct->setShortcut(QKeySequence::New);
     checkAct->setStatusTip(tr("Check the file for overlapping tasks, Correct flow amount sum and time order in flow"));
     connect(checkAct, &QAction::triggered, this, &MainWindow::check);
 
@@ -116,13 +120,13 @@ void MainWindow::createMenu(){
     checkMenu->addAction(checkAct);
 
     visualizeamountsAct = new QAction(tr("&Visualise Amounts"),this);
-    visualizeamountsAct->setShortcuts(QKeySequence::Paste);
+    //visualizeamountsAct->setShortcuts(QKeySequence::Paste);
     visualizeamountsAct->setCheckable(true);
     visualizeamountsAct->setStatusTip(tr("Visualize amounts in the Gantt Chart, relative to highest amount"));
     connect(visualizeamountsAct, &QAction::changed, this, &MainWindow::visualizeamounts);
 
     showAllFlowsAct = new QAction(tr("&Show all Flows"), this);
-    showAllFlowsAct->setShortcut(QKeySequence::Find);
+    //showAllFlowsAct->setShortcut(QKeySequence::Find);
     showAllFlowsAct->setCheckable(true);
     showAllFlowsAct->setStatusTip(tr("Show all flows, regardless of the current selection"));
     connect(showAllFlowsAct, &QAction::changed, this, &MainWindow::showAllFlowsToggled);
@@ -165,25 +169,25 @@ void MainWindow::createMenu(){
     connect(scrollwAct, &QAction::triggered, this, &MainWindow::scrollw);
 
     colorByAmountAct = new QAction(tr("&Color by Amount"), this);
-    colorByAmountAct->setShortcut(QKeySequence::SelectAll);
+    //colorByAmountAct->setShortcut(QKeySequence::SelectAll);
     colorByAmountAct->setStatusTip(tr("Color tasks relative to their amount, from white over yellow to red"));
     colorByAmountAct->setCheckable(true);
     connect(colorByAmountAct, &QAction::triggered, this, &MainWindow::colorByAmount);
 
     colorByUnitAct = new QAction(tr("&Color by Unit"), this);
-    colorByUnitAct->setShortcut(QKeySequence(Qt::Key_U));
+    //colorByUnitAct->setShortcut(QKeySequence(Qt::Key_U));
     colorByUnitAct->setStatusTip(tr("Color tasks like their unit"));
     colorByUnitAct->setCheckable(true);
     connect(colorByUnitAct, &QAction::triggered, this, &MainWindow::colorByUnit);
 
     colorByTaskAct = new QAction(tr("&Color by Task"), this);
-    colorByTaskAct->setShortcut(QKeySequence(Qt::Key_T));
+    //colorByTaskAct->setShortcut(QKeySequence(Qt::Key_T));
     colorByTaskAct->setStatusTip(tr("Color tasks with same name in same color"));
     colorByTaskAct->setCheckable(true);
     connect(colorByTaskAct, &QAction::triggered, this, &MainWindow::colorByTask);
 
     colorByColorAct = new QAction(tr("&Color by Color"), this);
-    colorByColorAct->setShortcut(QKeySequence(Qt::Key_D));
+    //colorByColorAct->setShortcut(QKeySequence(Qt::Key_D));
     colorByColorAct->setStatusTip(tr("Color tasks with predefined color"));
     colorByColorAct->setCheckable(true);
     connect(colorByColorAct, &QAction::triggered, this, &MainWindow::colorByColor);
@@ -215,7 +219,7 @@ void MainWindow::createMenu(){
     viewMenu->addAction(colorByColorAct);
 
     exportAct = new QAction(tr("&Export"));
-    exportAct->setShortcut(QKeySequence(Qt::Key_E));
+    exportAct->setShortcut(QKeySequence::Save);
     exportAct->setToolTip(tr("Export the current view to PNG"));
     connect(exportAct, &QAction::triggered, this, &MainWindow::exportToImage);
 
@@ -223,36 +227,7 @@ void MainWindow::createMenu(){
     exportMenu->addAction(exportAct);
 
 }
-void MainWindow::selectSysdir(){
-    QString newSysdir = QFileDialog::getExistingDirectory(this, "Select the GAMS Sysdir");
-    if (newSysdir == 0){
-        return;
-    }
-    QFile file(XMLCONFIGFILE);
-    if(!file.open(QFile::WriteOnly)){
-        QMessageBox errorBox;
-        errorBox.critical(0,"Error", "Could not open file for reading");
-        return;
-    }
 
-    QTextStream in(&file);
-    in << newSysdir;
-    file.close();
-}
-QString MainWindow::getSysdir(){
-    QFile file(XMLCONFIGFILE);
-    if(!file.open(QFile::ReadOnly | QFile::Text)){
-        QMessageBox errorBox;
-        //errorBox.critical(0,"Error", "Could not open config for reading, GAMS Sysdir has not been set");
-
-        return "";
-    }
-    QTextStream in(&file);
-    QString out = in.readLine();
-    file.close();
-    qDebug()<<"SYSDIR: "<< out;
-    return out;
-}
 
 //reset
 void MainWindow::reset(){
@@ -281,7 +256,8 @@ void MainWindow::reset(){
     currentClickedTaskIndex = -1;
     currentClickedFlowIndex = -1;
     largestAmount = 0;
-    longestTask = ui->ganttView->width();
+    largestAmounts = new QList<float>();
+    longestTask = 0;
     tasks = new QList<Task>();
     taskColors = new QMap<QString, QColor>();
     units = new QStringList();
@@ -297,8 +273,11 @@ void MainWindow::reset(){
 }
 
 //DATA stuff
-void MainWindow::openCSV(QString fileName){
-
+void MainWindow::openCSV(){
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open csv"), defaultDirectory, "CSV files (*.csv)");
+    if ( fileName == ""){
+        return;
+    }
 
     QFile file(fileName);
     if(!file.open(QFile::ReadOnly | QFile::Text)){
@@ -366,222 +345,13 @@ void MainWindow::openCSV(QString fileName){
 
     }
     qDebug("Loaded %d Tasks on %d Units and %d flows",tasks->count(),units->count(),flows->count());
-
-}
-void MainWindow::openGDX(QString filename){
-    //qDebug("Filename: %s", filename);
-    static gdxStrIndexPtrs_t Indx;
-    static gdxStrIndex_t IndxXXX;
-    static gdxValues_t Values;
-    //qDebug("Filename: %s", filename);
-    gdxHandle_t PGX = NULL;
-    char Msg[GMS_SSSIZE];
-    char Producer[GMS_SSSIZE];
-    int ErrNr;
-    int VarNr;
-    int NrRecs;
-    int N;
-    int Dim;
-    char VarName[GMS_SSSIZE];
-    int VarTyp;
-    int D;
-    //qDebug("FilenameX: %s", filename);
-
-
-    if (!gdxCreateD(&PGX, getSysdir().toLatin1().data(), Msg, sizeof(Msg))) {
-        qDebug("**** Could not load GDX library\n");
-        qDebug("**** %s\n", Msg);
-        return;
-    }
-
-    gdxGetDLLVersion(PGX, Msg);
-
-    qDebug("Using GDX DLL version: %s\n", Msg);
-    //qDebug("using GAMS system directory: %s\n", Sysdir);
-
-    GDXSTRINDEXPTRS_INIT(IndxXXX, Indx);
-    //qDebug("Filename2: %s", filename);
-    gdxOpenRead(PGX, filename.toLatin1().data(), &ErrNr);
-    if (ErrNr) {
-        qDebug("**** Fatal I/O Error = %d when calling %s\n", ErrNr, "gdxOpenRead");
-
-        gdxErrorStr(PGX, ErrNr, Msg);
-        qDebug("%s", Msg);
-        return;
-    }
-    reset();
-    QWidget::setWindowTitle(filename);
-    openFile = filename;
-    gdxFileVersion(PGX, Msg, Producer);
-    qDebug("GDX file written using version: %s\n", Msg);
-    qDebug("GDX file written by: %s\n", Producer);
-
-    if (!gdxFindSymbol(PGX, "GanttData", &VarNr)) {
-        qDebug("**** Could not find variable GanttData\n");
-        return;
-    }
-
-    gdxSymbolInfo(PGX, VarNr, VarName, &Dim, &VarTyp);
-    qDebug("Dim : %d\n", Dim);
-    /*
-   * if (Dim != 2 || GMS_DT_VAR != VarTyp) { qDebug("**** X is not a
-   * two dimensional variable: %d:%d\n",Dim,VarTyp); return; }
-   */
-
-    if (!gdxDataReadStrStart(PGX, VarNr, &NrRecs)) {
-        char S[GMS_SSSIZE];
-
-        qDebug("**** Fatal GDX Error\n");
-        gdxErrorStr(PGX, gdxGetLastError(PGX), S);
-        qDebug("**** %s\n", S);
-        return;
-    }
-    qDebug("GanttData has %d records\n", NrRecs);
-    char unitName[GMS_SSSIZE ];
-    char taskName[GMS_SSSIZE ];
-    float start = 0;
-    float end = 0;
-    float amount = 0;
-    char color[8];
-    strcpy(color, "random");
-
-    int numberOfTasks = 0;
-    while (gdxDataReadStr(PGX, Indx, Values, &N)) {
-        if (N < 3) {
-            if (numberOfTasks == 0) {
-                numberOfTasks++;
-            }
-            else {
-                numberOfTasks++;
-                addTask(unitName, taskName, start, end, amount, color);
-                start = 0;
-                end = 0;
-                amount = 0;
-                strcpy(color, "random");
-            }
-            strcpy(unitName, Indx[0]);
-            strcpy(taskName, Indx[1]);
-        }
-        if (strcmp(Indx[3], "Start") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                start = Values[GMS_VAL_LEVEL];
-            }
-        }
-        if (strcmp(Indx[3], "End") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                end = Values[GMS_VAL_LEVEL];
-            }
-        }
-        if (strcmp(Indx[3], "Amount") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                amount = Values[GMS_VAL_LEVEL];
-            }
-        }
-        if (strcmp(Indx[3], "Color") == 0) {
-            if (Values[GMS_VAL_LEVEL] == GMS_SV_EPS) {
-                strcpy(color, "#000000");
-            }
-            if (Values[GMS_VAL_LEVEL] <= 0xFFFFFF) {
-                sprintf(color, "#%06x", (int)Values[GMS_VAL_LEVEL]);
-            }
-        }
-    }
-    addTask(unitName, taskName, start, end, amount, color);
-    qDebug("Found %d tasks.\n", numberOfTasks);
-
-    if (!gdxFindSymbol(PGX, "FlowData", &VarNr)) {
-        qDebug("**** Could not find variable FlowData\n");
-        return;
-    }
-
-    gdxSymbolInfo(PGX, VarNr, VarName, &Dim, &VarTyp);
-    qDebug("Dim : %d\n", Dim);
-
-    if (!gdxDataReadStrStart(PGX, VarNr, &NrRecs)) {
-        char S[GMS_SSSIZE];
-
-        qDebug("**** Fatal GDX Error\n");
-        gdxErrorStr(PGX, gdxGetLastError(PGX), S);
-        qDebug("**** %s\n", S);
-    }
-
-    qDebug("FlowData has %d records\n", NrRecs);
-
-    char unit1name[GMS_SSSIZE ];
-    char task1name[GMS_SSSIZE ];
-    char unit2name[GMS_SSSIZE ];
-    char task2name[GMS_SSSIZE ];
-    float pr = 0;
-    float cr = 0;
-    amount = 0;
-    int numberOfFlows = 0;
-    while (gdxDataReadStr(PGX, Indx, Values, &N)) {
-        if (N < 5) {
-            if (numberOfFlows == 0) {
-                numberOfFlows++;
-            }
-            else {
-                numberOfFlows++;
-                addFlow(unit1name, task1name, unit2name, task2name, pr, cr, amount);
-                pr = 0;
-                cr = 0;
-                amount = 0;
-            }
-            strcpy(unit1name, Indx[0]);
-            strcpy(task1name, Indx[1]);
-            strcpy(unit2name, Indx[2]);
-            strcpy(task2name, Indx[3]);
-        }
-        if (strcmp(Indx[4], "Amount") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                amount = Values[GMS_VAL_LEVEL];
-            }
-        }
-        if (strcmp(Indx[4], "ProductionRate") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                pr = Values[GMS_VAL_LEVEL];
-            }
-        }
-        if (strcmp(Indx[4], "ConsumptionRate") == 0) {
-            if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                cr = Values[GMS_VAL_LEVEL];
-            }
-        }
-    }
-    addFlow(unit1name, task1name, unit2name, task2name, pr, cr, amount);
-
-    qDebug("Found %d flows.\n", numberOfFlows);
-    gdxDataReadDone(PGX);
-
-    if ((ErrNr = gdxClose(PGX))) {
-        qDebug("**** Fatal I/O Error = %d when calling %s\n", ErrNr, "gdxClose");
-    }
-
-    if (!gdxFree(&PGX)) {
-        qDebug("Problems unloading the GDX DLL\n");
-        return;
-    }
-}
-
-
-
-//parse csv file
-void MainWindow::open(){
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open csv or gdx"), defaultDirectory, "CSV or GDX files (*.csv *.gdx)");
-    if ( fileName == ""){
-        return;
-    }
-    qDebug()<<fileName;
-    if (QString(fileName.split(".").last()) == QString("csv")){
-        openCSV(fileName);
-    } else {
-        char * c_filename = fileName.toLatin1().data();
-        openGDX(c_filename);
-    }
-
     createRepresentation();
-    //loadData();
+
 }
+void MainWindow::openGDX(){
+
+}
+
 
 
 
@@ -593,7 +363,12 @@ void MainWindow::addTask(QString unitName, QString taskName, float start, float 
     int machineIndex = units->indexOf(unitName);
     if (machineIndex == -1){
         units->append(unitName);
+        largestAmounts->append(amount);
         machineIndex = units->size()-1;
+    } else {
+        if (amount > largestAmounts->at(machineIndex)){
+            largestAmounts->replace(machineIndex, amount);
+        }
     }
     if (end > longestTask){
         longestTask = end;
@@ -611,16 +386,17 @@ void MainWindow::addTask(QString unitName, QString taskName, float start, float 
         newTask.color.setHsv(qrand()%255, qrand()%128+127, qrand()%128+127);
     } else{
         newTask.color.setNamedColor(color);
-        if (!unitColors->contains(units->at(machineIndex))){
+        // Set the unit and task colors to the LAST reference
+        //if (!unitColors->contains(units->at(machineIndex))){
             qDebug()<<color << taskName;
             qDebug("%s has been assigned the color %s", unitName.toStdString().c_str(), color.toStdString().c_str());
             unitColors->insert(units->at(machineIndex), newTask.color);
-        }
-        if (!taskColors->contains(taskName)){
+        //}
+        //if (!taskColors->contains(taskName)){
             qDebug()<<color << taskName;
             qDebug("%s has been assigned the color %s", taskName.toStdString().c_str(), color.toStdString().c_str());
             unitColors->insert(taskName, newTask.color);
-        }
+        //}
     }
     newTask.taskIndex = tasks->size();
     tasks->append(newTask);
@@ -731,7 +507,30 @@ void MainWindow::createRepresentation(){
         ui->allTasksTable->setItem(i,3,new QTableWidgetNumberItem(task.end));
         ui->allTasksTable->setItem(i,4,new QTableWidgetNumberItem(task.end-task.start));
         ui->allTasksTable->setItem(i,5,new QTableWidgetNumberItem(task.amount));
-        ui->allTasksTable->setItem(i,6,new QTableWidgetNumberItem(i));
+        int b = 0;
+        int e = 0;
+        for (int f = 0; f < flows->size(); f++){
+            if (flows->at(f).op1Index == i){
+                e++;
+            }
+            if (flows->at(f).op2Index == i){
+                b++;
+            }
+
+        }
+        QString type;
+        if (b == 0 && e == 0){
+            type = "Single";
+        } else if (b == 0 && e > 0){
+            type = "First";
+        } else if (e == 0 && b > 0){
+            type = "Final";
+        } else {
+            type = "Middle";
+        }
+
+        ui->allTasksTable->setItem(i,6,new QTableWidgetItem(type));
+        ui->allTasksTable->setItem(i,7,new QTableWidgetNumberItem(i));
 
         // UI Actions
         connect(newRect, SIGNAL(iWasClicked(int)),this,SLOT(taskClicked(int)));
@@ -821,7 +620,7 @@ void MainWindow::check(){
     double tolerance = QInputDialog::getDouble(this,"Input Tolerance","Tolerance:",0);
     QString log = "";
     log += "Tolerance: " + QString::number(tolerance);
-    log += "Checking for overlapping tasks\n";
+    log += "\nChecking for overlapping tasks\n";
     for (int i = 0; i < tasks->size(); i++){
         for (int ii = i+1; ii< tasks->size(); ii++){
             if (tasks->at(i).unitIndex == tasks->at(ii).unitIndex){
@@ -859,21 +658,21 @@ void MainWindow::check(){
                 outFlows.append(f);
             }
         }
-        if (receivedInput != expectedInput){
+        if (receivedInput != expectedInput && inFlows.length() > 0 && outFlows.length() > 0){
             flowerrors++;
             log += "\n Unmatched amounts on \n " + describeTask(tasks->at(i)) + "\n Sum of Flows:\n";
             for (int f = 0; f < inFlows.size(); f++){
-                log += "From " + tasks->at(flows->at(inFlows.at(f)).op1Index).name + "\t\t" + QString::number(flows->at(inFlows.at(f)).amount) + "\n";
+                log += "\nFrom " + tasks->at(flows->at(inFlows.at(f)).op1Index).name + "\n\t\t\t" + QString::number(flows->at(inFlows.at(f)).amount) ;
             }
-            if (inFlows.length() > 1){
-                log += "=\t\t" + QString::number(receivedInput) + "\n";
-            }
+            //if (inFlows.length() > 1){
+                log += "\n\t\t=\t" + QString::number(receivedInput) + "\n";
+            //}
             for (int f = 0; f < outFlows.size(); f++){
-                log += "To " + tasks->at(flows->at(outFlows.at(f)).op2Index).name + "\t\t" + QString::number(flows->at(outFlows.at(f)).amount);
+                log += "\nTo " + tasks->at(flows->at(outFlows.at(f)).op2Index).name + "\n\t\t\t" + QString::number(flows->at(outFlows.at(f)).amount);
             }
-            if (outFlows.length() > 1){
-                log += "=\t\t" + QString::number(expectedInput) + "\n";
-            }
+            //if (outFlows.length() > 1){
+                log += "\n\t\t=\t" + QString::number(expectedInput) + "\n";
+            //}
 
         }
     }
@@ -931,11 +730,15 @@ void MainWindow::colorByTask(){
 }
 void MainWindow::colorByAmount(){
     for (int i = 0; i < tasks->size(); i++){
-        float x = tasks->at(i).amount / largestAmount;
-        QColor c = QColor();
+        float x = 2;
+        if (largestAmounts->at(tasks->at(i).unitIndex) != 0){
+            x = tasks->at(i).amount / largestAmounts->at(tasks->at(i).unitIndex);
+        }
+        QColor c = QColor(Qt::black);
+        // largestamount = 0, color black
         if (x < 0.5){ // white to yellow
             c.setHsv(42.5,x*512,255);
-        } else { //yellow to red
+        } else if (x >=0.5) { //yellow to red
             c.setHsv(85-85*x,255,255);
         }
         tasksRep->at(i)->setBrush(c);
@@ -962,8 +765,7 @@ void MainWindow::taskHoverLeave(int index){
 //Task Clicked
 void MainWindow::taskClicked(int index){
     for (int i = 0; i < tasks->count(); i++){
-        //qDebug()<<ui->allTasksTable->item(i,6)->text();
-        if (ui->allTasksTable->item(i,6)->text().toInt() == index){
+        if (ui->allTasksTable->item(i,7)->text().toInt() == index){
             qDebug("fksdj    %d",i);
             ui->allTasksTable->selectRow(i);
         }
@@ -1014,7 +816,7 @@ void MainWindow::taskClicked(int index){
 }
 
 void MainWindow::taskTableClicked(int row, int col){
-    int realIndex = ui->allTasksTable->item(row, 6)->text().toInt();
+    int realIndex = ui->allTasksTable->item(row, 7)->text().toInt();
     qDebug("%d",realIndex);
     taskClicked(realIndex);
 
@@ -1193,7 +995,7 @@ void MainWindow::applyFilter(){
     for (int i = 0; i < tasks->count(); i++){
         ui->allTasksTable->hideRow(i);
         tasksRep->at(i)->hide();
-        Task task = tasks->at(ui->allTasksTable->item(i,6)->text().toInt());
+        Task task = tasks->at(ui->allTasksTable->item(i,7)->text().toInt());
         bool alive = true;
         if (ui->filterUnit->text() != "")
             alive &= units->at(task.unitIndex).contains(ui->filterUnit->text());
@@ -1206,7 +1008,7 @@ void MainWindow::applyFilter(){
             alive &= task.amount >= ui->filter1amount->value() && task.amount <= ui->filter2amount->value();
             break;
         case 2: // outside of
-            alive &= task.amount < ui->filter1amount->value() && task.amount > ui->filter2amount->value();
+            alive &= task.amount < ui->filter1amount->value() || task.amount > ui->filter2amount->value();
             break;
         case 3: // greater than
             alive &= task.amount > ui->filter1amount->value();
@@ -1222,7 +1024,7 @@ void MainWindow::applyFilter(){
             alive &= task.start >= ui->filter1start->value() && task.start <= ui->filter2start->value();
             break;
         case 2: // outside of
-            alive &= task.start < ui->filter1start->value() && task.start > ui->filter2start->value();
+            alive &= task.start < ui->filter1start->value() || task.start > ui->filter2start->value();
             break;
         case 3: // greater than
             alive &= task.start > ui->filter1start->value();
@@ -1238,7 +1040,7 @@ void MainWindow::applyFilter(){
             alive &= task.end >= ui->filter1end->value() && task.end <= ui->filter2end->value();
             break;
         case 2: // outside of
-            alive &= task.end < ui->filter1end->value() && task.end > ui->filter2end->value();
+            alive &= task.end < ui->filter1end->value() || task.end > ui->filter2end->value();
             break;
         case 3: // greater than
             alive &= task.end > ui->filter1end->value();
@@ -1254,7 +1056,7 @@ void MainWindow::applyFilter(){
             alive &= task.end - task.start >= ui->filter1duration->value() && task.end - task.start <= ui->filter2duration->value();
             break;
         case 2: // outside of
-            alive &= task.end - task.start < ui->filter1duration->value() && task.end - task.start > ui->filter2duration->value();
+            alive &= task.end - task.start < ui->filter1duration->value() || task.end - task.start > ui->filter2duration->value();
             break;
         case 3: // greater than
             alive &= task.end - task.start > ui->filter1duration->value();
