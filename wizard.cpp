@@ -8,6 +8,9 @@
 #include <QTextStream>
 #include <QDebug>
 #include "constants.h"
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 Wizard::Wizard(QWidget *parent) :
     QWizard(parent),
     ui(new Ui::Wizard)
