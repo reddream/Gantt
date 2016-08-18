@@ -9,7 +9,8 @@
 #include <QDebug>
 #include "constants.h"
 #if defined(_WIN32)
-#include <windows.h>
+#define UNICODE
+#include <Windows.h>
 #endif
 Wizard::Wizard(QWidget *parent) :
     QWizard(parent),
@@ -598,7 +599,7 @@ std::string Wizard::FindGAMS()
     HKEY hKey = 0;
     char value[1024] = { NULL };
     DWORD value_length = 1024;
-    const char* subkey = "gams.location";
+    const wchar_t* subkey = L"gams.location";
     RegOpenKey(HKEY_CURRENT_USER, subkey, &hKey);
     if ( 0 == hKey )
     {
