@@ -43,11 +43,11 @@ struct Flow{
     /// The consumption rate of this flow
     float consumptionRate;
 };
-
+/// Ui namespace, containing the MainView and Wizard classes
 namespace Ui {
 class MainWindow;
 }
-
+/// Class for the Main window
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -64,6 +64,7 @@ private:
     float verticalZoom = 1;
     float horizontalZoom = 1;
     void resetZoom();
+
     /// Recursively make all flows connected to this task visible
     void showFlows(int taskIndex);
     void recursivelyActivateFlowsToTheRight(int taskIndex);

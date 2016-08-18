@@ -13,12 +13,15 @@ Wizard::Wizard(QWidget *parent) :
     ui(new Ui::Wizard)
 {
     ui->setupUi(this);
+    ui->loadFileButton->click();
     connect(ui->loadFileButton, SIGNAL(clicked(bool)), this, SLOT(loadFileClicked()));
     connect(ui->loadConfigButton, SIGNAL(clicked(bool)), this, SLOT(loadConfigClicked()));
     connect(ui->loadSysdirButton, SIGNAL(clicked(bool)), this, SLOT(selectSysdir()));
     connect(ui->saveConfigButton, SIGNAL(clicked(bool)), this, SLOT(saveConfiguration()));
+
     if (getSysdir() != ""){
         ui->sysdirLabel->setText(getSysdir());
+        Sysdir = getSysdir();
     }
 }
 
@@ -66,7 +69,7 @@ bool Wizard::validateCurrentPage(){
         } else {
             fetchAvailableSymbols();
             if (loadedConfigFile != "") {
-                loadSymbolsFromXML();
+                loadSymbolsFromConfig();
             }
         }
     }
@@ -236,7 +239,7 @@ void Wizard::saveConfiguration(){
     file.close();
 }
 
-void Wizard::loadSymbolsFromXML(){
+void Wizard::loadSymbolsFromConfig(){
     QFile file(loadedConfigFile);
     if(!file.open(QFile::ReadOnly)){
         QMessageBox errorBox;
@@ -259,26 +262,27 @@ void Wizard::loadSymbolsFromXML(){
     }
     ui->checkBox->setChecked(fileContents.at(6) == "YES");
     int i = -1;
+    qDebug("Amount : %d", ui->selectAmount->findText(fileContents.at(2)));
     if (i = ui->selectAmount->findText(fileContents.at(2))){
-        ui->selectAmount->currentIndexChanged(i);
+        ui->selectAmount->setCurrentIndex(i);
     }
     if (i = ui->selectStart->findText(fileContents.at(3))){
-        ui->selectStart->currentIndexChanged(i);
+        ui->selectStart->setCurrentIndex(i);
     }
     if (i = ui->selectEnd->findText(fileContents.at(4))){
-        ui->selectEnd->currentIndexChanged(i);
+        ui->selectEnd->setCurrentIndex(i);
     }
     if (i = ui->selectColor->findText(fileContents.at(5))){
-        ui->selectColor->currentIndexChanged(i);
+        ui->selectColor->setCurrentIndex(i);
     }
     if (i = ui->selectPr->findText(fileContents.at(7))){
-        ui->selectPr->currentIndexChanged(i);
+        ui->selectPr->setCurrentIndex(i);
     }
     if (i = ui->selectCr->findText(fileContents.at(8))){
-        ui->selectCr->currentIndexChanged(i);
+        ui->selectCr->setCurrentIndex(i);
     }
     if (i = ui->selectFlowAmount->findText(fileContents.at(9))){
-        ui->selectFlowAmount->currentIndexChanged(i);
+        ui->selectFlowAmount->setCurrentIndex(i);
     }
 
 }
@@ -419,14 +423,15 @@ void Wizard::openGDX(){
                 }
             }
             if (!randomColor){
-                if (strcmp(Indx[3], endSym.toLatin1().data()) == 0 && taskVar == endVar) {
+                if (strcmp(Indx[3], colorSym.toLatin1().data()) == 0 && taskVar == colorVar) {
                     if (Values[GMS_VAL_LEVEL] == GMS_SV_EPS) {
+
                         QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2]);
                         RawTask task;
                         if (tasks.contains(name)){
                             task =  tasks.value(name);
                         }
-                        task.end = 0;
+                        task.color = 0;
                         tasks.insert(name, task);
                     } else {
                         QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2]);
@@ -434,7 +439,7 @@ void Wizard::openGDX(){
                         if (tasks.contains(name)){
                             task =  tasks.value(name);
                         }
-                        task.end = Values[GMS_VAL_LEVEL];
+                        task.color = Values[GMS_VAL_LEVEL];
                         tasks.insert(name, task);
                     }
                 }
@@ -445,67 +450,67 @@ void Wizard::openGDX(){
     qDebug("Found %d tasks.\n", tasks.count());
 
     if (ui->checkBox->isChecked()){
-    foreach (QString flowVar, flowVars) {
+        foreach (QString flowVar, flowVars) {
 
-        if (!gdxFindSymbol(PGX, flowVar.toLatin1().data(), &VarNr)) {
-            qDebug("**** Could not find variable %s \n",flowVar.toLatin1().data());
-            return;
-        }
+            if (!gdxFindSymbol(PGX, flowVar.toLatin1().data(), &VarNr)) {
+                qDebug("**** Could not find variable %s \n",flowVar.toLatin1().data());
+                return;
+            }
 
-        gdxSymbolInfo(PGX, VarNr, VarName, &Dim, &VarTyp);
-        qDebug("Dim : %d\n", Dim);
-
-
-        if (!gdxDataReadStrStart(PGX, VarNr, &NrRecs)) {
-            char S[GMS_SSSIZE];
-
-            qDebug("**** Fatal GDX Error\n");
-            gdxErrorStr(PGX, gdxGetLastError(PGX), S);
-            qDebug("**** %s\n", S);
-            return;
-        }
-        qDebug("%s has %d records\n", flowVar.toLatin1().data(), NrRecs);
+            gdxSymbolInfo(PGX, VarNr, VarName, &Dim, &VarTyp);
+            qDebug("Dim : %d\n", Dim);
 
 
-        while (gdxDataReadStr(PGX, Indx, Values, &N)) {
+            if (!gdxDataReadStrStart(PGX, VarNr, &NrRecs)) {
+                char S[GMS_SSSIZE];
 
-            if (strcmp(Indx[4], crSym.toLatin1().data()) == 0 && flowVar == crVar) {
-                if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                    QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
-                    RawFlow flow;
-                    if (flows.contains(name)){
-                        flow =  flows.value(name);
+                qDebug("**** Fatal GDX Error\n");
+                gdxErrorStr(PGX, gdxGetLastError(PGX), S);
+                qDebug("**** %s\n", S);
+                return;
+            }
+            qDebug("%s has %d records\n", flowVar.toLatin1().data(), NrRecs);
+
+
+            while (gdxDataReadStr(PGX, Indx, Values, &N)) {
+
+                if (strcmp(Indx[4], crSym.toLatin1().data()) == 0 && flowVar == crVar) {
+                    if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
+                        QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
+                        RawFlow flow;
+                        if (flows.contains(name)){
+                            flow =  flows.value(name);
+                        }
+                        flow.cr = Values[GMS_VAL_LEVEL];
+                        flows.insert(name, flow);
                     }
-                    flow.cr = Values[GMS_VAL_LEVEL];
-                    flows.insert(name, flow);
+                }
+                if (strcmp(Indx[4], prSym.toLatin1().data()) == 0 && flowVar == prVar) {
+                    if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
+                        QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
+                        RawFlow flow;
+                        if (flows.contains(name)){
+                            flow =  flows.value(name);
+                        }
+                        flow.pr = Values[GMS_VAL_LEVEL];
+                        flows.insert(name, flow);
+                    }
+                }
+                if (strcmp(Indx[4], flowAmountSym.toLatin1().data()) == 0 && flowVar == flowAmountVar) {
+                    if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
+                        QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
+                        RawFlow flow;
+                        if (flows.contains(name)){
+                            flow =  flows.value(name);
+                        }
+                        flow.amount = Values[GMS_VAL_LEVEL];
+                        flows.insert(name, flow);
+                    }
                 }
             }
-            if (strcmp(Indx[4], prSym.toLatin1().data()) == 0 && flowVar == prVar) {
-                if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                    QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
-                    RawFlow flow;
-                    if (flows.contains(name)){
-                        flow =  flows.value(name);
-                    }
-                    flow.pr = Values[GMS_VAL_LEVEL];
-                    flows.insert(name, flow);
-                }
-            }
-            if (strcmp(Indx[4], flowAmountSym.toLatin1().data()) == 0 && flowVar == flowAmountVar) {
-                if (Values[GMS_VAL_LEVEL] != GMS_SV_EPS) {
-                    QString name = QString(Indx[0])+"."+QString(Indx[1])+"."+QString(Indx[2])+"."+QString(Indx[3]);
-                    RawFlow flow;
-                    if (flows.contains(name)){
-                        flow =  flows.value(name);
-                    }
-                    flow.amount = Values[GMS_VAL_LEVEL];
-                    flows.insert(name, flow);
-                }
-            }
-        }
 
-    }
-    qDebug("Found %d flows.\n", flows.count());
+        }
+        qDebug("Found %d flows.\n", flows.count());
     }
 
 
@@ -516,9 +521,11 @@ void Wizard::openGDX(){
         QStringList split = name.split(".");
         QString color = "random";
         if (tasks.value(name).color != -1){
-            char * ccolor = "#000000";
-            sprintf(ccolor, "#%06x", tasks.value(name).color);
+            //char * ccolor = "#000000";
+            //sprintf(ccolor, "#%06x", (int)tasks.value(name).color);
+            color = "#"+QString::number((int)tasks.value(name).color, 16);
         }
+        qDebug()<<"ay"<<color;
         addTask(split[0],split[1], tasks.value(name).start,tasks.value(name).end,tasks.value(name).amount, color);
     }
 
@@ -540,9 +547,16 @@ void Wizard::openGDX(){
 std::string Wizard::FindGAMS()
 {
     string GAMSDir = "";
-    //qDebug("here");
-#if __unix__
-    qDebug("here");
+#if __APPLE__
+    QStringList str_split = QString(getenv("PATH")).split(":");
+    foreach (QString pth, str_split) {
+        qDebug()<<pth;
+        if (pth.split("/",QString::SkipEmptyParts).last() == "sysdir"){
+            return pth.toStdString();
+        }
+    }
+    return "";
+#elif __unix__
     string GAMSDirLD = "";
 
     vector<string> str_split = getenvAndSplit("PATH");
@@ -556,11 +570,8 @@ std::string Wizard::FindGAMS()
     }
     if ( !GAMSDir.empty() && DebugLevel == 0 )
         return GAMSDir;
-#if __APPLE__
-    //TODO:
-#else
+
     str_split = getenvAndSplit("LD_LIBRARY_PATH");
-#endif
     for(vector<string>::iterator it = str_split.begin(); it != str_split.end(); ++it)
     {
         if(exists(path(*it) / path("gams")))
@@ -579,7 +590,7 @@ std::string Wizard::FindGAMS()
 
     return GAMSDir;
 #else
-#if defined(_WIN32)
+
     DWORD dwType = REG_SZ;
     HKEY hKey = 0;
     char value[1024] = { NULL };
@@ -597,41 +608,20 @@ std::string Wizard::FindGAMS()
     RegCloseKey(hKey);
     return value;
 #endif
-#endif
-    return "";
+
 }
 void Wizard::selectSysdir(){
     QString newSysdir = QFileDialog::getExistingDirectory(this, "Select the GAMS Sysdir");
-    if (newSysdir == 0){
+    if (newSysdir == ""){
         return;
     }
     Sysdir = newSysdir;
     ui->sysdirLabel->setText(Sysdir);
-    QFile file(SYSDIRLOCATIONLOCATION);
-    if(!file.open(QFile::WriteOnly)){
-        return;
-    }
-
-    QTextStream in(&file);
-    in << newSysdir;
-    file.close();
 }
 
 QString Wizard::getSysdir(){
     QString gamsdir = QString::fromStdString(FindGAMS());
     qDebug()<<gamsdir;
-    if (gamsdir != ""){
-        return gamsdir;
-    }
-    QFile file(SYSDIRLOCATIONLOCATION);
-    if(!file.open(QFile::ReadOnly | QFile::Text)){
-        return "";
-    }
-    QTextStream in(&file);
-    QString out = in.readLine();
-    file.close();
-    //qDebug()<<QString("SYSDIR: "+ out);
-    Sysdir = out;
-    return out;
+    return gamsdir;
 }
 

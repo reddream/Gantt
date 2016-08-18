@@ -7,7 +7,7 @@ struct RawTask {
     float start = 0;
     float end = 0;
     float amount = 0;
-    int color = -1;
+    float color = -1;
 };
 
 struct RawFlow {
@@ -21,6 +21,8 @@ class Wizard;
 }
 using namespace std;
 
+
+/// Class for the GDX import wizard
 class Wizard : public QWizard
 {
     Q_OBJECT
@@ -28,31 +30,40 @@ class Wizard : public QWizard
 public:
     explicit Wizard(QWidget *parent = 0);
     ~Wizard();
-    //Ui::MainWindow * dad;
-
+    /// currently selected gdx file
+    QString loadedFile = "";
 private:
     Ui::Wizard *ui;
+    /// calls FindGAMS(), returns value as a QString
     QString getSysdir();
+    /// import the GDX file
     void openGDX();
-    QString loadedFile = "";
+    /// path to the config file
     QString loadedConfigFile = "";
+    ///path to the GAMS Sysdir
     QString Sysdir = "";
+    /// Finds all Symbols in the loadedFile gdx
     void fetchAvailableSymbols();
-    void loadSymbolsFromXML();
+    /// Loads symbols to use in openGDX() from a previously saved config file
+    void loadSymbolsFromConfig();
+    /// List of available Task symbols
     QStringList * availableTaskSymbols;
+    /// List of available Flow symbols
     QStringList * availableFlowSymbols;
+    /// Searches for the GAMS Sysdir
     string FindGAMS();
 private slots:
     ///load File button clicked
     void loadFileClicked();
     ///load Config Button Clicked
     void loadConfigClicked();
-    /// get the GAMS Sysdir. If it can't be found, a dialog will request the directory from the user and save it in a config file
+    ///  set the GAMS Sysdir if none can be found
     void selectSysdir();
     /// save the current configuration
     void saveConfiguration();
 
 protected:
+    /// called at page change
     bool validateCurrentPage();
 
 signals:

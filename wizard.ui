@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
-    <height>371</height>
+    <width>713</width>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Wizard</string>
   </property>
   <property name="wizardStyle">
-   <enum>QWizard::ClassicStyle</enum>
+   <enum>QWizard::MacStyle</enum>
   </property>
   <property name="options">
    <set>QWizard::NoCancelButton|QWizard::NoDefaultButton</set>
@@ -27,21 +27,15 @@
     <string>Select the GDX file to load, the GAMS Sysdir and an optional config file.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_5">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="loadFileButton">
-      <property name="maximumSize">
-       <size>
-        <width>80</width>
-        <height>16777215</height>
-       </size>
-      </property>
+    <item row="0" column="1">
+     <widget class="QLabel" name="loadedFileLabel">
       <property name="text">
-       <string>Load...</string>
+       <string>No file loaded. (obligatory)</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="loadConfigButton">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="loadFileButton">
       <property name="text">
        <string>Load...</string>
       </property>
@@ -61,15 +55,21 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="loadedFileLabel">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="loadSysdirButton">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
-       <string>No file loaded. (obligatory)</string>
+       <string>Select...</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="loadSysdirButton">
+    <item row="2" column="0">
+     <widget class="QPushButton" name="loadConfigButton">
       <property name="text">
        <string>Load...</string>
       </property>

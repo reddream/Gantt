@@ -12,7 +12,13 @@
  *
  * To cross compile on unix for any platform: http://stackoverflow.com/questions/14170590/building-qt-5-on-linux-for-windows/14170591#14170591
  *
- * (set $PATH to mxe/usr/bin)
+ * -# add mxe to PATH: \code export PATH=$PATH:<mxe install location>/usr/bin \endcode
+ * -# to compile for Windows, run \code  i686-w64-mingw32.static-qmake-qt5 \endcode
+ * -# run \code make \endcode
+ *
+ * @author Julius Naeumann, julius.naeumann@gmail.com
+ * @date August 2016
+ *
  */
 
 #include "mainwindow.h"
@@ -34,6 +40,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
 
 //INIT stuff
 
@@ -232,7 +240,7 @@ void MainWindow::createMenu(){
 //reset
 void MainWindow::reset(){
     while (ui->allTasksTable->rowCount() > 0){
-    ui->allTasksTable->removeRow(0);
+        ui->allTasksTable->removeRow(0);
     }
     QWidget::setWindowTitle("Gantt");
     openFile = "";
@@ -313,13 +321,21 @@ void MainWindow::openCSV(){
             line.replace(" ", "");
             lineContents = line.split(";",QString::SkipEmptyParts);
             addTask(lineContents.at(0), lineContents.at(1), lineContents.at(2).toFloat(), lineContents.at(3).toFloat(), lineContents.at(4).toFloat());
-        } else if (lineContents.count() == 2){
-            // Unit color
+
+        } else if (lineContents.count() == 3){
+            //Task or unit color
             line.replace(" ", "");
-            unitColors->insert((line.at(0)),QColor(line.at(1)));
+            lineContents = line.split(";",QString::SkipEmptyParts);
+            QColor color = QColor();
+            color.setNamedColor(lineContents.at(2));
 
-
-
+            if (lineContents[0] == "TASKCOLOR"){
+                qDebug("Task %s has manually been assigned the color %s", lineContents.at(1).toStdString().c_str(), lineContents.at(1).toStdString().c_str());
+                taskColors->insert(lineContents.at(1), color);
+            } else {
+                qDebug("Unit %s has manually been assigned the color %s", lineContents.at(1).toStdString().c_str(), lineContents.at(1).toStdString().c_str());
+                unitColors->insert(lineContents.at(1), color);
+            }
         } else if (line.toStdString()[0] != '*' && (lineContents = line.split("->")).size() == 2){
 
             line.replace("(", " ");
@@ -355,6 +371,9 @@ void MainWindow::openGDX(){
     connect(wiz, SIGNAL(reset()), this, SLOT(reset()));
     connect(wiz, SIGNAL(createRepresentation()), this, SLOT(createRepresentation()));
     wiz->show();
+    if (wiz->loadedFile != ""){
+        openFile = wiz->loadedFile;
+    }
 }
 
 
@@ -388,20 +407,24 @@ void MainWindow::addTask(QString unitName, QString taskName, float start, float 
     newTask.amount = amount;
     newTask.color = QColor();
     if (color == "random"){
-        newTask.color.setHsv(qrand()%255, qrand()%128+127, qrand()%128+127);
+        if (taskColors->contains(taskName)){
+            newTask.color = taskColors->value(taskName);
+        } else if (unitColors->contains(unitName)){
+            newTask.color = unitColors->value(unitName);
+        } else {
+            newTask.color.setHsv(qrand()%255, qrand()%128+127, qrand()%128+127);
+        }
     } else{
         newTask.color.setNamedColor(color);
-        // Set the unit and task colors to the LAST reference
-        //if (!unitColors->contains(units->at(machineIndex))){
-            qDebug()<<color << taskName;
-            qDebug("%s has been assigned the color %s", unitName.toStdString().c_str(), color.toStdString().c_str());
+        // Set the unit and task colors
+        if (!unitColors->contains(units->at(machineIndex))){
+            //qDebug("Unit %s has automatically been assigned the color %s", unitName.toStdString().c_str(), color.toStdString().c_str());
             unitColors->insert(units->at(machineIndex), newTask.color);
-        //}
-        //if (!taskColors->contains(taskName)){
-            qDebug()<<color << taskName;
-            qDebug("%s has been assigned the color %s", taskName.toStdString().c_str(), color.toStdString().c_str());
-            unitColors->insert(taskName, newTask.color);
-        //}
+        }
+        if (!taskColors->contains(taskName)){
+            //qDebug("%s has automatically been assigned the color %s", taskName.toStdString().c_str(), color.toStdString().c_str());
+            taskColors->insert(taskName, newTask.color);
+        }
     }
     newTask.taskIndex = tasks->size();
     tasks->append(newTask);
@@ -475,7 +498,7 @@ void MainWindow::createRepresentation(){
     //Draw Ruler
     QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
-    for (int i = 0; i < longestTask/50 + 2; i++){
+    for (int i = 0; i < longestTask/50 + 1; i++){
         QGraphicsTextItem * rulerlabel = new QGraphicsTextItem();
         rulerlabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" + QString::number(i*50) + "</div>") );
         rulerlabel->setDefaultTextColor(Qt::black);
@@ -492,7 +515,7 @@ void MainWindow::createRepresentation(){
     QPen unitPen(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     unitPen.setWidth(0);
     for (int i = 0; i < units->size(); i++){
-        QGraphicsLineItem* line = new QGraphicsLineItem(0,(i+1)*UNITREPHEIGHT,longestTask + UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT);
+        QGraphicsLineItem* line = new QGraphicsLineItem(0,(i+1)*UNITREPHEIGHT,50*(longestTask/50 + 2) + UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT);
         line->setPen(unitPen);
         scene->addItem(line);
         lines->append(line);
@@ -500,7 +523,7 @@ void MainWindow::createRepresentation(){
     //Draw Tasks
     for (int i = 0; i < tasks->size(); i++){
         Task task = tasks->at(i);
-        GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmount,task.start,task.end,task.amount, task.color);
+        GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmounts->at(task.unitIndex),task.start,task.end,task.amount, task.color);
         scene->addItem(newRect);
         tasksRep->append(newRect);
         //Add Task to table
@@ -569,7 +592,7 @@ void MainWindow::createRepresentation(){
     showFlows(showAllFlows);
 
 
-    scene->setSceneRect(0,0,50*(longestTask/50 + 2), (UNITREPHEIGHT + 2) * units->length());
+    scene->setSceneRect(0,0,50*(longestTask/50 + 1) + UNITNAMEBARWIDTH, (UNITREPHEIGHT + 2) * units->length());
     center();
 
     //Generate Task Colors
@@ -670,13 +693,13 @@ void MainWindow::check(){
                 log += "\nFrom " + tasks->at(flows->at(inFlows.at(f)).op1Index).name + "\n\t\t\t" + QString::number(flows->at(inFlows.at(f)).amount) ;
             }
             //if (inFlows.length() > 1){
-                log += "\n\t\t=\t" + QString::number(receivedInput) + "\n";
+            log += "\n\t\t=\t" + QString::number(receivedInput) + "\n";
             //}
             for (int f = 0; f < outFlows.size(); f++){
                 log += "\nTo " + tasks->at(flows->at(outFlows.at(f)).op2Index).name + "\n\t\t\t" + QString::number(flows->at(outFlows.at(f)).amount);
             }
             //if (outFlows.length() > 1){
-                log += "\n\t\t=\t" + QString::number(expectedInput) + "\n";
+            log += "\n\t\t=\t" + QString::number(expectedInput) + "\n";
             //}
 
         }
