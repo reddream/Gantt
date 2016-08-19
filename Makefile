@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.8 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.8 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -I../Qt/5.7/clang_64/lib/QtSvg.framework/Headers -I../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib
+INCPATH       = -I. -I../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib
 QMAKE         = /Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = Gantt1.0.0
 DISTDIR = /Users/juliusnaeumann/Developer/Gantt/.tmp/Gantt1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib -framework QtSvg -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtPrintSupport -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib -framework QtPrintSupport -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -413,7 +413,6 @@ Makefile: Gantt.pro ../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf ../Qt/5.7/c
 		../Qt/5.7/clang_64/mkspecs/features/yacc.prf \
 		../Qt/5.7/clang_64/mkspecs/features/lex.prf \
 		Gantt.pro \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/QtSvg.prl \
 		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
@@ -575,7 +574,6 @@ Makefile: Gantt.pro ../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf ../Qt/5.7/c
 ../Qt/5.7/clang_64/mkspecs/features/yacc.prf:
 ../Qt/5.7/clang_64/mkspecs/features/lex.prf:
 Gantt.pro:
-../Qt/5.7/clang_64/lib/QtSvg.framework/QtSvg.prl:
 ../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl:
 ../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
@@ -666,7 +664,7 @@ moc_mainwindow.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWind
 		mainwindow.h \
 		mainwindow.h \
 		../Qt/5.7/clang_64/bin/moc
-	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtSvg.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
 
 moc_ganttrect.cpp: ../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPen \
 		../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpen.h \
@@ -674,7 +672,7 @@ moc_ganttrect.cpp: ../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPen \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		ganttrect.h \
 		../Qt/5.7/clang_64/bin/moc
-	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtSvg.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib ganttrect.h -o moc_ganttrect.cpp
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib ganttrect.h -o moc_ganttrect.cpp
 
 moc_ganttflow.cpp: ../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -682,7 +680,7 @@ moc_ganttflow.cpp: ../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		ganttflow.h \
 		../Qt/5.7/clang_64/bin/moc
-	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtSvg.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib ganttflow.h -o moc_ganttflow.cpp
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib ganttflow.h -o moc_ganttflow.cpp
 
 moc_wizard.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWizard \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
@@ -705,7 +703,7 @@ moc_wizard.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWizard \
 		wizard.h \
 		wizard.h \
 		../Qt/5.7/clang_64/bin/moc
-	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtSvg.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib wizard.h -o moc_wizard.cpp
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib wizard.h -o moc_wizard.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -799,13 +797,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		qtablewidgetnumberitem.h \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTableWidgetItem \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/QtSvg \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qgraphicssvgitem.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qsvggenerator.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qsvgrenderer.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qsvgwidget.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qtsvgglobal.h \
-		../Qt/5.7/clang_64/lib/QtSvg.framework/Headers/qtsvgversion.h \
 		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
 		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp

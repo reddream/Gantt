@@ -40,7 +40,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <QtSvg>
 #include <QPrinter>
 
 //INIT stuff
@@ -103,12 +102,12 @@ MainWindow::MainWindow(QWidget *parent) :
 //create Menu (File, Edit...)
 void MainWindow::createMenu(){
     openCSVAct = new QAction(tr("&Open CSV"),this);
-    //openCSVAct->setShortcuts(QKeySequence::Open);
+    openCSVAct->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     openCSVAct->setStatusTip(tr("Load a csvfile"));
     connect(openCSVAct, &QAction::triggered, this, &MainWindow::openCSV);
 
     openGDXAct = new QAction(tr("&Open GDX..."),this);
-    //openGDXAct->setShortcuts(QKeySequence::Open);
+    openGDXAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_O));
     openGDXAct->setStatusTip(tr("Load a GDX file with the help of a wizard"));
     connect(openGDXAct, &QAction::triggered, this, &MainWindow::openGDX);
 
@@ -119,27 +118,27 @@ void MainWindow::createMenu(){
     fileMenu->addAction(openGDXAct);
 
     checkAct = new QAction(tr("&Check"),this);
-    //checkAct->setShortcut(QKeySequence::New);
-    checkAct->setStatusTip(tr("Check the file for overlapping tasks, Correct flow amount sum and time order in flow"));
+    checkAct->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
+    checkAct->setStatusTip(tr("Check the file for overlapping tasks and orrect flow amount sum"));
     connect(checkAct, &QAction::triggered, this, &MainWindow::check);
 
     checkMenu = menuBar()->addMenu(tr("&Check"));
     checkMenu->addAction(checkAct);
 
     visualizeamountsAct = new QAction(tr("&Visualise Amounts"),this);
-    //visualizeamountsAct->setShortcuts(QKeySequence::Paste);
+    visualizeamountsAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
     visualizeamountsAct->setCheckable(true);
     visualizeamountsAct->setStatusTip(tr("Visualize amounts in the Gantt Chart, relative to highest amount"));
     connect(visualizeamountsAct, &QAction::changed, this, &MainWindow::visualizeamounts);
 
     showAllFlowsAct = new QAction(tr("&Show all Flows"), this);
-    //showAllFlowsAct->setShortcut(QKeySequence::Find);
+    showAllFlowsAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     showAllFlowsAct->setCheckable(true);
     showAllFlowsAct->setStatusTip(tr("Show all flows, regardless of the current selection"));
     connect(showAllFlowsAct, &QAction::changed, this, &MainWindow::showAllFlowsToggled);
 
     zoominAct = new QAction(tr("&Zoom in"), this);
-    zoominAct->setShortcuts(QList<QKeySequence>() << QKeySequence::ZoomIn << QKeySequence::Undo);
+    zoominAct->setShortcuts(QKeySequence::ZoomIn);
     zoominAct->setStatusTip(tr("Zoom in, Keeping aspect ratio"));
     connect(zoominAct, &QAction::triggered, this, &MainWindow::v_zoomin);
     connect(zoominAct, &QAction::triggered, this, &MainWindow::h_zoomin);
@@ -151,7 +150,7 @@ void MainWindow::createMenu(){
     connect(zoomoutAct, &QAction::triggered, this, &MainWindow::h_zoomout);
 
     centerAct = new QAction(tr("&Center view"), this);
-    centerAct->setShortcut(QKeySequence::Copy);
+    centerAct->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
     centerAct->setStatusTip(tr("Fit view to contents"));
     connect(centerAct, &QAction::triggered, this, &MainWindow::center);
 
@@ -176,25 +175,25 @@ void MainWindow::createMenu(){
     connect(scrollwAct, &QAction::triggered, this, &MainWindow::scrollw);
 
     colorByAmountAct = new QAction(tr("&Color by Amount"), this);
-    //colorByAmountAct->setShortcut(QKeySequence::SelectAll);
+    colorByAmountAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_A));
     colorByAmountAct->setStatusTip(tr("Color tasks relative to their amount, from white over yellow to red"));
     colorByAmountAct->setCheckable(true);
     connect(colorByAmountAct, &QAction::triggered, this, &MainWindow::colorByAmount);
 
     colorByUnitAct = new QAction(tr("&Color by Unit"), this);
-    //colorByUnitAct->setShortcut(QKeySequence(Qt::Key_U));
+    colorByUnitAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_U));
     colorByUnitAct->setStatusTip(tr("Color tasks like their unit"));
     colorByUnitAct->setCheckable(true);
     connect(colorByUnitAct, &QAction::triggered, this, &MainWindow::colorByUnit);
 
     colorByTaskAct = new QAction(tr("&Color by Task"), this);
-    //colorByTaskAct->setShortcut(QKeySequence(Qt::Key_T));
+    colorByTaskAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T));
     colorByTaskAct->setStatusTip(tr("Color tasks with same name in same color"));
     colorByTaskAct->setCheckable(true);
     connect(colorByTaskAct, &QAction::triggered, this, &MainWindow::colorByTask);
 
-    colorByColorAct = new QAction(tr("&Color by Color"), this);
-    //colorByColorAct->setShortcut(QKeySequence(Qt::Key_D));
+    colorByColorAct = new QAction(tr("&Color by Preset"), this);
+    colorByColorAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_C));
     colorByColorAct->setStatusTip(tr("Color tasks with predefined color"));
     colorByColorAct->setCheckable(true);
     connect(colorByColorAct, &QAction::triggered, this, &MainWindow::colorByColor);
@@ -226,11 +225,12 @@ void MainWindow::createMenu(){
     viewMenu->addAction(colorByColorAct);
 
     exportAct = new QAction(tr("&Export to PNG"));
-    exportAct->setShortcut(QKeySequence::Save);
+    exportAct->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_P));
     exportAct->setToolTip(tr("Export the current view to PNG"));
     connect(exportAct, &QAction::triggered, this, &MainWindow::exportToImage);
 
     exportPDFAct = new QAction(tr("&Export to PDF"));
+    exportAct->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_P));
     exportPDFAct->setToolTip("Export to PDF");
     connect(exportPDFAct, &QAction::triggered, this, &MainWindow::exportToPDF);
 
@@ -780,7 +780,14 @@ void MainWindow::colorByAmount(){
 
 void MainWindow::taskHoverEnter(int index){
     Task t = tasks->at(index);
-    QToolTip::showText(mapToGlobal(tasksRep->at(index)->pos().toPoint()),
+    ui->statusBar->showMessage("Name: " + t.name
+                                + " Unit: " + units->at(t.unitIndex)
+                                + " Start: " + QString::number(t.start)
+                                + " End: " + QString::number(t.end)
+                                + " Duration: " + QString::number(t.end-t.start)
+                                + " Amount: " + QString::number(t.amount));
+
+    /*QToolTip::showText(mapToGlobal(tasksRep->at(index)->pos().toPoint()),
                        "Name: " + t.name
                        + " Unit: " + units->at(t.unitIndex)
                        + " Start: " + QString::number(t.start)
@@ -788,11 +795,12 @@ void MainWindow::taskHoverEnter(int index){
                        + " Duration: " + QString::number(t.end-t.start)
                        + " Amount: " + QString::number(t.amount),
                        this, tasksRep->at(index)->boundingRect().toRect(),10000000
-                       );
+                       );*/
 
 }
 void MainWindow::taskHoverLeave(int index){
-    QToolTip::hideText();
+    //ui->hoverTaskLabel->setText("");
+    //QToolTip::hideText();
 }
 
 //Task Clicked
@@ -1335,14 +1343,14 @@ void MainWindow::exportToPDF(){
 
 //Pan
 void MainWindow::keyPressEvent(QKeyEvent *e){
-    if (e->key() == Qt::Key_Shift){
+    if (e->key() == Qt::SHIFT){
         ui->ganttView->setDragMode(QGraphicsView::ScrollHandDrag);
     }else {
         //MainWindow::keyPressEvent(e);
     }
 }
 void MainWindow::keyReleaseEvent(QKeyEvent *e){
-    if (e->key() == Qt::Key_Shift){
+    if (e->key() == Qt::SHIFT){
         ui->ganttView->setDragMode(QGraphicsView::NoDrag);
     } else {
         //MainWindow::keyPressEvent(e);
