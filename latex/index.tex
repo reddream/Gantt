@@ -1,0 +1,31 @@
+\hypertarget{index_intro_sec}{}\section{Introduction}\label{index_intro_sec}
+Basic functionality\+:
+
+\hyperlink{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{Main\+Window\+::reset()} will clear or reset everything. \hyperlink{class_main_window_a580a35d29abc0a0c82edf183e7f87b74}{Main\+Window\+::open\+C\+S\+V()} or \hyperlink{class_main_window_a23e9c749c8f0e5119317ea6484b9476f}{Main\+Window\+::open\+G\+D\+X()} will add flows and tasks with \hyperlink{class_main_window_a2920d5c6c64925cb5f87c7fdac3f54b0}{Main\+Window\+::add\+Task()} and \hyperlink{class_main_window_a645f1cd085c2636dc4eccb320455a6f4}{Main\+Window\+::add\+Flow()}. \hyperlink{class_main_window_a0b3d1510d0e0ed665daa74d6823e00d6}{Main\+Window\+::create\+Representation} will \char`\"{}bake\char`\"{} all tasks and flows and generate the scene.\hypertarget{index_install_sec}{}\section{Installation}\label{index_install_sec}
+To cross compile on unix for any platform\+: \href{http://stackoverflow.com/questions/14170590/building-qt-5-on-linux-for-windows/14170591#14170591}{\tt http\+://stackoverflow.\+com/questions/14170590/building-\/qt-\/5-\/on-\/linux-\/for-\/windows/14170591\#14170591}
+
+
+\begin{DoxyEnumerate}
+\item add mxe to P\+A\+T\+H\+:
+\begin{DoxyCode}
+export PATH=$PATH:<mxe install location>/usr/bin 
+\end{DoxyCode}
+
+\item to compile for Windows, run
+\begin{DoxyCode}
+i686-w64-mingw32.static-qmake-qt5 
+\end{DoxyCode}
+
+\item run
+\begin{DoxyCode}
+make 
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+\begin{DoxyAuthor}{Author}
+Julius Naeumann, \href{mailto:julius.naeumann@gmail.com}{\tt julius.\+naeumann@gmail.\+com} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+August 2016 
+\end{DoxyDate}

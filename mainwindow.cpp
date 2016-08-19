@@ -40,8 +40,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
+#include <QtSvg>
+#include <QPrinter>
 
 //INIT stuff
 
@@ -99,7 +99,6 @@ MainWindow::MainWindow(QWidget *parent) :
     reset();
 
 }
-
 
 //create Menu (File, Edit...)
 void MainWindow::createMenu(){
@@ -226,13 +225,18 @@ void MainWindow::createMenu(){
     viewMenu->addAction(colorByTaskAct);
     viewMenu->addAction(colorByColorAct);
 
-    exportAct = new QAction(tr("&Export"));
+    exportAct = new QAction(tr("&Export to PNG"));
     exportAct->setShortcut(QKeySequence::Save);
     exportAct->setToolTip(tr("Export the current view to PNG"));
     connect(exportAct, &QAction::triggered, this, &MainWindow::exportToImage);
 
+    exportPDFAct = new QAction(tr("&Export to PDF"));
+    exportPDFAct->setToolTip("Export to PDF");
+    connect(exportPDFAct, &QAction::triggered, this, &MainWindow::exportToPDF);
+
     exportMenu = menuBar()->addMenu(tr("&Export"));
     exportMenu->addAction(exportAct);
+    exportMenu->addAction(exportPDFAct);
 
 }
 
@@ -277,6 +281,7 @@ void MainWindow::reset(){
     lines = new QList<QGraphicsLineItem*>();
     flowsRep = new QList<GanttFlow*>();
     unitLabels = new QList<QGraphicsTextItem*>();
+    rulerLabels = new QList<QGraphicsTextItem*>();
 
 }
 
@@ -1239,6 +1244,93 @@ void MainWindow::exportToImage(){
     }
     QPixmap pixMap = QPixmap::grabWidget(ui->ganttView);
     pixMap.save(filename);
+}
+
+void MainWindow::exportToPDF(){
+
+    if (openFile == ""){
+        return;
+    }
+    QString filename = QFileDialog::getSaveFileName(this,"Save as",openFile+".pdf", "PDF file (*.pdf)");
+    if (filename == ""){
+        return;
+    }
+    double vscale = QInputDialog::getDouble(this,"Vertical scale","",1,0);
+    qDebug()<<vscale;
+    QGraphicsScene * printScene = new QGraphicsScene(QRectF(0,0,50*(longestTask/50 + 1)*vscale + UNITNAMEBARWIDTH, (UNITREPHEIGHT + 2) * units->length()));
+    QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+
+    for (int i = 0; i < longestTask/50 + 1; i++){
+        QGraphicsTextItem * rulerlabel = new QGraphicsTextItem();
+        rulerlabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 100%);'>" + QString::number(i*50) + "</div>") );
+        rulerlabel->setDefaultTextColor(Qt::black);
+        rulerlabel->setPos(i*50*vscale + UNITNAMEBARWIDTH,UNITREPHEIGHT * (units->size()+1));
+        //rulerlabel->setTextWidth(UNITNAMEBARWIDTH);
+        printScene->addItem(rulerlabel);
+        QGraphicsLineItem* line = new QGraphicsLineItem(i*50*vscale + UNITNAMEBARWIDTH,0,i*50*vscale + UNITNAMEBARWIDTH,(units->length()+1)*UNITREPHEIGHT);
+
+        line->setPen(rulerPen);
+        printScene->addItem(line);
+
+    }
+    //Draw Lines
+    QPen unitPen(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    unitPen.setWidth(0);
+    for (int i = 0; i < units->size(); i++){
+        QGraphicsLineItem* line = new QGraphicsLineItem(0,(i+1)*UNITREPHEIGHT,50*(longestTask/50 + 2)*vscale + UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT);
+        line->setPen(unitPen);
+        printScene->addItem(line);
+    }
+    //Draw Tasks
+    for (int i = 0; i < tasks->size(); i++){
+        Task task = tasks->at(i);
+        GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmounts->at(task.unitIndex),task.start*vscale,task.end*vscale,task.amount, task.color);
+        printScene->addItem(newRect);
+    }
+    //Draw Flows
+    /*
+    for (int i = 0; i < flows->size(); i++){
+        Flow flow = flows->at(i);
+        GanttFlow * newLine = new GanttFlow(i,
+                                            QPolygonF(QVector<QPointF>()
+                                                      << tasksRep->at(flow.op1Index)->boundingRect().topRight()
+                                                       << tasksRep->at(flow.op1Index)->boundingRect().bottomRight()
+                                                      << tasksRep->at(flow.op2Index)->boundingRect().bottomLeft()
+                                                      << tasksRep->at(flow.op2Index)->boundingRect().topLeft()));
+        printScene->addItem(newLine);
+    }*/
+    //Draw Labels
+    for (int i = 0; i < units->size(); i++){
+        QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
+        unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 100%);'>" +units->at(i) + "</div>") );
+        unitLabel->setDefaultTextColor(Qt::black);
+        //unitLabel->setTextWidth(UNITNAMEBARWIDTH);
+        unitLabel->setPos(0,(i+1)*UNITREPHEIGHT-unitLabel->boundingRect().height()/2);
+        printScene->addItem(unitLabel);
+    }
+
+    //showFlows(showAllFlows);
+
+
+
+    QPrinter printer( QPrinter::HighResolution );
+    printer.setPageSizeMM(QSizeF(50*(longestTask/50 + 1)*vscale + UNITNAMEBARWIDTH, (UNITREPHEIGHT + 2) * units->length()));
+    printer.setOrientation( QPrinter::Portrait );
+    printer.setOutputFormat( QPrinter::PdfFormat );
+
+    printer.setOutputFileName( filename ); // file will be created in your build directory (where debug/release directories are)
+
+    QPainter p;
+
+    if( !p.begin( &printer ) )
+    {
+        qDebug() << "Error!";
+        return;
+    }
+    printScene->render( &p );
+
+    p.end();
+    printScene->clear();
 }
 
 //Pan

@@ -1,0 +1,15 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/ganttrect.o
+./debug/ganttflow.o
+./debug/qtablewidgetnumberitem.o
+./debug/gclgms.o
+./debug/gdxcc.o
+./debug/wizard.o
+./debug/gantt_plugin_import.o
+./debug/moc_mainwindow.o
+./debug/moc_ganttrect.o
+./debug/moc_ganttflow.o
+./debug/moc_wizard.o
+);

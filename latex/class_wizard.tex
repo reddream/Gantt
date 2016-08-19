@@ -1,0 +1,111 @@
+\hypertarget{class_wizard}{}\section{Wizard Class Reference}
+\label{class_wizard}\index{Wizard@{Wizard}}
+
+
+Class for the G\+D\+X import wizard.  
+
+
+
+
+{\ttfamily \#include $<$wizard.\+h$>$}
+
+Inheritance diagram for Wizard\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_wizard}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_a196e8f8b6c8f346fe869d7f01c2d7ab5}{}void \hyperlink{class_wizard_a196e8f8b6c8f346fe869d7f01c2d7ab5}{create\+Representation} ()\label{class_wizard_a196e8f8b6c8f346fe869d7f01c2d7ab5}
+
+\begin{DoxyCompactList}\small\item\em call \hyperlink{class_main_window_a0b3d1510d0e0ed665daa74d6823e00d6}{Main\+Window\+::create\+Representation()} \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a6f7b8a79c893099e99100bb0c3c67be4}{}void \hyperlink{class_wizard_a6f7b8a79c893099e99100bb0c3c67be4}{add\+Flow} (Q\+String unit1name, Q\+String op1name, Q\+String unit2name, Q\+String op2name, float pr, float cr, float amount)\label{class_wizard_a6f7b8a79c893099e99100bb0c3c67be4}
+
+\begin{DoxyCompactList}\small\item\em call \hyperlink{class_main_window_a645f1cd085c2636dc4eccb320455a6f4}{Main\+Window\+::add\+Flow()} \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a7a17fda2d9854c8461234417c634ec32}{}void \hyperlink{class_wizard_a7a17fda2d9854c8461234417c634ec32}{add\+Task} (Q\+String unit\+Name, Q\+String task\+Name, float start, float end, float amount, Q\+String color=\char`\"{}random\char`\"{})\label{class_wizard_a7a17fda2d9854c8461234417c634ec32}
+
+\begin{DoxyCompactList}\small\item\em call \hyperlink{class_main_window_a2920d5c6c64925cb5f87c7fdac3f54b0}{Main\+Window\+::add\+Task()} \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_ae2efd036bcfcaa60c865fed1bec603bd}{}void \hyperlink{class_wizard_ae2efd036bcfcaa60c865fed1bec603bd}{reset} ()\label{class_wizard_ae2efd036bcfcaa60c865fed1bec603bd}
+
+\begin{DoxyCompactList}\small\item\em call \hyperlink{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{Main\+Window\+::reset()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_a89dcfb3d0ae3eca49fd820c1e96be8f5}{}{\bfseries Wizard} (Q\+Widget $\ast$parent=0)\label{class_wizard_a89dcfb3d0ae3eca49fd820c1e96be8f5}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_ab3f30f52640cbbd9ccb5bfd968845a72}{}Q\+String \hyperlink{class_wizard_ab3f30f52640cbbd9ccb5bfd968845a72}{loaded\+File} = \char`\"{}\char`\"{}\label{class_wizard_ab3f30f52640cbbd9ccb5bfd968845a72}
+
+\begin{DoxyCompactList}\small\item\em currently selected gdx file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_ad75370785215142ccc6516c5514e26d2}{}bool \hyperlink{class_wizard_ad75370785215142ccc6516c5514e26d2}{validate\+Current\+Page} ()\label{class_wizard_ad75370785215142ccc6516c5514e26d2}
+
+\begin{DoxyCompactList}\small\item\em called at page change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_a3e8121fb7eecf94c1c42b9059e0889cd}{}void \hyperlink{class_wizard_a3e8121fb7eecf94c1c42b9059e0889cd}{load\+File\+Clicked} ()\label{class_wizard_a3e8121fb7eecf94c1c42b9059e0889cd}
+
+\begin{DoxyCompactList}\small\item\em load File button clicked \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a0f4d2e63f1dd32a5a824a5aeecc88f43}{}void \hyperlink{class_wizard_a0f4d2e63f1dd32a5a824a5aeecc88f43}{load\+Config\+Clicked} ()\label{class_wizard_a0f4d2e63f1dd32a5a824a5aeecc88f43}
+
+\begin{DoxyCompactList}\small\item\em load Config Button Clicked \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_abd795959fb203bacb7f1059d5ee65faf}{}void \hyperlink{class_wizard_abd795959fb203bacb7f1059d5ee65faf}{select\+Sysdir} ()\label{class_wizard_abd795959fb203bacb7f1059d5ee65faf}
+
+\begin{DoxyCompactList}\small\item\em set the G\+A\+M\+S Sysdir if none can be found \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a62b2e1b496cb07ca1f14e4c079470b16}{}void \hyperlink{class_wizard_a62b2e1b496cb07ca1f14e4c079470b16}{save\+Configuration} ()\label{class_wizard_a62b2e1b496cb07ca1f14e4c079470b16}
+
+\begin{DoxyCompactList}\small\item\em save the current configuration \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_aca998aca16aff2aad5a3c14f8b954b6b}{}Q\+String \hyperlink{class_wizard_aca998aca16aff2aad5a3c14f8b954b6b}{get\+Sysdir} ()\label{class_wizard_aca998aca16aff2aad5a3c14f8b954b6b}
+
+\begin{DoxyCompactList}\small\item\em calls \hyperlink{class_wizard_a394f3e7a01cd617aa0759533ab2997ae}{Find\+G\+A\+M\+S()}, returns value as a Q\+String \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a1db1a1c24dc5099792e9ad0d183912e1}{}void \hyperlink{class_wizard_a1db1a1c24dc5099792e9ad0d183912e1}{open\+G\+D\+X} ()\label{class_wizard_a1db1a1c24dc5099792e9ad0d183912e1}
+
+\begin{DoxyCompactList}\small\item\em import the G\+D\+X file \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_adfe6a1afa0ef03c25371f32119337644}{}void \hyperlink{class_wizard_adfe6a1afa0ef03c25371f32119337644}{fetch\+Available\+Symbols} ()\label{class_wizard_adfe6a1afa0ef03c25371f32119337644}
+
+\begin{DoxyCompactList}\small\item\em Finds all Symbols in the loaded\+File gdx. \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a7873087523305cb8565a33f68d822cf9}{}void \hyperlink{class_wizard_a7873087523305cb8565a33f68d822cf9}{load\+Symbols\+From\+Config} ()\label{class_wizard_a7873087523305cb8565a33f68d822cf9}
+
+\begin{DoxyCompactList}\small\item\em Loads symbols to use in \hyperlink{class_wizard_a1db1a1c24dc5099792e9ad0d183912e1}{open\+G\+D\+X()} from a previously saved config file. \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a394f3e7a01cd617aa0759533ab2997ae}{}string \hyperlink{class_wizard_a394f3e7a01cd617aa0759533ab2997ae}{Find\+G\+A\+M\+S} ()\label{class_wizard_a394f3e7a01cd617aa0759533ab2997ae}
+
+\begin{DoxyCompactList}\small\item\em Searches for the G\+A\+M\+S Sysdir. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wizard_ad24ade19011c55a41d046fcb77e08e2c}{}\hyperlink{class_ui_1_1_wizard}{Ui\+::\+Wizard} $\ast$ {\bfseries ui}\label{class_wizard_ad24ade19011c55a41d046fcb77e08e2c}
+
+\item 
+\hypertarget{class_wizard_a91d00c36482a510a5c84c555b318acbf}{}Q\+String \hyperlink{class_wizard_a91d00c36482a510a5c84c555b318acbf}{loaded\+Config\+File} = \char`\"{}\char`\"{}\label{class_wizard_a91d00c36482a510a5c84c555b318acbf}
+
+\begin{DoxyCompactList}\small\item\em path to the config file \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_afb7142f7df6156f74c2e0bb38f48a56a}{}Q\+String \hyperlink{class_wizard_afb7142f7df6156f74c2e0bb38f48a56a}{Sysdir} = \char`\"{}\char`\"{}\label{class_wizard_afb7142f7df6156f74c2e0bb38f48a56a}
+
+\begin{DoxyCompactList}\small\item\em path to the G\+A\+M\+S Sysdir \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_a5f8ca2a02c9d656cf4a0f81949c692aa}{}Q\+String\+List $\ast$ \hyperlink{class_wizard_a5f8ca2a02c9d656cf4a0f81949c692aa}{available\+Task\+Symbols}\label{class_wizard_a5f8ca2a02c9d656cf4a0f81949c692aa}
+
+\begin{DoxyCompactList}\small\item\em List of available \hyperlink{struct_task}{Task} symbols. \end{DoxyCompactList}\item 
+\hypertarget{class_wizard_af441710077161dca35e55e3498caeb7b}{}Q\+String\+List $\ast$ \hyperlink{class_wizard_af441710077161dca35e55e3498caeb7b}{available\+Flow\+Symbols}\label{class_wizard_af441710077161dca35e55e3498caeb7b}
+
+\begin{DoxyCompactList}\small\item\em List of available \hyperlink{struct_flow}{Flow} symbols. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for the G\+D\+X import wizard. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wizard.\+h\item 
+moc\+\_\+wizard.\+cpp\item 
+wizard.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,28 @@
+QMAKE_DEFAULT_INCDIRS = \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed \
+    /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include
+QMAKE_DEFAULT_LIBDIRS = \
+    /Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4 \
+    /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/lib
+QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
+QMAKE_XCODE_VERSION = 7.3.1
+QMAKE_MAC_SDK.macosx.Path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk
+QMAKE_MAC_SDK.macosx.PlatformPath = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform
+QMAKE_MAC_SDK.macosx.SDKVersion = 10.11
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_FIX_RPATH = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool \
+    -id
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_AR = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar \
+    cq
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_RANLIB = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib \
+    -s
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_SHLIB = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++

@@ -85,6 +85,7 @@ private:
     QList<GanttFlow*> * flowsRep;
     ///A list of the vertical lines for each unit
     QList<QGraphicsLineItem*> * lines;
+    QList<QGraphicsTextItem*> * rulerLabels;
     ///A list of the labels of each unit
     QList<QGraphicsTextItem*> * unitLabels;
     /// The scene to which everything is drawn
@@ -152,7 +153,10 @@ private:
     QAction * colorByTaskAct;
     /// Menu action for checking
     QAction *  checkAct;
+    /// Menu action for exporting to PNG
     QAction *  exportAct;
+    /// Menu action for exporting to PDF
+    QAction * exportPDFAct;
 
 private slots:
     /// called when  the vertical zoom slider changed
@@ -199,6 +203,7 @@ private slots:
     void colorByColor();
     void colorByTask();
     void exportToImage();
+    void exportToPDF();
     // filter slots
     void ruleChangedAmount(int index);
     void ruleChangedDuration(int index);

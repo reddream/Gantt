@@ -1,0 +1,320 @@
+\hypertarget{class_main_window}{}\section{Main\+Window Class Reference}
+\label{class_main_window}\index{Main\+Window@{Main\+Window}}
+
+
+Class for the Main window.  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_window}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}{}{\bfseries Main\+Window} (Q\+Widget $\ast$parent=0)\label{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}
+
+\item 
+\hypertarget{class_main_window_a75d7910a13ccc8ee60126bf7be448341}{}bool {\bfseries event\+Filter} (Q\+Object $\ast$watched, Q\+Event $\ast$event)\label{class_main_window_a75d7910a13ccc8ee60126bf7be448341}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_main_window_ae12f8f63791595567b6250f8bb002bda}{}void {\bfseries resize\+Event} (Q\+Resize\+Event $\ast$event)\label{class_main_window_ae12f8f63791595567b6250f8bb002bda}
+
+\item 
+\hypertarget{class_main_window_adf88315e557e377353059bd313b1bfa6}{}void {\bfseries key\+Press\+Event} (Q\+Key\+Event $\ast$e)\label{class_main_window_adf88315e557e377353059bd313b1bfa6}
+
+\item 
+\hypertarget{class_main_window_a04b0c8ff3be04d1b1bf54e78c5ee7039}{}void {\bfseries key\+Release\+Event} (Q\+Key\+Event $\ast$e)\label{class_main_window_a04b0c8ff3be04d1b1bf54e78c5ee7039}
+
+\item 
+\hypertarget{class_main_window_ad2a20182d1ed20479debef57417cdb05}{}void {\bfseries wheel\+Event} (Q\+Wheel\+Event $\ast$e)\label{class_main_window_ad2a20182d1ed20479debef57417cdb05}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_main_window_a4878ed6cf33c2814e8a7c89e894585bc}{}void \hyperlink{class_main_window_a4878ed6cf33c2814e8a7c89e894585bc}{vertical\+Zoom\+Slider\+Changed} (int x)\label{class_main_window_a4878ed6cf33c2814e8a7c89e894585bc}
+
+\begin{DoxyCompactList}\small\item\em called when the vertical zoom slider changed \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a181da03c02e690223c8f93fe558bb4df}{}void \hyperlink{class_main_window_a181da03c02e690223c8f93fe558bb4df}{horizontal\+Zoom\+Slider\+Changed} (int x)\label{class_main_window_a181da03c02e690223c8f93fe558bb4df}
+
+\begin{DoxyCompactList}\small\item\em called when the horizontal zoom slider changed \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a1bce12a42d710ac9e5afa4d1a0a9aa4b}{}void \hyperlink{class_main_window_a1bce12a42d710ac9e5afa4d1a0a9aa4b}{v\+\_\+zoomin} ()\label{class_main_window_a1bce12a42d710ac9e5afa4d1a0a9aa4b}
+
+\begin{DoxyCompactList}\small\item\em zoom in vertically by 2x \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a9d72b029178eab9350387aa85d608add}{}void \hyperlink{class_main_window_a9d72b029178eab9350387aa85d608add}{v\+\_\+zoomout} ()\label{class_main_window_a9d72b029178eab9350387aa85d608add}
+
+\begin{DoxyCompactList}\small\item\em zoom out vertically by 2x \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_ad6d9b74f56b82f77078c2c656abc418b}{}void \hyperlink{class_main_window_ad6d9b74f56b82f77078c2c656abc418b}{h\+\_\+zoomin} ()\label{class_main_window_ad6d9b74f56b82f77078c2c656abc418b}
+
+\begin{DoxyCompactList}\small\item\em zoom in horizontally by 2x \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a777aff65da0144d1ed34646518ea955a}{}void \hyperlink{class_main_window_a777aff65da0144d1ed34646518ea955a}{h\+\_\+zoomout} ()\label{class_main_window_a777aff65da0144d1ed34646518ea955a}
+
+\begin{DoxyCompactList}\small\item\em zoom out horizontally by 2x \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a0c980716d7ece94ad4e01921ce557e98}{}void \hyperlink{class_main_window_a0c980716d7ece94ad4e01921ce557e98}{task\+Clicked} (int index)\label{class_main_window_a0c980716d7ece94ad4e01921ce557e98}
+
+\begin{DoxyCompactList}\small\item\em called when a task ( its graphical representation as a \hyperlink{class_gantt_rect}{Gantt\+Rect} ) has been clicked \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a2d3ef18f661856ebd7f1ee149e95c900}{}void \hyperlink{class_main_window_a2d3ef18f661856ebd7f1ee149e95c900}{task\+Hover\+Enter} (int index)\label{class_main_window_a2d3ef18f661856ebd7f1ee149e95c900}
+
+\begin{DoxyCompactList}\small\item\em called when a task ( its graphical representation as a \hyperlink{class_gantt_rect}{Gantt\+Rect} ) has started being hovered on \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a3a3957874de63e80e41661860e2b12c3}{}void \hyperlink{class_main_window_a3a3957874de63e80e41661860e2b12c3}{task\+Hover\+Leave} (int index)\label{class_main_window_a3a3957874de63e80e41661860e2b12c3}
+
+\begin{DoxyCompactList}\small\item\em called when a task ( its graphical representation as a \hyperlink{class_gantt_rect}{Gantt\+Rect} ) has stopped being hovered on \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aec3a0dff06eb089dbf3d8c4175d8e004}{}void \hyperlink{class_main_window_aec3a0dff06eb089dbf3d8c4175d8e004}{flow\+Clicked} (int index)\label{class_main_window_aec3a0dff06eb089dbf3d8c4175d8e004}
+
+\begin{DoxyCompactList}\small\item\em called when a flow ( its graphical representation as a \hyperlink{class_gantt_flow}{Gantt\+Flow} ) has been clicked \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_abacc539de6f25ca81a6b0543be799155}{}void \hyperlink{class_main_window_abacc539de6f25ca81a6b0543be799155}{task\+Table\+Clicked} (int index, int \+\_\+)\label{class_main_window_abacc539de6f25ca81a6b0543be799155}
+
+\begin{DoxyCompactList}\small\item\em called when a task has been selected in the table \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a580a35d29abc0a0c82edf183e7f87b74}{}void \hyperlink{class_main_window_a580a35d29abc0a0c82edf183e7f87b74}{open\+C\+S\+V} ()\label{class_main_window_a580a35d29abc0a0c82edf183e7f87b74}
+
+\begin{DoxyCompactList}\small\item\em called by open\+C\+S\+V\+Act, opens a File selection window and parses the selected C\+S\+V file. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a23e9c749c8f0e5119317ea6484b9476f}{}void \hyperlink{class_main_window_a23e9c749c8f0e5119317ea6484b9476f}{open\+G\+D\+X} ()\label{class_main_window_a23e9c749c8f0e5119317ea6484b9476f}
+
+\begin{DoxyCompactList}\small\item\em called by open\+G\+D\+X\+Act, opens a \hyperlink{class_wizard}{Wizard} for reading G\+D\+X files. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a631ac3f30fb6a0b0dc441739f0abe624}{}void \hyperlink{class_main_window_a631ac3f30fb6a0b0dc441739f0abe624}{visualizeamounts} ()\label{class_main_window_a631ac3f30fb6a0b0dc441739f0abe624}
+
+\begin{DoxyCompactList}\small\item\em called by visualize\+Amounts\+Act \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a36b4cda2f78374242c8fed56634dff90}{}void \hyperlink{class_main_window_a36b4cda2f78374242c8fed56634dff90}{show\+All\+Flows\+Toggled} ()\label{class_main_window_a36b4cda2f78374242c8fed56634dff90}
+
+\begin{DoxyCompactList}\small\item\em called by show\+All\+Flows\+Act \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aa01206c494495bf0dc61d5dd1adf3ef7}{}void {\bfseries scrolln} ()\label{class_main_window_aa01206c494495bf0dc61d5dd1adf3ef7}
+
+\item 
+\hypertarget{class_main_window_aedee761ccc4e5677bd1d3f37047b8809}{}void {\bfseries scrolle} ()\label{class_main_window_aedee761ccc4e5677bd1d3f37047b8809}
+
+\item 
+\hypertarget{class_main_window_a09f8db735147f5631d706aa7e3cff52c}{}void {\bfseries scrolls} ()\label{class_main_window_a09f8db735147f5631d706aa7e3cff52c}
+
+\item 
+\hypertarget{class_main_window_aaaec2945183e4bee42128478b2b66602}{}void {\bfseries scrollw} ()\label{class_main_window_aaaec2945183e4bee42128478b2b66602}
+
+\item 
+\hypertarget{class_main_window_af781f827f0e0df1357044a1861568600}{}void {\bfseries center} ()\label{class_main_window_af781f827f0e0df1357044a1861568600}
+
+\item 
+\hypertarget{class_main_window_aa74202e1272a25d59ff3799a48182b80}{}void {\bfseries check} ()\label{class_main_window_aa74202e1272a25d59ff3799a48182b80}
+
+\item 
+\hypertarget{class_main_window_a267eecc8fffb48d32f449d83d6604dd7}{}void \hyperlink{class_main_window_a267eecc8fffb48d32f449d83d6604dd7}{save\+Logs} ()\label{class_main_window_a267eecc8fffb48d32f449d83d6604dd7}
+
+\begin{DoxyCompactList}\small\item\em Save log ouput to file. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a0cffe7069f97c1795a8ba7f00002f43e}{}void {\bfseries color\+By\+Amount} ()\label{class_main_window_a0cffe7069f97c1795a8ba7f00002f43e}
+
+\item 
+\hypertarget{class_main_window_a1f40b9a1fd5872645aaf1e9e3fe82a45}{}void {\bfseries color\+By\+Unit} ()\label{class_main_window_a1f40b9a1fd5872645aaf1e9e3fe82a45}
+
+\item 
+\hypertarget{class_main_window_a4e71a4c397c36e151a917039c7db06d7}{}void {\bfseries color\+By\+Color} ()\label{class_main_window_a4e71a4c397c36e151a917039c7db06d7}
+
+\item 
+\hypertarget{class_main_window_a5e7373649a8fdcd8fc010c321569864a}{}void {\bfseries color\+By\+Task} ()\label{class_main_window_a5e7373649a8fdcd8fc010c321569864a}
+
+\item 
+\hypertarget{class_main_window_a494c17acd55c3f4c1ccf1710371bb322}{}void {\bfseries export\+To\+Image} ()\label{class_main_window_a494c17acd55c3f4c1ccf1710371bb322}
+
+\item 
+\hypertarget{class_main_window_a19794f4b42e03bee539fd9783825a3b6}{}void {\bfseries rule\+Changed\+Amount} (int index)\label{class_main_window_a19794f4b42e03bee539fd9783825a3b6}
+
+\item 
+\hypertarget{class_main_window_a462222b03801d153d7e1eaf037741dd7}{}void {\bfseries rule\+Changed\+Duration} (int index)\label{class_main_window_a462222b03801d153d7e1eaf037741dd7}
+
+\item 
+\hypertarget{class_main_window_a243f90594158b9d2b14bec0fbf192b13}{}void {\bfseries rule\+Changed\+Start} (int index)\label{class_main_window_a243f90594158b9d2b14bec0fbf192b13}
+
+\item 
+\hypertarget{class_main_window_a5a4b524f33975847930b136d0e497958}{}void {\bfseries rule\+Changed\+End} (int index)\label{class_main_window_a5a4b524f33975847930b136d0e497958}
+
+\item 
+\hypertarget{class_main_window_acecada8d60710fb12ef90f8752f7f074}{}void {\bfseries apply\+Filter} ()\label{class_main_window_acecada8d60710fb12ef90f8752f7f074}
+
+\item 
+\hypertarget{class_main_window_ade9c4f4c00ac1956276e10e65123b848}{}void {\bfseries clear\+Filter} ()\label{class_main_window_ade9c4f4c00ac1956276e10e65123b848}
+
+\item 
+\hypertarget{class_main_window_a0b3d1510d0e0ed665daa74d6823e00d6}{}void \hyperlink{class_main_window_a0b3d1510d0e0ed665daa74d6823e00d6}{create\+Representation} ()\label{class_main_window_a0b3d1510d0e0ed665daa74d6823e00d6}
+
+\begin{DoxyCompactList}\small\item\em Creates the graphical representation of the gantt chart. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a645f1cd085c2636dc4eccb320455a6f4}{}void \hyperlink{class_main_window_a645f1cd085c2636dc4eccb320455a6f4}{add\+Flow} (Q\+String unit1name, Q\+String op1name, Q\+String unit2name, Q\+String op2name, float pr, float cr, float amount)\label{class_main_window_a645f1cd085c2636dc4eccb320455a6f4}
+
+\begin{DoxyCompactList}\small\item\em Adds a \hyperlink{struct_flow}{Flow} to the flows list. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a2920d5c6c64925cb5f87c7fdac3f54b0}{}void \hyperlink{class_main_window_a2920d5c6c64925cb5f87c7fdac3f54b0}{add\+Task} (Q\+String unit\+Name, Q\+String task\+Name, float start, float end, float amount, Q\+String color=\char`\"{}random\char`\"{})\label{class_main_window_a2920d5c6c64925cb5f87c7fdac3f54b0}
+
+\begin{DoxyCompactList}\small\item\em Adds a \hyperlink{struct_task}{Task} to the tasks list. color is a color name in hex format, if none is given a random color will be generated. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{}void \hyperlink{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{reset} ()\label{class_main_window_a02076de46e6810174817ebfc6ddd2be5}
+
+\begin{DoxyCompactList}\small\item\em reset the window (important for loading new files) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_main_window_a6a403614bd858e16e35af405c562fc9b}{}void {\bfseries reset\+Zoom} ()\label{class_main_window_a6a403614bd858e16e35af405c562fc9b}
+
+\item 
+\hypertarget{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}{}void \hyperlink{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}{show\+Flows} (int task\+Index)\label{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}
+
+\begin{DoxyCompactList}\small\item\em Recursively make all flows connected to this task visible. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a8c5ff24ebba239b7dbf435b3dd50e1f3}{}void {\bfseries recursively\+Activate\+Flows\+To\+The\+Right} (int task\+Index)\label{class_main_window_a8c5ff24ebba239b7dbf435b3dd50e1f3}
+
+\item 
+\hypertarget{class_main_window_af938550e53f022625dd21ff1536bb36b}{}void {\bfseries recursively\+Activate\+Flows\+To\+The\+Left} (int task\+Index)\label{class_main_window_af938550e53f022625dd21ff1536bb36b}
+
+\item 
+\hypertarget{class_main_window_a63772da55576703fd979ced117a9fa89}{}void \hyperlink{class_main_window_a63772da55576703fd979ced117a9fa89}{show\+Amount} (bool yes)\label{class_main_window_a63772da55576703fd979ced117a9fa89}
+
+\begin{DoxyCompactList}\small\item\em Set wether to visualize amounts by height. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a28e45b950a89e35ffb5b1d1e345e7aa6}{}void \hyperlink{class_main_window_a28e45b950a89e35ffb5b1d1e345e7aa6}{select\+Task\+On\+Table} (int index)\label{class_main_window_a28e45b950a89e35ffb5b1d1e345e7aa6}
+
+\begin{DoxyCompactList}\small\item\em select a \hyperlink{struct_task}{Task} in the Table by index \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a03799692902ab88a551b4dca1fa042db}{}void \hyperlink{class_main_window_a03799692902ab88a551b4dca1fa042db}{create\+Menu} ()\label{class_main_window_a03799692902ab88a551b4dca1fa042db}
+
+\begin{DoxyCompactList}\small\item\em creates the menu bar \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a4aacfe6bb51e21018d6d26e6146ba1f7}{}Q\+String \hyperlink{class_main_window_a4aacfe6bb51e21018d6d26e6146ba1f7}{describe\+Task} (\hyperlink{struct_task}{Task} task)\label{class_main_window_a4aacfe6bb51e21018d6d26e6146ba1f7}
+
+\begin{DoxyCompactList}\small\item\em returns a readable description of a \hyperlink{struct_task}{Task} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_main_window_a35466a70ed47252a0191168126a352a5}{}\hyperlink{class_ui_1_1_main_window}{Ui\+::\+Main\+Window} $\ast$ {\bfseries ui}\label{class_main_window_a35466a70ed47252a0191168126a352a5}
+
+\item 
+\hypertarget{class_main_window_abe042bf7fb79319c77c2e2aeea0cd3e6}{}float {\bfseries vertical\+Zoom} = 1\label{class_main_window_abe042bf7fb79319c77c2e2aeea0cd3e6}
+
+\item 
+\hypertarget{class_main_window_a75d4db6cf3737249d72aa1cb2859b424}{}float {\bfseries horizontal\+Zoom} = 1\label{class_main_window_a75d4db6cf3737249d72aa1cb2859b424}
+
+\item 
+\hypertarget{class_main_window_ab302362b256360d527a628bdbfcde171}{}Q\+List$<$ \hyperlink{struct_task}{Task} $>$ $\ast$ \hyperlink{class_main_window_ab302362b256360d527a628bdbfcde171}{tasks}\label{class_main_window_ab302362b256360d527a628bdbfcde171}
+
+\begin{DoxyCompactList}\small\item\em A list of all tasks. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a843068e01d54730258357a4bc5f29bac}{}Q\+List$<$ \hyperlink{struct_flow}{Flow} $>$ $\ast$ \hyperlink{class_main_window_a843068e01d54730258357a4bc5f29bac}{flows}\label{class_main_window_a843068e01d54730258357a4bc5f29bac}
+
+\begin{DoxyCompactList}\small\item\em A list of all flows. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aad7505c53a0ad219080b3c1b1d1ef1e6}{}Q\+String\+List $\ast$ \hyperlink{class_main_window_aad7505c53a0ad219080b3c1b1d1ef1e6}{units}\label{class_main_window_aad7505c53a0ad219080b3c1b1d1ef1e6}
+
+\begin{DoxyCompactList}\small\item\em A list of all unit names. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a306683291c0136c9808f7026b37820e5}{}Q\+Map$<$ Q\+String, Q\+Color $>$ $\ast$ \hyperlink{class_main_window_a306683291c0136c9808f7026b37820e5}{unit\+Colors}\label{class_main_window_a306683291c0136c9808f7026b37820e5}
+
+\begin{DoxyCompactList}\small\item\em A map of unit colors. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}{}Q\+Map$<$ Q\+String, Q\+Color $>$ $\ast$ \hyperlink{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}{task\+Colors}\label{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}
+
+\begin{DoxyCompactList}\small\item\em A map of task colors. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a71197b2944e569701672e2e8462d7805}{}Q\+List$<$ \hyperlink{class_gantt_rect}{Gantt\+Rect} $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a71197b2944e569701672e2e8462d7805}{tasks\+Rep}\label{class_main_window_a71197b2944e569701672e2e8462d7805}
+
+\begin{DoxyCompactList}\small\item\em Graphic representations of each task. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_ab3c8fa1d1db3eb29de99197692da7028}{}Q\+List$<$ \hyperlink{class_gantt_flow}{Gantt\+Flow} $\ast$ $>$ $\ast$ \hyperlink{class_main_window_ab3c8fa1d1db3eb29de99197692da7028}{flows\+Rep}\label{class_main_window_ab3c8fa1d1db3eb29de99197692da7028}
+
+\begin{DoxyCompactList}\small\item\em Graphic representations of each flow. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a60463caf2bb888172a6dcbae02004739}{}Q\+List$<$ Q\+Graphics\+Line\+Item $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a60463caf2bb888172a6dcbae02004739}{lines}\label{class_main_window_a60463caf2bb888172a6dcbae02004739}
+
+\begin{DoxyCompactList}\small\item\em A list of the vertical lines for each unit. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}{}Q\+List$<$ Q\+Graphics\+Text\+Item $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}{unit\+Labels}\label{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}
+
+\begin{DoxyCompactList}\small\item\em A list of the labels of each unit. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a51ac2b126495216832501cea3929c6f6}{}Q\+Graphics\+Scene $\ast$ \hyperlink{class_main_window_a51ac2b126495216832501cea3929c6f6}{scene}\label{class_main_window_a51ac2b126495216832501cea3929c6f6}
+
+\begin{DoxyCompactList}\small\item\em The scene to which everything is drawn. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a10467ff3d17d133dba6d758def5e51de}{}float \hyperlink{class_main_window_a10467ff3d17d133dba6d758def5e51de}{longest\+Task}\label{class_main_window_a10467ff3d17d133dba6d758def5e51de}
+
+\begin{DoxyCompactList}\small\item\em The time when the longest task ends. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_afaf2042d5708a2242bb7181cab07d55c}{}float \hyperlink{class_main_window_afaf2042d5708a2242bb7181cab07d55c}{largest\+Amount}\label{class_main_window_afaf2042d5708a2242bb7181cab07d55c}
+
+\begin{DoxyCompactList}\small\item\em The largest amount (For scaling the view) \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aa1b77bbae055203d9cf749c1dbb0ab40}{}Q\+List$<$ float $>$ $\ast$ \hyperlink{class_main_window_aa1b77bbae055203d9cf749c1dbb0ab40}{largest\+Amounts}\label{class_main_window_aa1b77bbae055203d9cf749c1dbb0ab40}
+
+\begin{DoxyCompactList}\small\item\em Largest amount for each task, for the coloring option. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a218b4cd8253b62c52f813a38ac6896ab}{}int {\bfseries current\+Clicked\+Task\+Index} = -\/1\label{class_main_window_a218b4cd8253b62c52f813a38ac6896ab}
+
+\item 
+\hypertarget{class_main_window_a651ff42acb84f96089f4a91aff00771a}{}int {\bfseries current\+Clicked\+Flow\+Index} = -\/1\label{class_main_window_a651ff42acb84f96089f4a91aff00771a}
+
+\item 
+\hypertarget{class_main_window_a716410ca805f3fd24ee3d00e5998dd51}{}int \hyperlink{class_main_window_a716410ca805f3fd24ee3d00e5998dd51}{show\+All\+Flows} = -\/2\label{class_main_window_a716410ca805f3fd24ee3d00e5998dd51}
+
+\begin{DoxyCompactList}\small\item\em -\/2 = hide all flows, -\/1 = show all flows by default \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a090ea7bbf9ff3fa21ba13e32f8c2d15d}{}Q\+String \hyperlink{class_main_window_a090ea7bbf9ff3fa21ba13e32f8c2d15d}{open\+File}\label{class_main_window_a090ea7bbf9ff3fa21ba13e32f8c2d15d}
+
+\begin{DoxyCompactList}\small\item\em The currently opened file. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a426da48f6e2f865b07a28533c07c4f7a}{}Q\+Menu $\ast$ \hyperlink{class_main_window_a426da48f6e2f865b07a28533c07c4f7a}{file\+Menu}\label{class_main_window_a426da48f6e2f865b07a28533c07c4f7a}
+
+\begin{DoxyCompactList}\small\item\em File menu. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a976ec486a97951607dd8acf14bbbe0a8}{}Q\+Menu $\ast$ \hyperlink{class_main_window_a976ec486a97951607dd8acf14bbbe0a8}{check\+Menu}\label{class_main_window_a976ec486a97951607dd8acf14bbbe0a8}
+
+\begin{DoxyCompactList}\small\item\em Check menu. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a04c3da2faf42d4d70c0e4e5447b612c6}{}Q\+Menu $\ast$ \hyperlink{class_main_window_a04c3da2faf42d4d70c0e4e5447b612c6}{export\+Menu}\label{class_main_window_a04c3da2faf42d4d70c0e4e5447b612c6}
+
+\begin{DoxyCompactList}\small\item\em Export menu. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a6e38d7c63a3dc537d05eafe7e0f5f4db}{}Q\+Menu $\ast$ \hyperlink{class_main_window_a6e38d7c63a3dc537d05eafe7e0f5f4db}{view\+Menu}\label{class_main_window_a6e38d7c63a3dc537d05eafe7e0f5f4db}
+
+\begin{DoxyCompactList}\small\item\em View menu. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a03a0c355640f06f7ca4031bc2a46e97e}{}Q\+Action\+Group $\ast$ \hyperlink{class_main_window_a03a0c355640f06f7ca4031bc2a46e97e}{task\+Coloring\+Menu}\label{class_main_window_a03a0c355640f06f7ca4031bc2a46e97e}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_task}{Task} coloring submenu. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_abfe81d95d41bd675dca3d8adbcb0e3b4}{}Q\+Action $\ast$ \hyperlink{class_main_window_abfe81d95d41bd675dca3d8adbcb0e3b4}{open\+C\+S\+V\+Act}\label{class_main_window_abfe81d95d41bd675dca3d8adbcb0e3b4}
+
+\begin{DoxyCompactList}\small\item\em Menu action for opening a new file. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aefbf50425ce00693cf6f756b8f8144ba}{}Q\+Action $\ast$ \hyperlink{class_main_window_aefbf50425ce00693cf6f756b8f8144ba}{open\+G\+D\+X\+Act}\label{class_main_window_aefbf50425ce00693cf6f756b8f8144ba}
+
+\begin{DoxyCompactList}\small\item\em Menu action for resetting the view. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a5d49f5e7ffc7c5cf139f9c60b6f78329}{}Q\+Action $\ast$ \hyperlink{class_main_window_a5d49f5e7ffc7c5cf139f9c60b6f78329}{visualizeamounts\+Act}\label{class_main_window_a5d49f5e7ffc7c5cf139f9c60b6f78329}
+
+\begin{DoxyCompactList}\small\item\em Menu action for visualizing amounts. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a5df02f4f33bf3405039d00d07acf3159}{}Q\+Action $\ast$ \hyperlink{class_main_window_a5df02f4f33bf3405039d00d07acf3159}{show\+All\+Flows\+Act}\label{class_main_window_a5df02f4f33bf3405039d00d07acf3159}
+
+\begin{DoxyCompactList}\small\item\em Menu action for showing all flows. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_add670a181a3e23eb0f45190499f243b1}{}Q\+Action $\ast$ \hyperlink{class_main_window_add670a181a3e23eb0f45190499f243b1}{zoomin\+Act}\label{class_main_window_add670a181a3e23eb0f45190499f243b1}
+
+\begin{DoxyCompactList}\small\item\em Menu action for zooming in. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a99f24486816a0c347025ce9cf4143f33}{}Q\+Action $\ast$ \hyperlink{class_main_window_a99f24486816a0c347025ce9cf4143f33}{zoomout\+Act}\label{class_main_window_a99f24486816a0c347025ce9cf4143f33}
+
+\begin{DoxyCompactList}\small\item\em Menu action for zooming out. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a34f421d670cc6aea9c3052037ccb1f67}{}Q\+Action $\ast$ \hyperlink{class_main_window_a34f421d670cc6aea9c3052037ccb1f67}{scrolln\+Act}\label{class_main_window_a34f421d670cc6aea9c3052037ccb1f67}
+
+\begin{DoxyCompactList}\small\item\em Menu action for scrolling up. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a13af611a2fe66f2647cba9f7ac4abc23}{}Q\+Action $\ast$ \hyperlink{class_main_window_a13af611a2fe66f2647cba9f7ac4abc23}{scrolle\+Act}\label{class_main_window_a13af611a2fe66f2647cba9f7ac4abc23}
+
+\begin{DoxyCompactList}\small\item\em Menu action for scrolling right. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a37ed37186143d9eb86245d6d9f16825a}{}Q\+Action $\ast$ \hyperlink{class_main_window_a37ed37186143d9eb86245d6d9f16825a}{scrolls\+Act}\label{class_main_window_a37ed37186143d9eb86245d6d9f16825a}
+
+\begin{DoxyCompactList}\small\item\em Menu action for scrolling down. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a81c6b5894367519bb960dc41a7cac94c}{}Q\+Action $\ast$ \hyperlink{class_main_window_a81c6b5894367519bb960dc41a7cac94c}{scrollw\+Act}\label{class_main_window_a81c6b5894367519bb960dc41a7cac94c}
+
+\begin{DoxyCompactList}\small\item\em Menu action for scrolling left. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_ae683117a63a4704c29c145ec43fd8cd2}{}Q\+Action $\ast$ \hyperlink{class_main_window_ae683117a63a4704c29c145ec43fd8cd2}{center\+Act}\label{class_main_window_ae683117a63a4704c29c145ec43fd8cd2}
+
+\begin{DoxyCompactList}\small\item\em Menu action for centering the view to fit all content. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a974454751eb8589532a62d8f0ce4d148}{}Q\+Action $\ast$ \hyperlink{class_main_window_a974454751eb8589532a62d8f0ce4d148}{color\+By\+Amount\+Act}\label{class_main_window_a974454751eb8589532a62d8f0ce4d148}
+
+\begin{DoxyCompactList}\small\item\em Menu action for coloring each task relative to the amount. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a88cf5f2b7bc25dece22dad7c02c13eab}{}Q\+Action $\ast$ \hyperlink{class_main_window_a88cf5f2b7bc25dece22dad7c02c13eab}{color\+By\+Unit\+Act}\label{class_main_window_a88cf5f2b7bc25dece22dad7c02c13eab}
+
+\begin{DoxyCompactList}\small\item\em Menu action for coloring each task by unit. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_afd6cf07dd21a8cde228102b8798ac49d}{}Q\+Action $\ast$ \hyperlink{class_main_window_afd6cf07dd21a8cde228102b8798ac49d}{color\+By\+Color\+Act}\label{class_main_window_afd6cf07dd21a8cde228102b8798ac49d}
+
+\begin{DoxyCompactList}\small\item\em Menu action for coloring each task by preset color;. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a4c72320ca62b13088dc5ca562cba2761}{}Q\+Action $\ast$ \hyperlink{class_main_window_a4c72320ca62b13088dc5ca562cba2761}{color\+By\+Task\+Act}\label{class_main_window_a4c72320ca62b13088dc5ca562cba2761}
+
+\begin{DoxyCompactList}\small\item\em Menu action for coloring each task by task color;. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}{}Q\+Action $\ast$ \hyperlink{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}{check\+Act}\label{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}
+
+\begin{DoxyCompactList}\small\item\em Menu action for checking. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_acb019ac85cd188f2738421da7095e932}{}Q\+Action $\ast$ {\bfseries export\+Act}\label{class_main_window_acb019ac85cd188f2738421da7095e932}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for the Main window. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mainwindow.\+h\item 
+mainwindow.\+cpp\end{DoxyCompactItemize}
