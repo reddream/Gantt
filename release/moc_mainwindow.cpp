@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[55];
-    char stringdata0[589];
+    char stringdata0[588];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -60,30 +60,30 @@ QT_MOC_LITERAL(27, 292, 13), // "colorByAmount"
 QT_MOC_LITERAL(28, 306, 11), // "colorByUnit"
 QT_MOC_LITERAL(29, 318, 12), // "colorByColor"
 QT_MOC_LITERAL(30, 331, 11), // "colorByTask"
-QT_MOC_LITERAL(31, 343, 13), // "exportToImage"
-QT_MOC_LITERAL(32, 357, 11), // "exportToPDF"
-QT_MOC_LITERAL(33, 369, 17), // "ruleChangedAmount"
-QT_MOC_LITERAL(34, 387, 19), // "ruleChangedDuration"
-QT_MOC_LITERAL(35, 407, 16), // "ruleChangedStart"
-QT_MOC_LITERAL(36, 424, 14), // "ruleChangedEnd"
-QT_MOC_LITERAL(37, 439, 11), // "applyFilter"
-QT_MOC_LITERAL(38, 451, 11), // "clearFilter"
-QT_MOC_LITERAL(39, 463, 20), // "createRepresentation"
-QT_MOC_LITERAL(40, 484, 7), // "addFlow"
-QT_MOC_LITERAL(41, 492, 9), // "unit1name"
-QT_MOC_LITERAL(42, 502, 7), // "op1name"
-QT_MOC_LITERAL(43, 510, 9), // "unit2name"
-QT_MOC_LITERAL(44, 520, 7), // "op2name"
-QT_MOC_LITERAL(45, 528, 2), // "pr"
-QT_MOC_LITERAL(46, 531, 2), // "cr"
-QT_MOC_LITERAL(47, 534, 6), // "amount"
-QT_MOC_LITERAL(48, 541, 7), // "addTask"
-QT_MOC_LITERAL(49, 549, 8), // "unitName"
-QT_MOC_LITERAL(50, 558, 8), // "taskName"
-QT_MOC_LITERAL(51, 567, 5), // "start"
-QT_MOC_LITERAL(52, 573, 3), // "end"
-QT_MOC_LITERAL(53, 577, 5), // "color"
-QT_MOC_LITERAL(54, 583, 5) // "reset"
+QT_MOC_LITERAL(31, 343, 14), // "startExportWiz"
+QT_MOC_LITERAL(32, 358, 9), // "exportWiz"
+QT_MOC_LITERAL(33, 368, 17), // "ruleChangedAmount"
+QT_MOC_LITERAL(34, 386, 19), // "ruleChangedDuration"
+QT_MOC_LITERAL(35, 406, 16), // "ruleChangedStart"
+QT_MOC_LITERAL(36, 423, 14), // "ruleChangedEnd"
+QT_MOC_LITERAL(37, 438, 11), // "applyFilter"
+QT_MOC_LITERAL(38, 450, 11), // "clearFilter"
+QT_MOC_LITERAL(39, 462, 20), // "createRepresentation"
+QT_MOC_LITERAL(40, 483, 7), // "addFlow"
+QT_MOC_LITERAL(41, 491, 9), // "unit1name"
+QT_MOC_LITERAL(42, 501, 7), // "op1name"
+QT_MOC_LITERAL(43, 509, 9), // "unit2name"
+QT_MOC_LITERAL(44, 519, 7), // "op2name"
+QT_MOC_LITERAL(45, 527, 2), // "pr"
+QT_MOC_LITERAL(46, 530, 2), // "cr"
+QT_MOC_LITERAL(47, 533, 6), // "amount"
+QT_MOC_LITERAL(48, 540, 7), // "addTask"
+QT_MOC_LITERAL(49, 548, 8), // "unitName"
+QT_MOC_LITERAL(50, 557, 8), // "taskName"
+QT_MOC_LITERAL(51, 566, 5), // "start"
+QT_MOC_LITERAL(52, 572, 3), // "end"
+QT_MOC_LITERAL(53, 576, 5), // "color"
+QT_MOC_LITERAL(54, 582, 5) // "reset"
 
     },
     "MainWindow\0verticalZoomSliderChanged\0"
@@ -94,8 +94,8 @@ QT_MOC_LITERAL(54, 583, 5) // "reset"
     "openGDX\0visualizeamounts\0showAllFlowsToggled\0"
     "scrolln\0scrolle\0scrolls\0scrollw\0center\0"
     "check\0saveLogs\0colorByAmount\0colorByUnit\0"
-    "colorByColor\0colorByTask\0exportToImage\0"
-    "exportToPDF\0ruleChangedAmount\0"
+    "colorByColor\0colorByTask\0startExportWiz\0"
+    "exportWiz\0ruleChangedAmount\0"
     "ruleChangedDuration\0ruleChangedStart\0"
     "ruleChangedEnd\0applyFilter\0clearFilter\0"
     "createRepresentation\0addFlow\0unit1name\0"
@@ -235,8 +235,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 23: _t->colorByUnit(); break;
         case 24: _t->colorByColor(); break;
         case 25: _t->colorByTask(); break;
-        case 26: _t->exportToImage(); break;
-        case 27: _t->exportToPDF(); break;
+        case 26: _t->startExportWiz(); break;
+        case 27: _t->exportWiz(); break;
         case 28: _t->ruleChangedAmount((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 29: _t->ruleChangedDuration((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 30: _t->ruleChangedStart((*reinterpret_cast< int(*)>(_a[1]))); break;

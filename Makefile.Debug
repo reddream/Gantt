@@ -50,11 +50,13 @@ SOURCES       = main.cpp \
 		qtablewidgetnumberitem.cpp \
 		gclgms.c \
 		gdxcc.c \
-		wizard.cpp /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp \
+		wizard.cpp \
+		exportwizard.cpp /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp \
 		debug/moc_mainwindow.cpp \
 		debug/moc_ganttrect.cpp \
 		debug/moc_ganttflow.cpp \
-		debug/moc_wizard.cpp
+		debug/moc_wizard.cpp \
+		debug/moc_exportwizard.cpp
 OBJECTS       = debug/main.o \
 		debug/mainwindow.o \
 		debug/ganttrect.o \
@@ -63,11 +65,13 @@ OBJECTS       = debug/main.o \
 		debug/gclgms.o \
 		debug/gdxcc.o \
 		debug/wizard.o \
+		debug/exportwizard.o \
 		debug/gantt_plugin_import.o \
 		debug/moc_mainwindow.o \
 		debug/moc_ganttrect.o \
 		debug/moc_ganttflow.o \
-		debug/moc_wizard.o
+		debug/moc_wizard.o \
+		debug/moc_exportwizard.o
 
 DIST          = gantticon.png \
 		gantticon.ico \
@@ -79,14 +83,16 @@ DIST          = gantticon.png \
 		qtablewidgetnumberitem.h \
 		gclgms.h \
 		gdxcc.h \
-		wizard.h main.cpp \
+		wizard.h \
+		exportwizard.h main.cpp \
 		mainwindow.cpp \
 		ganttrect.cpp \
 		ganttflow.cpp \
 		qtablewidgetnumberitem.cpp \
 		gclgms.c \
 		gdxcc.c \
-		wizard.cpp
+		wizard.cpp \
+		exportwizard.cpp
 QMAKE_TARGET  = Gantt
 DESTDIR        = debug/ #avoid trailing-slash linebreak
 TARGET         = Gantt.exe
@@ -97,7 +103,7 @@ DESTDIR_TARGET = debug/Gantt.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5PrintSupportd.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Widgetsd.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Guid.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Cored.a ui_mainwindow.h ui_wizard.h $(OBJECTS) debug/gantt_res.o
+$(DESTDIR_TARGET): /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5PrintSupportd.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Widgetsd.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Guid.a /Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/lib/libQt5Cored.a ui_mainwindow.h ui_wizard.h ui_exportwizard.h $(OBJECTS) debug/gantt_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.Gantt.Debug  $(LIBS)
 
 debug/gantt_res.o: gantt.rc
@@ -112,7 +118,7 @@ dist:
 	$(ZIP) Gantt.zip $(SOURCES) $(DIST) Gantt.pro ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qdevice.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/device_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/common/angle.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qconfig.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_zlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qgenericbearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qico.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qminimal.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qnativewifibearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlite.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlmysql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlodbc.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlpsql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqltds.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qtuiotouchplugin.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qwindows.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_windowsprintersupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_functions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++/qmake.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_post.prf .qmake.stash ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resolve_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/build_pass.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/rtti.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/precompile_header.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/warn_on.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resources.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/moc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/opengl.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/uic.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/file_copies.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/windows.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/testcase_targets.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exceptions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/yacc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/lex.prf Gantt.pro  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug/main.o debug/mainwindow.o debug/ganttrect.o debug/ganttflow.o debug/qtablewidgetnumberitem.o debug/gclgms.o debug/gdxcc.o debug/wizard.o debug/gantt_plugin_import.o debug/moc_mainwindow.o debug/moc_ganttrect.o debug/moc_ganttflow.o debug/moc_wizard.o
+	-$(DEL_FILE) debug/main.o debug/mainwindow.o debug/ganttrect.o debug/ganttflow.o debug/qtablewidgetnumberitem.o debug/gclgms.o debug/gdxcc.o debug/wizard.o debug/exportwizard.o debug/gantt_plugin_import.o debug/moc_mainwindow.o debug/moc_ganttrect.o debug/moc_ganttflow.o debug/moc_wizard.o debug/moc_exportwizard.o
 	-$(DEL_FILE) debug/gantt_res.o
 
 distclean: clean 
@@ -132,9 +138,9 @@ compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_ganttrect.cpp debug/moc_ganttflow.cpp debug/moc_wizard.cpp
+compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_ganttrect.cpp debug/moc_ganttflow.cpp debug/moc_wizard.cpp debug/moc_exportwizard.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug/moc_mainwindow.cpp debug/moc_ganttrect.cpp debug/moc_ganttflow.cpp debug/moc_wizard.cpp
+	-$(DEL_FILE) debug/moc_mainwindow.cpp debug/moc_ganttrect.cpp debug/moc_ganttflow.cpp debug/moc_wizard.cpp debug/moc_exportwizard.cpp
 debug/moc_mainwindow.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QMainWindow \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qmainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
@@ -252,6 +258,7 @@ debug/moc_mainwindow.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidge
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdialog.h \
 		mainwindow.h \
+		exportwizard.h \
 		mainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/bin/moc
 	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/moc $(DEFINES) -D__GNUC__ -DWIN32 -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++ -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtPrintSupport -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include mainwindow.h -o debug/moc_mainwindow.cpp
@@ -549,15 +556,119 @@ debug/moc_wizard.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/Q
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpen.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsRectItem \
 		wizard.h \
+		exportwizard.h \
 		wizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/bin/moc
 	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/moc $(DEFINES) -D__GNUC__ -DWIN32 -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++ -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtPrintSupport -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include wizard.h -o debug/moc_wizard.cpp
 
+debug/moc_exportwizard.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizard \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwizard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdialog.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qconfig.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfeatures.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocessordetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcompilerdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypeinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypetraits.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qisenum.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsysinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlogging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qflags.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasicatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_bootstrap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qgenericatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_cxx11.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_msvc.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobalstatic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmutex.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnumeric.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhashfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpair.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraylist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregexp.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringmatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetatype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpoint.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpalette.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgba64.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbrush.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpolygon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qregion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatastream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiodevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtransform.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainterpath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixelformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qshareddata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfont.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontmetrics.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qsizepolicy.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcursor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qkeysequence.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlocale.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qset.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontiguouscache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurlquery.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfiledevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector2d.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtouchdevice.h \
+		exportwizard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/bin/moc
+	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/moc $(DEFINES) -D__GNUC__ -DWIN32 -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++ -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtPrintSupport -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include exportwizard.h -o debug/moc_exportwizard.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_wizard.h
+compiler_uic_make_all: ui_mainwindow.h ui_wizard.h ui_exportwizard.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_wizard.h
+	-$(DEL_FILE) ui_mainwindow.h ui_wizard.h ui_exportwizard.h
 ui_mainwindow.h: mainwindow.ui \
 		../mxe/usr/i686-w64-mingw32.static/qt5/bin/uic
 	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
@@ -565,6 +676,10 @@ ui_mainwindow.h: mainwindow.ui \
 ui_wizard.h: wizard.ui \
 		../mxe/usr/i686-w64-mingw32.static/qt5/bin/uic
 	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/uic wizard.ui -o ui_wizard.h
+
+ui_exportwizard.h: exportwizard.ui \
+		../mxe/usr/i686-w64-mingw32.static/qt5/bin/uic
+	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/uic exportwizard.ui -o ui_exportwizard.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -695,6 +810,7 @@ debug/main.o: main.cpp mainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizard \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdialog.h \
+		exportwizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QApplication \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qapplication.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreapplication.h \
@@ -821,6 +937,7 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizard \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdialog.h \
+		exportwizard.h \
 		ui_mainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QVariant \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QAction \
@@ -1565,6 +1682,7 @@ debug/wizard.o: wizard.cpp wizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QPen \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpen.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsRectItem \
+		exportwizard.h \
 		ui_wizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QVariant \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QAction \
@@ -1626,6 +1744,157 @@ debug/wizard.o: wizard.cpp wizard.h \
 		constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/wizard.o wizard.cpp
 
+debug/exportwizard.o: exportwizard.cpp exportwizard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizard \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwizard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdialog.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qconfig.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfeatures.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocessordetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcompilerdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypeinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypetraits.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qisenum.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsysinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlogging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qflags.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasicatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_bootstrap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qgenericatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_cxx11.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_msvc.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobalstatic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmutex.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnumeric.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhashfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpair.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraylist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregexp.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringmatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetatype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpoint.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpalette.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgba64.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbrush.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpolygon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qregion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatastream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiodevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtransform.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainterpath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixelformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qshareddata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfont.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontmetrics.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qsizepolicy.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcursor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qkeysequence.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlocale.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qset.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontiguouscache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurlquery.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfiledevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector2d.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtouchdevice.h \
+		ui_exportwizard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QVariant \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QAction \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qaction.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qicon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qactiongroup.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QApplication \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qapplication.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreapplication.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeventloop.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdesktopwidget.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qguiapplication.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qinputmethod.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QButtonGroup \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qbuttongroup.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QCheckBox \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qcheckbox.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractbutton.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QComboBox \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qcombobox.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractitemdelegate.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qstyleoption.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractspinbox.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvalidator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregularexpression.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qslider.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractslider.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qstyle.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qtabbar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qtabwidget.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qrubberband.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qframe.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractitemmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QDoubleSpinBox \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qspinbox.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGridLayout \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgridlayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayoutitem.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qboxlayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QHeaderView \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qheaderview.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractitemview.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractscrollarea.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qitemselectionmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QLabel \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlabel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QSpinBox \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizardPage
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/exportwizard.o exportwizard.cpp
+
 debug/gantt_plugin_import.o: /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/gantt_plugin_import.o /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp
 
@@ -1640,6 +1909,9 @@ debug/moc_ganttflow.o: debug/moc_ganttflow.cpp
 
 debug/moc_wizard.o: debug/moc_wizard.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_wizard.o debug/moc_wizard.cpp
+
+debug/moc_exportwizard.o: debug/moc_exportwizard.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_exportwizard.o debug/moc_exportwizard.cpp
 
 ####### Install
 

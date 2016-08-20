@@ -7,9 +7,11 @@ INPUT(
 ./release/gclgms.o
 ./release/gdxcc.o
 ./release/wizard.o
+./release/exportwizard.o
 ./release/gantt_plugin_import.o
 ./release/moc_mainwindow.o
 ./release/moc_ganttrect.o
 ./release/moc_ganttflow.o
 ./release/moc_wizard.o
+./release/moc_exportwizard.o
 );
