@@ -6,6 +6,7 @@
 
 QT       += core gui printsupport
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Gantt
@@ -19,7 +20,8 @@ SOURCES += main.cpp\
     qtablewidgetnumberitem.cpp \
     gclgms.c \
     gdxcc.c \
-    wizard.cpp
+    wizard.cpp \
+    exportwizard.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -29,10 +31,12 @@ HEADERS  += mainwindow.h \
     qtablewidgetnumberitem.h \
     gclgms.h \
     gdxcc.h \
-    wizard.h
+    wizard.h \
+    exportwizard.h
 
 FORMS    += mainwindow.ui \
-    wizard.ui
+    wizard.ui \
+    exportwizard.ui
 
 DISTFILES += \
     gantticon.png \

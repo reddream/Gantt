@@ -55,10 +55,12 @@ SOURCES       = main.cpp \
 		qtablewidgetnumberitem.cpp \
 		gclgms.c \
 		gdxcc.c \
-		wizard.cpp moc_mainwindow.cpp \
+		wizard.cpp \
+		exportwizard.cpp moc_mainwindow.cpp \
 		moc_ganttrect.cpp \
 		moc_ganttflow.cpp \
-		moc_wizard.cpp
+		moc_wizard.cpp \
+		moc_exportwizard.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		ganttrect.o \
@@ -67,10 +69,12 @@ OBJECTS       = main.o \
 		gclgms.o \
 		gdxcc.o \
 		wizard.o \
+		exportwizard.o \
 		moc_mainwindow.o \
 		moc_ganttrect.o \
 		moc_ganttflow.o \
-		moc_wizard.o
+		moc_wizard.o \
+		moc_exportwizard.o
 DIST          = gantticon.png \
 		gantticon.ico \
 		icon.icns \
@@ -237,14 +241,16 @@ DIST          = gantticon.png \
 		qtablewidgetnumberitem.h \
 		gclgms.h \
 		gdxcc.h \
-		wizard.h main.cpp \
+		wizard.h \
+		exportwizard.h main.cpp \
 		mainwindow.cpp \
 		ganttrect.cpp \
 		ganttflow.cpp \
 		qtablewidgetnumberitem.cpp \
 		gclgms.c \
 		gdxcc.c \
-		wizard.cpp
+		wizard.cpp \
+		exportwizard.cpp
 QMAKE_TARGET  = Gantt
 DESTDIR       = 
 TARGET        = Gantt.app/Contents/MacOS/Gantt
@@ -253,7 +259,7 @@ TARGET        = Gantt.app/Contents/MacOS/Gantt
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_wizard.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_wizard.h ui_exportwizard.h $(OBJECTS)  
 	@test -d Gantt.app/Contents/MacOS/ || mkdir -p Gantt.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -612,9 +618,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h ganttrect.h ganttflow.h constants.h qtablewidgetnumberitem.h gclgms.h gdxcc.h wizard.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp ganttrect.cpp ganttflow.cpp qtablewidgetnumberitem.cpp gclgms.c gdxcc.c wizard.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.ui wizard.ui $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h ganttrect.h ganttflow.h constants.h qtablewidgetnumberitem.h gclgms.h gdxcc.h wizard.h exportwizard.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp ganttrect.cpp ganttflow.cpp qtablewidgetnumberitem.cpp gclgms.c gdxcc.c wizard.cpp exportwizard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.ui wizard.ui exportwizard.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -640,9 +646,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_ganttrect.cpp moc_ganttflow.cpp moc_wizard.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_ganttrect.cpp moc_ganttflow.cpp moc_wizard.cpp moc_exportwizard.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_ganttrect.cpp moc_ganttflow.cpp moc_wizard.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_ganttrect.cpp moc_ganttflow.cpp moc_wizard.cpp moc_exportwizard.cpp
 moc_mainwindow.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
@@ -705,11 +711,17 @@ moc_wizard.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWizard \
 		../Qt/5.7/clang_64/bin/moc
 	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib wizard.h -o moc_wizard.cpp
 
+moc_exportwizard.cpp: ../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWizard \
+		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
+		exportwizard.h \
+		../Qt/5.7/clang_64/bin/moc
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include -F/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/lib exportwizard.h -o moc_exportwizard.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_wizard.h
+compiler_uic_make_all: ui_mainwindow.h ui_wizard.h ui_exportwizard.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_wizard.h
+	-$(DEL_FILE) ui_mainwindow.h ui_wizard.h ui_exportwizard.h
 ui_mainwindow.h: mainwindow.ui \
 		../Qt/5.7/clang_64/bin/uic
 	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/uic mainwindow.ui -o ui_mainwindow.h
@@ -717,6 +729,10 @@ ui_mainwindow.h: mainwindow.ui \
 ui_wizard.h: wizard.ui \
 		../Qt/5.7/clang_64/bin/uic
 	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/uic wizard.ui -o ui_wizard.h
+
+ui_exportwizard.h: exportwizard.ui \
+		../Qt/5.7/clang_64/bin/uic
+	/Users/juliusnaeumann/Developer/Qt/5.7/clang_64/bin/uic exportwizard.ui -o ui_exportwizard.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -798,7 +814,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTableWidgetItem \
 		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
-		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h
+		../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		exportwizard.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 ganttrect.o: ganttrect.cpp ganttrect.h \
@@ -970,6 +987,12 @@ wizard.o: wizard.cpp wizard.h \
 		constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wizard.o wizard.cpp
 
+exportwizard.o: exportwizard.cpp exportwizard.h \
+		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWizard \
+		../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
+		ui_exportwizard.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o exportwizard.o exportwizard.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -981,6 +1004,9 @@ moc_ganttflow.o: moc_ganttflow.cpp
 
 moc_wizard.o: moc_wizard.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_wizard.o moc_wizard.cpp
+
+moc_exportwizard.o: moc_exportwizard.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_exportwizard.o moc_exportwizard.cpp
 
 ####### Install
 

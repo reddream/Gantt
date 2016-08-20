@@ -7,6 +7,7 @@
 #include "ganttflow.h"
 #include "ganttrect.h"
 #include "wizard.h"
+#include "exportwizard.h"
 /// representation of a task
 struct Task{
     /// Task name
@@ -64,7 +65,8 @@ private:
     float verticalZoom = 1;
     float horizontalZoom = 1;
     void resetZoom();
-
+    /// width of the unit name bar, dynamically set to width of longest label.
+    int UNITNAMEBARWIDTH = 0;
     /// Recursively make all flows connected to this task visible
     void showFlows(int taskIndex);
     void recursivelyActivateFlowsToTheRight(int taskIndex);
@@ -79,6 +81,8 @@ private:
     QMap<QString, QColor> * unitColors;
     /// A map of task colors
     QMap<QString, QColor> * taskColors;
+    /// The export wizard
+    ExportWizard * wiz;
     ///Graphic representations of each task
     QList<GanttRect*> * tasksRep;
     ///Graphic representations of each flow
@@ -153,10 +157,8 @@ private:
     QAction * colorByTaskAct;
     /// Menu action for checking
     QAction *  checkAct;
-    /// Menu action for exporting to PNG
+    /// Menu action for exporting
     QAction *  exportAct;
-    /// Menu action for exporting to PDF
-    QAction * exportPDFAct;
 
 private slots:
     /// called when  the vertical zoom slider changed
@@ -202,8 +204,8 @@ private slots:
     void colorByUnit();
     void colorByColor();
     void colorByTask();
-    void exportToImage();
-    void exportToPDF();
+    void startExportWiz();
+    void exportWiz();
     // filter slots
     void ruleChangedAmount(int index);
     void ruleChangedDuration(int index);

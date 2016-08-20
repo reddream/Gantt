@@ -6,7 +6,7 @@ class GanttRect : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    explicit GanttRect(int taskIndex, int unitIndex, float largestAmount, float start, float end, float amount, QColor color, QGraphicsItem *parent = Q_NULLPTR);
+    explicit GanttRect(int taskIndex, int unitIndex, float largestAmount, float start, float end, float amount, int UNITNAMEBARWIDTH, QColor color, QGraphicsItem *parent = Q_NULLPTR);
     int taskIndex;
     int unitIndex;
     void showAmount(bool yes);
@@ -20,7 +20,7 @@ private:
     float start;
     float end;
     float amount;
-
+    int UNITNAMEBARWIDTH;
     QPen pen;
 
 protected:

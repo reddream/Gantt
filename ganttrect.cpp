@@ -15,7 +15,7 @@ QVariant blinker(const QBrush  &original, const QBrush &trash, qreal progress){
 
 }
 
-GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float start, float end, float amount, QColor color, QGraphicsItem *parent) : QGraphicsRectItem( start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start ,  DEFAULTTASKHEIGHT*2,  parent)
+GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float start, float end, float amount, int UNITNAMEBARWIDTH, QColor color, QGraphicsItem *parent) : QGraphicsRectItem( start + UNITNAMEBARWIDTH,  (unitIndex+1)*UNITREPHEIGHT-DEFAULTTASKHEIGHT,  end-start ,  DEFAULTTASKHEIGHT*2,  parent)
 {
     this->taskIndex = taskIndex;
     this->unitIndex = unitIndex;
@@ -27,6 +27,7 @@ GanttRect::GanttRect(int taskIndex, int unitIndex, float largestAmount,  float s
     pen = QPen(Qt::black, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     setPen(pen);
     setAcceptHoverEvents(true);
+    this->UNITNAMEBARWIDTH = UNITNAMEBARWIDTH;
 
 }
 void GanttRect::isSelected(){
