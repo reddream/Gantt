@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[55];
-    char stringdata0[588];
+    QByteArrayData data[58];
+    char stringdata0[624];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -83,7 +83,10 @@ QT_MOC_LITERAL(50, 557, 8), // "taskName"
 QT_MOC_LITERAL(51, 566, 5), // "start"
 QT_MOC_LITERAL(52, 572, 3), // "end"
 QT_MOC_LITERAL(53, 576, 5), // "color"
-QT_MOC_LITERAL(54, 582, 5) // "reset"
+QT_MOC_LITERAL(54, 582, 5), // "reset"
+QT_MOC_LITERAL(55, 588, 8), // "doLabels"
+QT_MOC_LITERAL(56, 597, 16), // "resetLabelScenes"
+QT_MOC_LITERAL(57, 614, 9) // "toggleBar"
 
     },
     "MainWindow\0verticalZoomSliderChanged\0"
@@ -101,7 +104,8 @@ QT_MOC_LITERAL(54, 582, 5) // "reset"
     "createRepresentation\0addFlow\0unit1name\0"
     "op1name\0unit2name\0op2name\0pr\0cr\0amount\0"
     "addTask\0unitName\0taskName\0start\0end\0"
-    "color\0reset"
+    "color\0reset\0doLabels\0resetLabelScenes\0"
+    "toggleBar"
 };
 #undef QT_MOC_LITERAL
 
@@ -111,7 +115,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      42,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -119,45 +123,48 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  209,    2, 0x08 /* Private */,
-       4,    1,  212,    2, 0x08 /* Private */,
-       5,    0,  215,    2, 0x08 /* Private */,
-       6,    0,  216,    2, 0x08 /* Private */,
-       7,    0,  217,    2, 0x08 /* Private */,
-       8,    0,  218,    2, 0x08 /* Private */,
-       9,    1,  219,    2, 0x08 /* Private */,
-      11,    1,  222,    2, 0x08 /* Private */,
-      12,    1,  225,    2, 0x08 /* Private */,
-      13,    1,  228,    2, 0x08 /* Private */,
-      14,    2,  231,    2, 0x08 /* Private */,
-      16,    0,  236,    2, 0x08 /* Private */,
-      17,    0,  237,    2, 0x08 /* Private */,
-      18,    0,  238,    2, 0x08 /* Private */,
-      19,    0,  239,    2, 0x08 /* Private */,
-      20,    0,  240,    2, 0x08 /* Private */,
-      21,    0,  241,    2, 0x08 /* Private */,
-      22,    0,  242,    2, 0x08 /* Private */,
-      23,    0,  243,    2, 0x08 /* Private */,
-      24,    0,  244,    2, 0x08 /* Private */,
-      25,    0,  245,    2, 0x08 /* Private */,
-      26,    0,  246,    2, 0x08 /* Private */,
-      27,    0,  247,    2, 0x08 /* Private */,
-      28,    0,  248,    2, 0x08 /* Private */,
-      29,    0,  249,    2, 0x08 /* Private */,
-      30,    0,  250,    2, 0x08 /* Private */,
-      31,    0,  251,    2, 0x08 /* Private */,
-      32,    0,  252,    2, 0x08 /* Private */,
-      33,    1,  253,    2, 0x08 /* Private */,
-      34,    1,  256,    2, 0x08 /* Private */,
-      35,    1,  259,    2, 0x08 /* Private */,
-      36,    1,  262,    2, 0x08 /* Private */,
-      37,    0,  265,    2, 0x08 /* Private */,
-      38,    0,  266,    2, 0x08 /* Private */,
-      39,    0,  267,    2, 0x08 /* Private */,
-      40,    7,  268,    2, 0x08 /* Private */,
-      48,    6,  283,    2, 0x08 /* Private */,
-      48,    5,  296,    2, 0x28 /* Private | MethodCloned */,
-      54,    0,  307,    2, 0x08 /* Private */,
+       1,    1,  224,    2, 0x08 /* Private */,
+       4,    1,  227,    2, 0x08 /* Private */,
+       5,    0,  230,    2, 0x08 /* Private */,
+       6,    0,  231,    2, 0x08 /* Private */,
+       7,    0,  232,    2, 0x08 /* Private */,
+       8,    0,  233,    2, 0x08 /* Private */,
+       9,    1,  234,    2, 0x08 /* Private */,
+      11,    1,  237,    2, 0x08 /* Private */,
+      12,    1,  240,    2, 0x08 /* Private */,
+      13,    1,  243,    2, 0x08 /* Private */,
+      14,    2,  246,    2, 0x08 /* Private */,
+      16,    0,  251,    2, 0x08 /* Private */,
+      17,    0,  252,    2, 0x08 /* Private */,
+      18,    0,  253,    2, 0x08 /* Private */,
+      19,    0,  254,    2, 0x08 /* Private */,
+      20,    0,  255,    2, 0x08 /* Private */,
+      21,    0,  256,    2, 0x08 /* Private */,
+      22,    0,  257,    2, 0x08 /* Private */,
+      23,    0,  258,    2, 0x08 /* Private */,
+      24,    0,  259,    2, 0x08 /* Private */,
+      25,    0,  260,    2, 0x08 /* Private */,
+      26,    0,  261,    2, 0x08 /* Private */,
+      27,    0,  262,    2, 0x08 /* Private */,
+      28,    0,  263,    2, 0x08 /* Private */,
+      29,    0,  264,    2, 0x08 /* Private */,
+      30,    0,  265,    2, 0x08 /* Private */,
+      31,    0,  266,    2, 0x08 /* Private */,
+      32,    0,  267,    2, 0x08 /* Private */,
+      33,    1,  268,    2, 0x08 /* Private */,
+      34,    1,  271,    2, 0x08 /* Private */,
+      35,    1,  274,    2, 0x08 /* Private */,
+      36,    1,  277,    2, 0x08 /* Private */,
+      37,    0,  280,    2, 0x08 /* Private */,
+      38,    0,  281,    2, 0x08 /* Private */,
+      39,    0,  282,    2, 0x08 /* Private */,
+      40,    7,  283,    2, 0x08 /* Private */,
+      48,    6,  298,    2, 0x08 /* Private */,
+      48,    5,  311,    2, 0x28 /* Private | MethodCloned */,
+      54,    0,  322,    2, 0x08 /* Private */,
+      55,    0,  323,    2, 0x08 /* Private */,
+      56,    0,  324,    2, 0x08 /* Private */,
+      57,    0,  325,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -198,6 +205,9 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Float, QMetaType::Float, QMetaType::Float,   41,   42,   43,   44,   45,   46,   47,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Float, QMetaType::Float, QMetaType::Float, QMetaType::QString,   49,   50,   51,   52,   47,   53,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Float, QMetaType::Float, QMetaType::Float,   49,   50,   51,   52,   47,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -248,6 +258,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 36: _t->addTask((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3])),(*reinterpret_cast< float(*)>(_a[4])),(*reinterpret_cast< float(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
         case 37: _t->addTask((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3])),(*reinterpret_cast< float(*)>(_a[4])),(*reinterpret_cast< float(*)>(_a[5]))); break;
         case 38: _t->reset(); break;
+        case 39: _t->doLabels(); break;
+        case 40: _t->resetLabelScenes(); break;
+        case 41: _t->toggleBar(); break;
         default: ;
         }
     }
@@ -278,13 +291,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 42)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 42;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 39)
+        if (_id < 42)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 39;
+        _id -= 42;
     }
     return _id;
 }

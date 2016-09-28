@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ionicons-2.0.1/png/512/arrow-expand.png</file>
+        <file>ionicons-2.0.1/png/512/minus-round.png</file>
+        <file>ionicons-2.0.1/png/512/plus-round.png</file>
+        <file>ionicons-2.0.1/png/512/navicon-round.png</file>
+    </qresource>
+</RCC>

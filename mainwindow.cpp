@@ -78,6 +78,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->filterTask, SIGNAL(textChanged(QString)), this, SLOT(applyFilter()));
     connect(ui->filterUnit, SIGNAL(textChanged(QString)), this, SLOT(applyFilter()));
 
+    connect(ui->splitter, SIGNAL(splitterMoved(int,int)), this, SLOT(resetLabelScenes()));
+
+    connect(ui->centerButton, SIGNAL(pressed()), this, SLOT(center()));
+
+    connect(ui->toggleButton, SIGNAL(pressed()), this, SLOT(toggleBar()));
+
     //loadData();
 
     ui->allTasksTable->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
@@ -278,11 +284,33 @@ void MainWindow::reset(){
     unitLabels = new QList<QGraphicsTextItem*>();
     rulerLabels = new QList<QGraphicsTextItem*>();
 
+    resetLabelScenes();
+}
+void MainWindow::resetLabelScenes(){
+
+    nameLabelScene = new QGraphicsScene(ui->labelView->frameRect());
+    rulerLabelScene = new QGraphicsScene(ui->rulerView->frameRect());
+
+    ui->labelView->setScene(nameLabelScene);
+    ui->rulerView->setScene(rulerLabelScene);
+    ui->labelView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->labelView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->rulerView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->rulerView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->labelView->setSceneRect(nameLabelScene->sceneRect());
+    ui->rulerView->setSceneRect(rulerLabelScene->sceneRect());
+    nameLabelScene->setBackgroundBrush(QBrush(QWidget::palette().color(QWidget::backgroundRole())));
+    rulerLabelScene->setBackgroundBrush(QBrush(QWidget::palette().color(QWidget::backgroundRole())));
+    ui->labelView->setStyleSheet( "QGraphicsView { border-style: none; }" );
+    //ui->rulerView->setStyleSheet( "QGraphicsView { border-style: none; }" );
+    doLabels();
 }
 
 //DATA stuff
 void MainWindow::openCSV(){
+    filedialogopen = true;
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open csv"), DEFAULTDIRECTORY, "CSV files (*.csv)");
+    filedialogopen = false;
     if ( fileName == ""){
         return;
     }
@@ -365,12 +393,15 @@ void MainWindow::openCSV(){
 
 }
 void MainWindow::openGDX(){
+
     Wizard * wiz = new Wizard(this);
     connect(wiz, SIGNAL(addFlow(QString,QString,QString,QString,float,float,float)), this, SLOT(addFlow(QString,QString,QString,QString,float,float,float)));
     connect(wiz, SIGNAL(addTask(QString,QString,float,float,float,QString)), this, SLOT(addTask(QString,QString,float,float,float,QString)));
     connect(wiz, SIGNAL(reset()), this, SLOT(reset()));
     connect(wiz, SIGNAL(createRepresentation()), this, SLOT(createRepresentation()));
+    filedialogopen = true;
     wiz->show();
+    filedialogopen = false;
     if (wiz->loadedFile != ""){
         openFile = wiz->loadedFile;
     }
@@ -485,7 +516,7 @@ void MainWindow::addFlow(QString unit1name, QString op1name, QString unit2name, 
 
 //create Gantt chart
 void MainWindow::createRepresentation(){
-    //Seed qrand for random colors
+    //Seed qsrand for random colors
     qsrand(static_cast<quint64>(QTime::currentTime().msecsSinceStartOfDay()));
     //populate UnitColors with random colors
     for (int i = 0; i < units->size(); i++){
@@ -496,17 +527,18 @@ void MainWindow::createRepresentation(){
         }
     }
     //Draw Labels
-    UNITNAMEBARWIDTH = 0;
+
     for (int i = 0; i < units->size(); i++){
         QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
         unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +units->at(i) + "</div>") );
         unitLabel->setDefaultTextColor(Qt::black);
-        if (unitLabel->boundingRect().width() > UNITNAMEBARWIDTH){
+        if (unitLabel->boundingRect().width() > 0){
             UNITNAMEBARWIDTH = unitLabel->boundingRect().width();
         }
 
         unitLabel->setZValue(10);
         unitLabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        unitLabel->hide();
         scene->addItem(unitLabel);
         unitLabels->append(unitLabel);
     }
@@ -514,37 +546,22 @@ void MainWindow::createRepresentation(){
         QTransform n;
         n.translate(-unitLabels->at(i)->boundingRect().width(),0);
         unitLabels->at(i)->setTransform(n);
-        unitLabels->at(i)->setPos(UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT-unitLabels->at(i)->boundingRect().height()/2);
+        unitLabels->at(i)->setPos(-UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT-unitLabels->at(i)->boundingRect().height()/2);
     }
-    //Draw Ruler
-    QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
-    for (int i = 0; i < longestTask/50 + 1; i++){
-        QGraphicsTextItem * rulerlabel = new QGraphicsTextItem();
-        rulerlabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" + QString::number(i*50) + "</div>") );
-        rulerlabel->setDefaultTextColor(Qt::black);
-        rulerlabel->setPos(i*50 + UNITNAMEBARWIDTH,UNITREPHEIGHT * (units->size()+1));
-        rulerlabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        scene->addItem(rulerlabel);
-        QGraphicsLineItem* line = new QGraphicsLineItem(i*50 + UNITNAMEBARWIDTH,0,i*50 + UNITNAMEBARWIDTH,(units->length()+1)*UNITREPHEIGHT);
-
-        line->setPen(rulerPen);
-        scene->addItem(line);
-
-    }
     //Draw Lines
     QPen unitPen(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     unitPen.setWidth(0);
     for (int i = 0; i < units->size(); i++){
-        QGraphicsLineItem* line = new QGraphicsLineItem(0,(i+1)*UNITREPHEIGHT,50*(longestTask/50 + 2) + UNITNAMEBARWIDTH,(i+1)*UNITREPHEIGHT);
+        QGraphicsLineItem* line = new QGraphicsLineItem(0,(i+1)*UNITREPHEIGHT,longestTask + 0,(i+1)*UNITREPHEIGHT);
         line->setPen(unitPen);
         scene->addItem(line);
-        lines->append(line);
+
     }
     //Draw Tasks
     for (int i = 0; i < tasks->size(); i++){
         Task task = tasks->at(i);
-        GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmounts->at(task.unitIndex),task.start,task.end,task.amount, UNITNAMEBARWIDTH, task.color);
+        GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmounts->at(task.unitIndex),task.start,task.end,task.amount, 0, task.color);
         scene->addItem(newRect);
         tasksRep->append(newRect);
         //Add Task to table
@@ -604,7 +621,7 @@ void MainWindow::createRepresentation(){
     showFlows(showAllFlows);
 
 
-    scene->setSceneRect(0,0,50*(longestTask/50 + 1) + UNITNAMEBARWIDTH, (UNITREPHEIGHT + 2) * units->length());
+    scene->setSceneRect(0,0,longestTask + 0, (UNITREPHEIGHT + 2) * units->length());
     center();
 
     //Generate Task Colors
@@ -617,6 +634,59 @@ void MainWindow::createRepresentation(){
         }
     }
     clearFilter();
+    doLabels();
+}
+void MainWindow::doLabels(){
+    if (filedialogopen){ //this was called when a file dialog was scrolled and not the ganttview, wrong!
+        return;
+    }
+    //not efficient
+    nameLabelScene->clear();
+    rulerLabelScene->clear();
+
+    for (int i = 0; i < unitLabels->size(); i++){
+        QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
+        unitLabel->setPlainText(units->at(i));
+
+        //unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +units->at(i) + "</div>") );
+        //unitLabel->setDefaultTextColor(Qt::black);
+
+
+        //unitLabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        unitLabel->setPos(nameLabelScene->width()-unitLabel->boundingRect().width(), ui->labelView->mapToScene(ui->ganttView->mapFromScene(QPoint(0,(i+1)*UNITREPHEIGHT))).y());
+        nameLabelScene->addItem(unitLabel);
+    }
+    //width  of ruler label
+    int s = 40;
+    //number of ruler labels
+    int n = ui->rulerView->width()/s;
+    //distance between labels
+    //float d = ui->ganttView->mapFromGlobal(ui->rulerView->mapToGlobal(QPoint(s,0))).x() - ui->ganttView->mapFromGlobal(ui->rulerView->mapToGlobal(QPoint(0,0))).x();
+    QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    // remove old ruler lines
+    for (int i = 0; i< lines->size(); i++){
+        scene->removeItem(lines->at(i));
+    }
+    lines->clear();
+    //draw new ruler lines
+    for (int i = 0; i < n; i++){
+        QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
+        float p = ui->ganttView->mapToScene(ui->rulerView->mapFromScene(QPoint(i*s,0))).x();
+        QGraphicsLineItem* line = new QGraphicsLineItem(p + 0,0,p + 0,(units->length()+1)*UNITREPHEIGHT);
+        lines->append(line);
+        line->setPen(rulerPen);
+        line->setZValue(-10);
+        scene->addItem(line);
+        unitLabel->setPlainText(QString::number(p,'f',1));
+        //unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +QString::number(p) + "</div>") );
+        unitLabel->setDefaultTextColor(Qt::black);
+
+        //unitLabel->setZValue(10);
+        //unitLabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        unitLabel->setPos(i*s,0);
+        rulerLabelScene->addItem(unitLabel);
+    }
+
 
 }
 
@@ -1171,51 +1241,62 @@ void MainWindow::scrolln(){
     ui->ganttView->setTransformationAnchor(QGraphicsView::NoAnchor);
     ui->ganttView->translate(0,SCROLLAMOUNT);
     ui->ganttView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    doLabels();
 }
 void MainWindow::scrolle(){
     ui->ganttView->setTransformationAnchor(QGraphicsView::NoAnchor);
     ui->ganttView->translate(-SCROLLAMOUNT, 0);
     ui->ganttView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    doLabels();
 }
 void MainWindow::scrolls(){
     ui->ganttView->setTransformationAnchor(QGraphicsView::NoAnchor);
     ui->ganttView->translate(0,-SCROLLAMOUNT);
     ui->ganttView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    doLabels();
 }
 void MainWindow::scrollw(){
     ui->ganttView->setTransformationAnchor(QGraphicsView::NoAnchor);
     ui->ganttView->translate(SCROLLAMOUNT, 0);
     ui->ganttView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    doLabels();
 }
 
 //Zoom
 void MainWindow::v_zoomin(){
     ui->ganttView->scale(1,2);
+    doLabels();
 }
 void MainWindow::v_zoomout(){
     ui->ganttView->scale(1,0.5);
+    doLabels();
 }
 void MainWindow::h_zoomin(){
     ui->ganttView->scale(2,1);
+    doLabels();
 }
 void MainWindow::h_zoomout(){
     ui->ganttView->scale(0.5,1);
+    doLabels();
 }
 void MainWindow::verticalZoomSliderChanged(int x){
     resetZoom();
     verticalZoom = qPow(SCALERANGE, (x+1)/50.0-1.0);
     ui->ganttView->scale(horizontalZoom, verticalZoom);
     qDebug("%f,%f",horizontalZoom,verticalZoom);
+    doLabels();
 }
 void MainWindow::horizontalZoomSliderChanged(int x){
     resetZoom();
     horizontalZoom = qPow(SCALERANGE, (x+1)/50.0-1.0);
     ui->ganttView->scale(horizontalZoom, verticalZoom);
     qDebug("%f,%f",horizontalZoom,verticalZoom);
+    doLabels();
 }
 void MainWindow::resetZoom(){
 
     ui->ganttView->scale(1/horizontalZoom, 1/verticalZoom);
+    doLabels();
 
 }
 void MainWindow::center(){
@@ -1225,18 +1306,44 @@ void MainWindow::center(){
     horizontalZoom = 1;
     //ui->ganttView->scale();
     ui->ganttView->fitInView(scene->sceneRect());
+    doLabels();
 }
+void MainWindow::toggleBar(){
+    QList<int> currentSizes = ui->splitter->sizes();
+    // adjust sizes individually here, e.g.
+
+
+    if (currentSizes[0] < 2) {
+        currentSizes[0] = ui->tabWidget->minimumWidth();
+
+    } else {
+        currentSizes[0] = 0;
+    }
+    ui->splitter->setSizes(currentSizes);
+
+}
+
 void MainWindow::wheelEvent(QWheelEvent *e){
 
     if (QApplication::keyboardModifiers().testFlag(Qt::KeyboardModifier::ControlModifier)){
         ui->verticalSlider->setValue(ui->verticalSlider->value()+e->delta()/100);
         ui->horizontalSlider->setValue(ui->horizontalSlider->value()+e->delta()/100);
     }
+
+
 }
 bool MainWindow::eventFilter(QObject *watched, QEvent *event){
+
     if (watched == ui->ganttView->viewport() && event->type() == QEvent::Wheel && QApplication::keyboardModifiers().testFlag(Qt::KeyboardModifier::ControlModifier)){
+        doLabels();
         return true;
     }
+
+    if ((event->type()!=QEvent::Paint) && (event->type()!=QEvent::MouseMove)){// || event->type()!=QEvent::MouseMove || event->type()!=QEvent::Leave || event->type()!=QEvent::WindowDeactivate){
+        qDebug()<<event->type();
+        doLabels();
+    }
+
     return false;
 }
 
@@ -1245,6 +1352,8 @@ void MainWindow::resizeEvent(QResizeEvent * event)
 
     //fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     //
+    resetLabelScenes();
+    doLabels();
 
 };
 // Export

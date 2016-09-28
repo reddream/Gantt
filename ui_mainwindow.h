@@ -40,7 +40,19 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QGridLayout *gridLayout_2;
+    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout_3;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *toggleButton;
+    QLabel *label_2;
+    QPushButton *v_zoom_out;
+    QSlider *verticalSlider;
+    QPushButton *v_zoom_in;
+    QLabel *label;
+    QPushButton *h_zoom_out;
+    QSlider *horizontalSlider;
+    QPushButton *h_zoom_in;
+    QPushButton *centerButton;
     QSplitter *splitter;
     QWidget *layoutWidget;
     QVBoxLayout *Sidebar;
@@ -78,32 +90,107 @@ public:
     QVBoxLayout *verticalLayout;
     QTextBrowser *errorsViewer;
     QPushButton *saveButton;
-    QHBoxLayout *V_Zoom;
-    QLabel *label_2;
-    QPushButton *v_zoom_out;
-    QSlider *verticalSlider;
-    QPushButton *v_zoom_in;
-    QHBoxLayout *H_Zoom;
-    QLabel *label;
-    QPushButton *h_zoom_out;
-    QSlider *horizontalSlider;
-    QPushButton *h_zoom_in;
+    QWidget *layoutWidget1;
+    QGridLayout *gridLayout_2;
+    QGraphicsView *rulerView;
+    QGraphicsView *labelView;
     QGraphicsView *ganttView;
-    QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
+    QMenuBar *menuBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1072, 641);
+        MainWindow->resize(1165, 668);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout_2 = new QGridLayout(centralWidget);
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_4 = new QGridLayout(centralWidget);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        toggleButton = new QPushButton(centralWidget);
+        toggleButton->setObjectName(QStringLiteral("toggleButton"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/ionicons-2.0.1/png/512/navicon-round.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toggleButton->setIcon(icon);
+
+        horizontalLayout->addWidget(toggleButton);
+
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMinimumSize(QSize(110, 22));
+        label_2->setMaximumSize(QSize(110, 22));
+
+        horizontalLayout->addWidget(label_2);
+
+        v_zoom_out = new QPushButton(centralWidget);
+        v_zoom_out->setObjectName(QStringLiteral("v_zoom_out"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/ionicons-2.0.1/png/512/minus-round.png"), QSize(), QIcon::Normal, QIcon::Off);
+        v_zoom_out->setIcon(icon1);
+
+        horizontalLayout->addWidget(v_zoom_out);
+
+        verticalSlider = new QSlider(centralWidget);
+        verticalSlider->setObjectName(QStringLiteral("verticalSlider"));
+        verticalSlider->setValue(50);
+        verticalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout->addWidget(verticalSlider);
+
+        v_zoom_in = new QPushButton(centralWidget);
+        v_zoom_in->setObjectName(QStringLiteral("v_zoom_in"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/ionicons-2.0.1/png/512/plus-round.png"), QSize(), QIcon::Normal, QIcon::Off);
+        v_zoom_in->setIcon(icon2);
+
+        horizontalLayout->addWidget(v_zoom_in);
+
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMinimumSize(QSize(110, 22));
+        label->setMaximumSize(QSize(110, 22));
+
+        horizontalLayout->addWidget(label);
+
+        h_zoom_out = new QPushButton(centralWidget);
+        h_zoom_out->setObjectName(QStringLiteral("h_zoom_out"));
+        h_zoom_out->setIcon(icon1);
+
+        horizontalLayout->addWidget(h_zoom_out);
+
+        horizontalSlider = new QSlider(centralWidget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setValue(50);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout->addWidget(horizontalSlider);
+
+        h_zoom_in = new QPushButton(centralWidget);
+        h_zoom_in->setObjectName(QStringLiteral("h_zoom_in"));
+        h_zoom_in->setIcon(icon2);
+
+        horizontalLayout->addWidget(h_zoom_in);
+
+        centerButton = new QPushButton(centralWidget);
+        centerButton->setObjectName(QStringLiteral("centerButton"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/ionicons-2.0.1/png/512/arrow-expand.png"), QSize(), QIcon::Normal, QIcon::Off);
+        centerButton->setIcon(icon3);
+
+        horizontalLayout->addWidget(centerButton);
+
+
+        gridLayout_3->addLayout(horizontalLayout, 0, 0, 1, 1);
+
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
         splitter->setOrientation(Qt::Horizontal);
@@ -122,6 +209,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget->setItem(0, 0, __qtablewidgetitem);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->setMinimumSize(QSize(0, 0));
         tableWidget->setMaximumSize(QSize(16777215, 104));
         tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget->setShowGrid(false);
@@ -139,6 +227,7 @@ public:
 
         tabWidget = new QTabWidget(layoutWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setMinimumSize(QSize(400, 0));
         tasksTab = new QWidget();
         tasksTab->setObjectName(QStringLiteral("tasksTab"));
         verticalLayout_2 = new QVBoxLayout(tasksTab);
@@ -165,6 +254,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
         allTasksTable->setHorizontalHeaderItem(7, __qtablewidgetitem8);
         allTasksTable->setObjectName(QStringLiteral("allTasksTable"));
+        allTasksTable->setMinimumSize(QSize(0, 0));
         allTasksTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         allTasksTable->setSortingEnabled(true);
         allTasksTable->setRowCount(0);
@@ -355,88 +445,56 @@ public:
 
         Sidebar->addWidget(tabWidget);
 
-        V_Zoom = new QHBoxLayout();
-        V_Zoom->setSpacing(6);
-        V_Zoom->setObjectName(QStringLiteral("V_Zoom"));
-        label_2 = new QLabel(layoutWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMinimumSize(QSize(110, 22));
-        label_2->setMaximumSize(QSize(110, 22));
-
-        V_Zoom->addWidget(label_2);
-
-        v_zoom_out = new QPushButton(layoutWidget);
-        v_zoom_out->setObjectName(QStringLiteral("v_zoom_out"));
-
-        V_Zoom->addWidget(v_zoom_out);
-
-        verticalSlider = new QSlider(layoutWidget);
-        verticalSlider->setObjectName(QStringLiteral("verticalSlider"));
-        verticalSlider->setValue(50);
-        verticalSlider->setOrientation(Qt::Horizontal);
-
-        V_Zoom->addWidget(verticalSlider);
-
-        v_zoom_in = new QPushButton(layoutWidget);
-        v_zoom_in->setObjectName(QStringLiteral("v_zoom_in"));
-
-        V_Zoom->addWidget(v_zoom_in);
-
-
-        Sidebar->addLayout(V_Zoom);
-
-        H_Zoom = new QHBoxLayout();
-        H_Zoom->setSpacing(6);
-        H_Zoom->setObjectName(QStringLiteral("H_Zoom"));
-        label = new QLabel(layoutWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setMinimumSize(QSize(110, 22));
-        label->setMaximumSize(QSize(110, 22));
-
-        H_Zoom->addWidget(label);
-
-        h_zoom_out = new QPushButton(layoutWidget);
-        h_zoom_out->setObjectName(QStringLiteral("h_zoom_out"));
-
-        H_Zoom->addWidget(h_zoom_out);
-
-        horizontalSlider = new QSlider(layoutWidget);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setValue(50);
-        horizontalSlider->setOrientation(Qt::Horizontal);
-
-        H_Zoom->addWidget(horizontalSlider);
-
-        h_zoom_in = new QPushButton(layoutWidget);
-        h_zoom_in->setObjectName(QStringLiteral("h_zoom_in"));
-
-        H_Zoom->addWidget(h_zoom_in);
-
-
-        Sidebar->addLayout(H_Zoom);
-
         splitter->addWidget(layoutWidget);
-        ganttView = new QGraphicsView(splitter);
+        layoutWidget1 = new QWidget(splitter);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        gridLayout_2 = new QGridLayout(layoutWidget1);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        rulerView = new QGraphicsView(layoutWidget1);
+        rulerView->setObjectName(QStringLiteral("rulerView"));
+        rulerView->setMinimumSize(QSize(500, 0));
+        rulerView->setMaximumSize(QSize(16777215, 30));
+
+        gridLayout_2->addWidget(rulerView, 0, 1, 1, 2);
+
+        labelView = new QGraphicsView(layoutWidget1);
+        labelView->setObjectName(QStringLiteral("labelView"));
+        labelView->setMinimumSize(QSize(50, 0));
+        labelView->setMaximumSize(QSize(70, 16777215));
+
+        gridLayout_2->addWidget(labelView, 1, 0, 2, 1);
+
+        ganttView = new QGraphicsView(layoutWidget1);
         ganttView->setObjectName(QStringLiteral("ganttView"));
         ganttView->setMinimumSize(QSize(500, 500));
         ganttView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        splitter->addWidget(ganttView);
 
-        gridLayout_2->addWidget(splitter, 0, 0, 1, 1);
+        gridLayout_2->addWidget(ganttView, 1, 1, 2, 1);
+
+        splitter->addWidget(layoutWidget1);
+
+        gridLayout_3->addWidget(splitter, 1, 0, 1, 1);
+
+
+        gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1072, 22));
-        menuBar->setDefaultUp(false);
-        menuBar->setNativeMenuBar(true);
-        MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setAutoFillBackground(false);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 1165, 22));
+        menuBar->setDefaultUp(false);
+        menuBar->setNativeMenuBar(true);
+        MainWindow->setMenuBar(menuBar);
 
         retranslateUi(MainWindow);
 
@@ -448,7 +506,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Gantt Viewer", 0));
+        toggleButton->setText(QString());
+        label_2->setText(QApplication::translate("MainWindow", "Vertical Zoom", 0));
+        v_zoom_out->setText(QString());
+        v_zoom_in->setText(QString());
+        label->setText(QApplication::translate("MainWindow", "Horizontal Zoom", 0));
+        h_zoom_out->setText(QString());
+        h_zoom_in->setText(QString());
+        centerButton->setText(QString());
 
         const bool __sortingEnabled = tableWidget->isSortingEnabled();
         tableWidget->setSortingEnabled(false);
@@ -522,12 +588,6 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">No check has been run yet. Run check to check for overlapping tasks and Flow amount sum.</p></body></html>", 0));
         saveButton->setText(QApplication::translate("MainWindow", "Save...", 0));
         tabWidget->setTabText(tabWidget->indexOf(errorsTab), QApplication::translate("MainWindow", "Log", 0));
-        label_2->setText(QApplication::translate("MainWindow", "Vertical Zoom", 0));
-        v_zoom_out->setText(QApplication::translate("MainWindow", "(-)", 0));
-        v_zoom_in->setText(QApplication::translate("MainWindow", "(+)", 0));
-        label->setText(QApplication::translate("MainWindow", "Horizontal Zoom", 0));
-        h_zoom_out->setText(QApplication::translate("MainWindow", "(-)", 0));
-        h_zoom_in->setText(QApplication::translate("MainWindow", "(+)", 0));
     } // retranslateUi
 
 };

@@ -61,9 +61,13 @@ public:
 
 
 private:
+
     Ui::MainWindow *ui;
     float verticalZoom = 1;
     float horizontalZoom = 1;
+    /// wether the file dialog is open (to not redo the labels if scrolling inside filedialog)
+    bool filedialogopen = false;
+    /// resets zoom
     void resetZoom();
     /// width of the unit name bar, dynamically set to width of longest label.
     int UNITNAMEBARWIDTH = 0;
@@ -89,11 +93,16 @@ private:
     QList<GanttFlow*> * flowsRep;
     ///A list of the vertical lines for each unit
     QList<QGraphicsLineItem*> * lines;
+    ///A list of the ruler labels
     QList<QGraphicsTextItem*> * rulerLabels;
     ///A list of the labels of each unit
     QList<QGraphicsTextItem*> * unitLabels;
     /// The scene to which everything is drawn
     QGraphicsScene * scene;
+    /// Scene for name labels
+    QGraphicsScene * nameLabelScene ;
+    /// Scene for ruler labels
+    QGraphicsScene * rulerLabelScene;
     /// The time when the longest task ends.
     float longestTask;
     /// The largest amount (For scaling the view)
@@ -222,6 +231,12 @@ private slots:
     void addTask(QString unitName, QString taskName, float start, float end, float amount, QString color = "random");
     /// reset the window (important for loading new files)
     void reset();
+    /// Setup the label views
+    void doLabels();
+    /// reset the label views (when window was resized)
+    void resetLabelScenes();
+    /// toggle the table sidebar
+    void toggleBar();
 protected:
     void resizeEvent(QResizeEvent * event);
     void keyPressEvent(QKeyEvent * e);
