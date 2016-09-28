@@ -13,8 +13,12 @@
  * To cross compile on unix for any platform: http://stackoverflow.com/questions/14170590/building-qt-5-on-linux-for-windows/14170591#14170591
  *
  * -# add mxe to PATH: \code export PATH=$PATH:<mxe install location>/usr/bin \endcode
- * -# to compile for Windows, run \code  i686-w64-mingw32.static-qmake-qt5 \endcode
- * -# run \code make \endcode
+ * -# to compile for Windows, run
+ * \code
+ * cd release
+ * i686-w64-mingw32.static-qmake-qt5 ..
+ * make
+ * \endcode
  *
  * @author Julius Naeumann, julius.naeumann@gmail.com
  * @date August 2016
@@ -279,14 +283,9 @@ void MainWindow::reset(){
     scene = new QGraphicsScene(0,0,ui->ganttView->frameSize().width(),ui->ganttView->frameSize().height());
     ui->ganttView->setScene(scene);
     tasksRep = new QList<GanttRect*>();
+
     lines = new QList<QGraphicsLineItem*>();
     flowsRep = new QList<GanttFlow*>();
-    unitLabels = new QList<QGraphicsTextItem*>();
-    rulerLabels = new QList<QGraphicsTextItem*>();
-
-    resetLabelScenes();
-}
-void MainWindow::resetLabelScenes(){
 
     nameLabelScene = new QGraphicsScene(ui->labelView->frameRect());
     rulerLabelScene = new QGraphicsScene(ui->rulerView->frameRect());
@@ -302,8 +301,10 @@ void MainWindow::resetLabelScenes(){
     nameLabelScene->setBackgroundBrush(QBrush(QWidget::palette().color(QWidget::backgroundRole())));
     rulerLabelScene->setBackgroundBrush(QBrush(QWidget::palette().color(QWidget::backgroundRole())));
     ui->labelView->setStyleSheet( "QGraphicsView { border-style: none; }" );
-    //ui->rulerView->setStyleSheet( "QGraphicsView { border-style: none; }" );
-    doLabels();
+    ui->rulerView->setStyleSheet( "QGraphicsView { border-style: none; }" );
+    //ui->labelView->setAlignment(Qt::AlignLeft | Qt::AlignRight);
+    //ui->rulerView->setAlignment(Qt::AlignLeft | Qt::AlignRight);
+    resetLabelScenes();
 }
 
 //DATA stuff
@@ -634,57 +635,84 @@ void MainWindow::createRepresentation(){
         }
     }
     clearFilter();
-    doLabels();
+    resetLabelScenes();
 }
-void MainWindow::doLabels(){
-    if (filedialogopen){ //this was called when a file dialog was scrolled and not the ganttview, wrong!
-        return;
-    }
-    //not efficient
+void MainWindow::resetLabelScenes(){
+
     nameLabelScene->clear();
     rulerLabelScene->clear();
+    //nameLabelScene->setSceneRect(0, 0, ui->labelView->width(), ui->labelView->height());
+    //rulerLabelScene->setSceneRect(0, 0, ui->rulerView->width(), ui->rulerView->height());
+    //ui->labelView->fitInView(nameLabelScene->sceneRect(), Qt::IgnoreAspectRatio);
+    //ui->rulerView->fitInView(rulerLabelScene->sceneRect(), Qt::IgnoreAspectRatio);
 
-    for (int i = 0; i < unitLabels->size(); i++){
+    unitLabels = new QList<QGraphicsTextItem*>();
+    rulerLabels = new QList<QGraphicsTextItem*>();
+    nameLabelScene->clear();
+    rulerLabelScene->clear();
+    for (int i = 0; i < units->size(); i++){
         QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
+        unitLabel->setPos(unitLabel->boundingRect().width(),0);
         unitLabel->setPlainText(units->at(i));
-
-        //unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +units->at(i) + "</div>") );
-        //unitLabel->setDefaultTextColor(Qt::black);
-
-
-        //unitLabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        unitLabel->setPos(nameLabelScene->width()-unitLabel->boundingRect().width(), ui->labelView->mapToScene(ui->ganttView->mapFromScene(QPoint(0,(i+1)*UNITREPHEIGHT))).y());
         nameLabelScene->addItem(unitLabel);
+        unitLabels->append(unitLabel);
     }
-    //width  of ruler label
-    int s = 40;
-    //number of ruler labels
-    int n = ui->rulerView->width()/s;
-    //distance between labels
-    //float d = ui->ganttView->mapFromGlobal(ui->rulerView->mapToGlobal(QPoint(s,0))).x() - ui->ganttView->mapFromGlobal(ui->rulerView->mapToGlobal(QPoint(0,0))).x();
-    QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     // remove old ruler lines
     for (int i = 0; i< lines->size(); i++){
         scene->removeItem(lines->at(i));
     }
     lines->clear();
-    //draw new ruler lines
+
+
+    QPen rulerPen(Qt::lightGray, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+
+    //number of ruler labels
+    int n = ui->rulerView->width()/RULERLABELWIDTH;
+    //top left corner
+    QPointF tl = ui->rulerView->mapToScene(0,0);
     for (int i = 0; i < n; i++){
-        QGraphicsTextItem * unitLabel = new QGraphicsTextItem();
-        float p = ui->ganttView->mapToScene(ui->rulerView->mapFromScene(QPoint(i*s,0))).x();
-        QGraphicsLineItem* line = new QGraphicsLineItem(p + 0,0,p + 0,(units->length()+1)*UNITREPHEIGHT);
+        QGraphicsTextItem * rulerLabel = new QGraphicsTextItem();
+        float r = tl.x() + i * RULERLABELWIDTH;
+        float p = ui->ganttView->mapToScene(ui->rulerView->mapFromScene(QPoint(r,0))).x();
+
+        QGraphicsLineItem* line = new QGraphicsLineItem();
         lines->append(line);
         line->setPen(rulerPen);
         line->setZValue(-10);
         scene->addItem(line);
-        unitLabel->setPlainText(QString::number(p,'f',1));
-        //unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +QString::number(p) + "</div>") );
-        unitLabel->setDefaultTextColor(Qt::black);
+        rulerLabel->setPos(r,0);
+        rulerLabelScene->addItem(rulerLabel);
+        rulerLabels->append(rulerLabel);
 
-        //unitLabel->setZValue(10);
-        //unitLabel->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        unitLabel->setPos(i*s,0);
-        rulerLabelScene->addItem(unitLabel);
+        //unitLabel->setHtml(QString("<div style='background:rgba(255, 255, 255, 50%);'>" +QString::number(p) + "</div>") );
+        rulerLabel->setDefaultTextColor(Qt::black);
+
+    }
+
+    doLabels();
+}
+
+void MainWindow::doLabels(){
+    if (filedialogopen){ //this was called when a file dialog was scrolled and not the ganttview, wrong!
+        return;
+    }
+    // move name labels
+    for (int i = 0; i < units->size(); i++){
+        unitLabels->at(i)->setPos(unitLabels->at(i)->pos().x(), ui->labelView->mapToScene(ui->ganttView->mapFromScene(QPoint(0,(i)*UNITREPHEIGHT))).y());
+    }
+    //upper line point
+    float up = ui->ganttView->mapToScene(0,0).y();
+    //lower line point
+    float dp = ui->ganttView->mapToScene(0,ui->ganttView->height()).y();
+
+
+    // move ruler lines, rename ruler labels
+    for (int i = 0; i < lines->size(); i++){
+
+
+        float p = ui->ganttView->mapToScene(ui->rulerView->mapFromScene(rulerLabels->at(i)->pos())).x();
+        lines->at(i)->setLine(p, up, p, dp);
+        rulerLabels->at(i)->setPlainText(QString::number(p,'f',1));
     }
 
 
@@ -844,9 +872,11 @@ void MainWindow::colorByAmount(){
         if (largestAmounts->at(tasks->at(i).unitIndex) != 0){
             x = tasks->at(i).amount / largestAmounts->at(tasks->at(i).unitIndex);
         }
-        QColor c = QColor(Qt::black);
+        QColor c = QColor(Qt::gray);
         // largestamount = 0, color black
-        if (x < 0.5){ // white to yellow
+        if (x == 0){
+
+        } else if (x < 0.5){ // white to yellow
             c.setHsv(42.5,x*512,255);
         } else if (x >=0.5) { //yellow to red
             c.setHsv(85-85*x,255,255);
@@ -1320,6 +1350,7 @@ void MainWindow::toggleBar(){
         currentSizes[0] = 0;
     }
     ui->splitter->setSizes(currentSizes);
+    resetLabelScenes();
 
 }
 
@@ -1339,7 +1370,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event){
         return true;
     }
 
-    if ((event->type()!=QEvent::Paint) && (event->type()!=QEvent::MouseMove)){// || event->type()!=QEvent::MouseMove || event->type()!=QEvent::Leave || event->type()!=QEvent::WindowDeactivate){
+    if ((event->type()!=QEvent::Paint) && (event->type()!=QEvent::MouseMove) && (event->type()!=QEvent::Resize)){// || event->type()!=QEvent::MouseMove || event->type()!=QEvent::Leave || event->type()!=QEvent::WindowDeactivate){
         qDebug()<<event->type();
         doLabels();
     }
@@ -1353,7 +1384,6 @@ void MainWindow::resizeEvent(QResizeEvent * event)
     //fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     //
     resetLabelScenes();
-    doLabels();
 
 };
 // Export
@@ -1406,7 +1436,7 @@ void MainWindow::exportWiz(){
         GanttRect * newRect = new GanttRect(task.taskIndex,task.unitIndex,largestAmounts->at(task.unitIndex),task.start*vscale,task.end*vscale,task.amount, UNITNAMEBARWIDTH, task.color);
         if (tasksRep->at(i)->isVisible() || wiz->filter){
 
-            QColor c = QColor(Qt::black);
+            QColor c = QColor(Qt::gray);
 
             switch (wiz->color) {
             case 0: //default
@@ -1423,7 +1453,9 @@ void MainWindow::exportWiz(){
                 if (largestAmounts->at(tasks->at(i).unitIndex) != 0){
                     x = tasks->at(i).amount / largestAmounts->at(tasks->at(i).unitIndex);
                 }
-                if (x < 0.5){ // white to yellow
+                if (x == 0){
+
+                } else if (x < 0.5){ // white to yellow
                     c.setHsv(42.5,x*512,255);
                 } else if (x >=0.5) { //yellow to red
                     c.setHsv(85-85*x,255,255);

@@ -120,7 +120,10 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \hypertarget{class_main_window_a5e7373649a8fdcd8fc010c321569864a}{}void {\bfseries color\+By\+Task} ()\label{class_main_window_a5e7373649a8fdcd8fc010c321569864a}
 
 \item 
-\hypertarget{class_main_window_a494c17acd55c3f4c1ccf1710371bb322}{}void {\bfseries export\+To\+Image} ()\label{class_main_window_a494c17acd55c3f4c1ccf1710371bb322}
+\hypertarget{class_main_window_a7711b82555d28b4c5822ab72a9943c1f}{}void {\bfseries start\+Export\+Wiz} ()\label{class_main_window_a7711b82555d28b4c5822ab72a9943c1f}
+
+\item 
+\hypertarget{class_main_window_a0238ee12b8c13e76eaa59b24e3de1157}{}void {\bfseries export\+Wiz} ()\label{class_main_window_a0238ee12b8c13e76eaa59b24e3de1157}
 
 \item 
 \hypertarget{class_main_window_a19794f4b42e03bee539fd9783825a3b6}{}void {\bfseries rule\+Changed\+Amount} (int index)\label{class_main_window_a19794f4b42e03bee539fd9783825a3b6}
@@ -152,13 +155,22 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Adds a \hyperlink{struct_task}{Task} to the tasks list. color is a color name in hex format, if none is given a random color will be generated. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{}void \hyperlink{class_main_window_a02076de46e6810174817ebfc6ddd2be5}{reset} ()\label{class_main_window_a02076de46e6810174817ebfc6ddd2be5}
 
-\begin{DoxyCompactList}\small\item\em reset the window (important for loading new files) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em reset the window (important for loading new files) \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a46f95f01be8aeeea1a828a8a1a8f1706}{}void \hyperlink{class_main_window_a46f95f01be8aeeea1a828a8a1a8f1706}{do\+Labels} ()\label{class_main_window_a46f95f01be8aeeea1a828a8a1a8f1706}
+
+\begin{DoxyCompactList}\small\item\em Setup the label views. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_af169d161884483a84742241bb3fedc5f}{}void \hyperlink{class_main_window_af169d161884483a84742241bb3fedc5f}{reset\+Label\+Scenes} ()\label{class_main_window_af169d161884483a84742241bb3fedc5f}
+
+\begin{DoxyCompactList}\small\item\em reset the label views (when window was resized) \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_afade4be02b38062cd3a439f02abdf3bc}{}void \hyperlink{class_main_window_afade4be02b38062cd3a439f02abdf3bc}{toggle\+Bar} ()\label{class_main_window_afade4be02b38062cd3a439f02abdf3bc}
+
+\begin{DoxyCompactList}\small\item\em toggle the table sidebar \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_main_window_a6a403614bd858e16e35af405c562fc9b}{}void {\bfseries reset\+Zoom} ()\label{class_main_window_a6a403614bd858e16e35af405c562fc9b}
+\hypertarget{class_main_window_a6a403614bd858e16e35af405c562fc9b}{}void \hyperlink{class_main_window_a6a403614bd858e16e35af405c562fc9b}{reset\+Zoom} ()\label{class_main_window_a6a403614bd858e16e35af405c562fc9b}
 
-\item 
+\begin{DoxyCompactList}\small\item\em resets zoom \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}{}void \hyperlink{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}{show\+Flows} (int task\+Index)\label{class_main_window_aa9bca4a0b90acf75f82a7f1acc411acb}
 
 \begin{DoxyCompactList}\small\item\em Recursively make all flows connected to this task visible. \end{DoxyCompactList}\item 
@@ -192,6 +204,12 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \hypertarget{class_main_window_a75d4db6cf3737249d72aa1cb2859b424}{}float {\bfseries horizontal\+Zoom} = 1\label{class_main_window_a75d4db6cf3737249d72aa1cb2859b424}
 
 \item 
+\hypertarget{class_main_window_abc95ad5dca40c75507cea7914b3f9fab}{}bool \hyperlink{class_main_window_abc95ad5dca40c75507cea7914b3f9fab}{filedialogopen} = false\label{class_main_window_abc95ad5dca40c75507cea7914b3f9fab}
+
+\begin{DoxyCompactList}\small\item\em wether the file dialog is open (to not redo the labels if scrolling inside filedialog) \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a3da16704d1445e1885bf6c72cdc88066}{}int \hyperlink{class_main_window_a3da16704d1445e1885bf6c72cdc88066}{U\+N\+I\+T\+N\+A\+M\+E\+B\+A\+R\+W\+I\+D\+T\+H} = 0\label{class_main_window_a3da16704d1445e1885bf6c72cdc88066}
+
+\begin{DoxyCompactList}\small\item\em width of the unit name bar, dynamically set to width of longest label. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_ab302362b256360d527a628bdbfcde171}{}Q\+List$<$ \hyperlink{struct_task}{Task} $>$ $\ast$ \hyperlink{class_main_window_ab302362b256360d527a628bdbfcde171}{tasks}\label{class_main_window_ab302362b256360d527a628bdbfcde171}
 
 \begin{DoxyCompactList}\small\item\em A list of all tasks. \end{DoxyCompactList}\item 
@@ -207,6 +225,9 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \hypertarget{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}{}Q\+Map$<$ Q\+String, Q\+Color $>$ $\ast$ \hyperlink{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}{task\+Colors}\label{class_main_window_a26149cc7038562e5b7f1b4143a2f6a29}
 
 \begin{DoxyCompactList}\small\item\em A map of task colors. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_ab33d830736fa6da8353ba4c01e124642}{}\hyperlink{class_export_wizard}{Export\+Wizard} $\ast$ \hyperlink{class_main_window_ab33d830736fa6da8353ba4c01e124642}{wiz}\label{class_main_window_ab33d830736fa6da8353ba4c01e124642}
+
+\begin{DoxyCompactList}\small\item\em The export wizard. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_a71197b2944e569701672e2e8462d7805}{}Q\+List$<$ \hyperlink{class_gantt_rect}{Gantt\+Rect} $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a71197b2944e569701672e2e8462d7805}{tasks\+Rep}\label{class_main_window_a71197b2944e569701672e2e8462d7805}
 
 \begin{DoxyCompactList}\small\item\em Graphic representations of each task. \end{DoxyCompactList}\item 
@@ -216,12 +237,21 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \hypertarget{class_main_window_a60463caf2bb888172a6dcbae02004739}{}Q\+List$<$ Q\+Graphics\+Line\+Item $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a60463caf2bb888172a6dcbae02004739}{lines}\label{class_main_window_a60463caf2bb888172a6dcbae02004739}
 
 \begin{DoxyCompactList}\small\item\em A list of the vertical lines for each unit. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_aea62adad51ab139eb7eaa498a23a7b9a}{}Q\+List$<$ Q\+Graphics\+Text\+Item $\ast$ $>$ $\ast$ \hyperlink{class_main_window_aea62adad51ab139eb7eaa498a23a7b9a}{ruler\+Labels}\label{class_main_window_aea62adad51ab139eb7eaa498a23a7b9a}
+
+\begin{DoxyCompactList}\small\item\em A list of the ruler labels. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}{}Q\+List$<$ Q\+Graphics\+Text\+Item $\ast$ $>$ $\ast$ \hyperlink{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}{unit\+Labels}\label{class_main_window_a33c063caa7e87dc13a3d943aabc77a49}
 
 \begin{DoxyCompactList}\small\item\em A list of the labels of each unit. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_a51ac2b126495216832501cea3929c6f6}{}Q\+Graphics\+Scene $\ast$ \hyperlink{class_main_window_a51ac2b126495216832501cea3929c6f6}{scene}\label{class_main_window_a51ac2b126495216832501cea3929c6f6}
 
 \begin{DoxyCompactList}\small\item\em The scene to which everything is drawn. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a0661875b0e8d230abcaa746f68d56d24}{}Q\+Graphics\+Scene $\ast$ \hyperlink{class_main_window_a0661875b0e8d230abcaa746f68d56d24}{name\+Label\+Scene}\label{class_main_window_a0661875b0e8d230abcaa746f68d56d24}
+
+\begin{DoxyCompactList}\small\item\em Scene for name labels. \end{DoxyCompactList}\item 
+\hypertarget{class_main_window_a5a9dc81912a405ee0101ce6c6fd72cbc}{}Q\+Graphics\+Scene $\ast$ \hyperlink{class_main_window_a5a9dc81912a405ee0101ce6c6fd72cbc}{ruler\+Label\+Scene}\label{class_main_window_a5a9dc81912a405ee0101ce6c6fd72cbc}
+
+\begin{DoxyCompactList}\small\item\em Scene for ruler labels. \end{DoxyCompactList}\item 
 \hypertarget{class_main_window_a10467ff3d17d133dba6d758def5e51de}{}float \hyperlink{class_main_window_a10467ff3d17d133dba6d758def5e51de}{longest\+Task}\label{class_main_window_a10467ff3d17d133dba6d758def5e51de}
 
 \begin{DoxyCompactList}\small\item\em The time when the longest task ends. \end{DoxyCompactList}\item 
@@ -306,9 +336,9 @@ Inheritance diagram for Main\+Window\+:\begin{figure}[H]
 \hypertarget{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}{}Q\+Action $\ast$ \hyperlink{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}{check\+Act}\label{class_main_window_ab6bb74007a03a6d6e97fa3b4c92cd0da}
 
 \begin{DoxyCompactList}\small\item\em Menu action for checking. \end{DoxyCompactList}\item 
-\hypertarget{class_main_window_acb019ac85cd188f2738421da7095e932}{}Q\+Action $\ast$ {\bfseries export\+Act}\label{class_main_window_acb019ac85cd188f2738421da7095e932}
+\hypertarget{class_main_window_acb019ac85cd188f2738421da7095e932}{}Q\+Action $\ast$ \hyperlink{class_main_window_acb019ac85cd188f2738421da7095e932}{export\+Act}\label{class_main_window_acb019ac85cd188f2738421da7095e932}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Menu action for exporting. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

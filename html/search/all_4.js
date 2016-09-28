@@ -1,6 +1,7 @@
 var searchData=
 [
   ['fetchavailablesymbols',['fetchAvailableSymbols',['../class_wizard.html#adfe6a1afa0ef03c25371f32119337644',1,'Wizard']]],
+  ['filedialogopen',['filedialogopen',['../class_main_window.html#abc95ad5dca40c75507cea7914b3f9fab',1,'MainWindow']]],
   ['filemenu',['fileMenu',['../class_main_window.html#a426da48f6e2f865b07a28533c07c4f7a',1,'MainWindow']]],
   ['findgams',['FindGAMS',['../class_wizard.html#a394f3e7a01cd617aa0759533ab2997ae',1,'Wizard']]],
   ['flow',['Flow',['../struct_flow.html',1,'']]],

@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_gantt_rect.html">GanttRect</a>(<span class="keywordtype">int</span> taskIndex, <span class="keywordtype">int</span> unitIndex, <span class="keywordtype">float</span> largestAmount, <span class="keywordtype">float</span> start, <span class="keywordtype">float</span> end, <span class="keywordtype">float</span> amount, QColor color, QGraphicsItem *parent = Q_NULLPTR);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_gantt_rect.html">GanttRect</a>(<span class="keywordtype">int</span> taskIndex, <span class="keywordtype">int</span> unitIndex, <span class="keywordtype">float</span> largestAmount, <span class="keywordtype">float</span> start, <span class="keywordtype">float</span> end, <span class="keywordtype">float</span> amount, <span class="keywordtype">int</span> UNITNAMEBARWIDTH, QColor color, QGraphicsItem *parent = Q_NULLPTR);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">int</span> taskIndex;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">int</span> unitIndex;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">void</span> showAmount(<span class="keywordtype">bool</span> yes);</div>
@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">float</span> start;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">float</span> end;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">float</span> amount;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> UNITNAMEBARWIDTH;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QPen pen;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">protected</span>:</div>

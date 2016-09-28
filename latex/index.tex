@@ -11,14 +11,11 @@ To cross compile on unix for any platform\+: \href{http://stackoverflow.com/ques
 export PATH=$PATH:<mxe install location>/usr/bin 
 \end{DoxyCode}
 
-\item to compile for Windows, run
+\item to compile for Windows, run 
 \begin{DoxyCode}
-i686-w64-mingw32.static-qmake-qt5 
-\end{DoxyCode}
-
-\item run
-\begin{DoxyCode}
-make 
+cd release
+i686-w64-mingw32.static-qmake-qt5 ..
+make
 \end{DoxyCode}
 
 \end{DoxyEnumerate}

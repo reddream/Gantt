@@ -9,5 +9,6 @@ var searchData=
   ['taskindex',['taskIndex',['../struct_task.html#a57c58377752649d07774496b713a3b62',1,'Task']]],
   ['tasks',['tasks',['../class_main_window.html#ab302362b256360d527a628bdbfcde171',1,'MainWindow']]],
   ['tasksrep',['tasksRep',['../class_main_window.html#a71197b2944e569701672e2e8462d7805',1,'MainWindow']]],
-  ['tasktableclicked',['taskTableClicked',['../class_main_window.html#abacc539de6f25ca81a6b0543be799155',1,'MainWindow']]]
+  ['tasktableclicked',['taskTableClicked',['../class_main_window.html#abacc539de6f25ca81a6b0543be799155',1,'MainWindow']]],
+  ['togglebar',['toggleBar',['../class_main_window.html#afade4be02b38062cd3a439f02abdf3bc',1,'MainWindow']]]
 ];

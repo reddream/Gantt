@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['unit1index',['unit1Index',['../struct_flow.html#a3272e1f0ab6863ad902be6022fb9c537',1,'Flow']]],
-  ['unit2index',['unit2Index',['../struct_flow.html#a0e6209bf9cb7c20c6b3e8eff36c12527',1,'Flow']]],
-  ['unitcolors',['unitColors',['../class_main_window.html#a306683291c0136c9808f7026b37820e5',1,'MainWindow']]],
-  ['unitindex',['unitIndex',['../struct_task.html#a39948d136b05540e7ad6dd1574e698a3',1,'Task']]],
-  ['unitlabels',['unitLabels',['../class_main_window.html#a33c063caa7e87dc13a3d943aabc77a49',1,'MainWindow']]],
-  ['units',['units',['../class_main_window.html#aad7505c53a0ad219080b3c1b1d1ef1e6',1,'MainWindow']]]
+  ['taskcoloringmenu',['taskColoringMenu',['../class_main_window.html#a03a0c355640f06f7ca4031bc2a46e97e',1,'MainWindow']]],
+  ['taskcolors',['taskColors',['../class_main_window.html#a26149cc7038562e5b7f1b4143a2f6a29',1,'MainWindow']]],
+  ['taskindex',['taskIndex',['../struct_task.html#a57c58377752649d07774496b713a3b62',1,'Task']]],
+  ['tasks',['tasks',['../class_main_window.html#ab302362b256360d527a628bdbfcde171',1,'MainWindow']]],
+  ['tasksrep',['tasksRep',['../class_main_window.html#a71197b2944e569701672e2e8462d7805',1,'MainWindow']]]
 ];

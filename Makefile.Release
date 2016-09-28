@@ -51,12 +51,16 @@ SOURCES       = main.cpp \
 		gclgms.c \
 		gdxcc.c \
 		wizard.cpp \
-		exportwizard.cpp /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp \
+		exportwizard.cpp \
+		ganttgraphicsview.cpp \
+		ganttline.cpp /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp \
+		release/qrc_icons.cpp \
 		release/moc_mainwindow.cpp \
 		release/moc_ganttrect.cpp \
 		release/moc_ganttflow.cpp \
 		release/moc_wizard.cpp \
-		release/moc_exportwizard.cpp
+		release/moc_exportwizard.cpp \
+		release/moc_ganttline.cpp
 OBJECTS       = release/main.o \
 		release/mainwindow.o \
 		release/ganttrect.o \
@@ -66,17 +70,621 @@ OBJECTS       = release/main.o \
 		release/gdxcc.o \
 		release/wizard.o \
 		release/exportwizard.o \
+		release/ganttgraphicsview.o \
+		release/ganttline.o \
 		release/gantt_plugin_import.o \
+		release/qrc_icons.o \
 		release/moc_mainwindow.o \
 		release/moc_ganttrect.o \
 		release/moc_ganttflow.o \
 		release/moc_wizard.o \
-		release/moc_exportwizard.o
+		release/moc_exportwizard.o \
+		release/moc_ganttline.o
 
 DIST          = gantticon.png \
 		gantticon.ico \
 		icon.icns \
-		gantt.rc mainwindow.h \
+		ionicons-2.0.1/png/512/alert-circled.png \
+		ionicons-2.0.1/png/512/alert.png \
+		ionicons-2.0.1/png/512/android-add-contact.png \
+		ionicons-2.0.1/png/512/android-add.png \
+		ionicons-2.0.1/png/512/android-alarm.png \
+		ionicons-2.0.1/png/512/android-archive.png \
+		ionicons-2.0.1/png/512/android-arrow-back.png \
+		ionicons-2.0.1/png/512/android-arrow-down-left.png \
+		ionicons-2.0.1/png/512/android-arrow-down-right.png \
+		ionicons-2.0.1/png/512/android-arrow-forward.png \
+		ionicons-2.0.1/png/512/android-arrow-up-left.png \
+		ionicons-2.0.1/png/512/android-arrow-up-right.png \
+		ionicons-2.0.1/png/512/android-battery.png \
+		ionicons-2.0.1/png/512/android-book.png \
+		ionicons-2.0.1/png/512/android-calendar.png \
+		ionicons-2.0.1/png/512/android-call.png \
+		ionicons-2.0.1/png/512/android-camera.png \
+		ionicons-2.0.1/png/512/android-chat.png \
+		ionicons-2.0.1/png/512/android-checkmark.png \
+		ionicons-2.0.1/png/512/android-clock.png \
+		ionicons-2.0.1/png/512/android-close.png \
+		ionicons-2.0.1/png/512/android-contact.png \
+		ionicons-2.0.1/png/512/android-contacts.png \
+		ionicons-2.0.1/png/512/android-data.png \
+		ionicons-2.0.1/png/512/android-developer.png \
+		ionicons-2.0.1/png/512/android-display.png \
+		ionicons-2.0.1/png/512/android-download.png \
+		ionicons-2.0.1/png/512/android-drawer.png \
+		ionicons-2.0.1/png/512/android-dropdown.png \
+		ionicons-2.0.1/png/512/android-earth.png \
+		ionicons-2.0.1/png/512/android-folder.png \
+		ionicons-2.0.1/png/512/android-forums.png \
+		ionicons-2.0.1/png/512/android-friends.png \
+		ionicons-2.0.1/png/512/android-hand.png \
+		ionicons-2.0.1/png/512/android-image.png \
+		ionicons-2.0.1/png/512/android-inbox.png \
+		ionicons-2.0.1/png/512/android-information.png \
+		ionicons-2.0.1/png/512/android-keypad.png \
+		ionicons-2.0.1/png/512/android-lightbulb.png \
+		ionicons-2.0.1/png/512/android-locate.png \
+		ionicons-2.0.1/png/512/android-location.png \
+		ionicons-2.0.1/png/512/android-mail.png \
+		ionicons-2.0.1/png/512/android-microphone.png \
+		ionicons-2.0.1/png/512/android-mixer.png \
+		ionicons-2.0.1/png/512/android-more.png \
+		ionicons-2.0.1/png/512/android-note.png \
+		ionicons-2.0.1/png/512/android-playstore.png \
+		ionicons-2.0.1/png/512/android-printer.png \
+		ionicons-2.0.1/png/512/android-promotion.png \
+		ionicons-2.0.1/png/512/android-reminder.png \
+		ionicons-2.0.1/png/512/android-remove.png \
+		ionicons-2.0.1/png/512/android-search.png \
+		ionicons-2.0.1/png/512/android-send.png \
+		ionicons-2.0.1/png/512/android-settings.png \
+		ionicons-2.0.1/png/512/android-share.png \
+		ionicons-2.0.1/png/512/android-social-user.png \
+		ionicons-2.0.1/png/512/android-social.png \
+		ionicons-2.0.1/png/512/android-sort.png \
+		ionicons-2.0.1/png/512/android-stair-drawer.png \
+		ionicons-2.0.1/png/512/android-star.png \
+		ionicons-2.0.1/png/512/android-stopwatch.png \
+		ionicons-2.0.1/png/512/android-storage.png \
+		ionicons-2.0.1/png/512/android-system-back.png \
+		ionicons-2.0.1/png/512/android-system-home.png \
+		ionicons-2.0.1/png/512/android-system-windows.png \
+		ionicons-2.0.1/png/512/android-timer.png \
+		ionicons-2.0.1/png/512/android-trash.png \
+		ionicons-2.0.1/png/512/android-user-menu.png \
+		ionicons-2.0.1/png/512/android-volume.png \
+		ionicons-2.0.1/png/512/android-wifi.png \
+		ionicons-2.0.1/png/512/aperture.png \
+		ionicons-2.0.1/png/512/archive.png \
+		ionicons-2.0.1/png/512/arrow-down-a.png \
+		ionicons-2.0.1/png/512/arrow-down-b.png \
+		ionicons-2.0.1/png/512/arrow-down-c.png \
+		ionicons-2.0.1/png/512/arrow-expand.png \
+		ionicons-2.0.1/png/512/arrow-graph-down-left.png \
+		ionicons-2.0.1/png/512/arrow-graph-down-right.png \
+		ionicons-2.0.1/png/512/arrow-graph-up-left.png \
+		ionicons-2.0.1/png/512/arrow-graph-up-right.png \
+		ionicons-2.0.1/png/512/arrow-left-a.png \
+		ionicons-2.0.1/png/512/arrow-left-b.png \
+		ionicons-2.0.1/png/512/arrow-left-c.png \
+		ionicons-2.0.1/png/512/arrow-move.png \
+		ionicons-2.0.1/png/512/arrow-resize.png \
+		ionicons-2.0.1/png/512/arrow-return-left.png \
+		ionicons-2.0.1/png/512/arrow-return-right.png \
+		ionicons-2.0.1/png/512/arrow-right-a.png \
+		ionicons-2.0.1/png/512/arrow-right-b.png \
+		ionicons-2.0.1/png/512/arrow-right-c.png \
+		ionicons-2.0.1/png/512/arrow-shrink.png \
+		ionicons-2.0.1/png/512/arrow-swap.png \
+		ionicons-2.0.1/png/512/arrow-up-a.png \
+		ionicons-2.0.1/png/512/arrow-up-b.png \
+		ionicons-2.0.1/png/512/arrow-up-c.png \
+		ionicons-2.0.1/png/512/asterisk.png \
+		ionicons-2.0.1/png/512/at.png \
+		ionicons-2.0.1/png/512/bag.png \
+		ionicons-2.0.1/png/512/battery-charging.png \
+		ionicons-2.0.1/png/512/battery-empty.png \
+		ionicons-2.0.1/png/512/battery-full.png \
+		ionicons-2.0.1/png/512/battery-half.png \
+		ionicons-2.0.1/png/512/battery-low.png \
+		ionicons-2.0.1/png/512/beaker.png \
+		ionicons-2.0.1/png/512/beer.png \
+		ionicons-2.0.1/png/512/bluetooth.png \
+		ionicons-2.0.1/png/512/bonfire.png \
+		ionicons-2.0.1/png/512/bookmark.png \
+		ionicons-2.0.1/png/512/briefcase.png \
+		ionicons-2.0.1/png/512/bug.png \
+		ionicons-2.0.1/png/512/calculator.png \
+		ionicons-2.0.1/png/512/calendar.png \
+		ionicons-2.0.1/png/512/camera.png \
+		ionicons-2.0.1/png/512/card.png \
+		ionicons-2.0.1/png/512/cash.png \
+		ionicons-2.0.1/png/512/chatbox-working.png \
+		ionicons-2.0.1/png/512/chatbox.png \
+		ionicons-2.0.1/png/512/chatboxes.png \
+		ionicons-2.0.1/png/512/chatbubble-working.png \
+		ionicons-2.0.1/png/512/chatbubble.png \
+		ionicons-2.0.1/png/512/chatbubbles.png \
+		ionicons-2.0.1/png/512/checkmark-circled.png \
+		ionicons-2.0.1/png/512/checkmark-round.png \
+		ionicons-2.0.1/png/512/checkmark.png \
+		ionicons-2.0.1/png/512/chevron-down.png \
+		ionicons-2.0.1/png/512/chevron-left.png \
+		ionicons-2.0.1/png/512/chevron-right.png \
+		ionicons-2.0.1/png/512/chevron-up.png \
+		ionicons-2.0.1/png/512/clipboard.png \
+		ionicons-2.0.1/png/512/clock.png \
+		ionicons-2.0.1/png/512/close-circled.png \
+		ionicons-2.0.1/png/512/close-round.png \
+		ionicons-2.0.1/png/512/close.png \
+		ionicons-2.0.1/png/512/closed-captioning.png \
+		ionicons-2.0.1/png/512/cloud.png \
+		ionicons-2.0.1/png/512/code-download.png \
+		ionicons-2.0.1/png/512/code-working.png \
+		ionicons-2.0.1/png/512/code.png \
+		ionicons-2.0.1/png/512/coffee.png \
+		ionicons-2.0.1/png/512/compass.png \
+		ionicons-2.0.1/png/512/compose.png \
+		ionicons-2.0.1/png/512/connection-bars.png \
+		ionicons-2.0.1/png/512/contrast.png \
+		ionicons-2.0.1/png/512/cube.png \
+		ionicons-2.0.1/png/512/disc.png \
+		ionicons-2.0.1/png/512/document-text.png \
+		ionicons-2.0.1/png/512/document.png \
+		ionicons-2.0.1/png/512/drag.png \
+		ionicons-2.0.1/png/512/earth.png \
+		ionicons-2.0.1/png/512/edit.png \
+		ionicons-2.0.1/png/512/egg.png \
+		ionicons-2.0.1/png/512/eject.png \
+		ionicons-2.0.1/png/512/email.png \
+		ionicons-2.0.1/png/512/eye-disabled.png \
+		ionicons-2.0.1/png/512/eye.png \
+		ionicons-2.0.1/png/512/female.png \
+		ionicons-2.0.1/png/512/filing.png \
+		ionicons-2.0.1/png/512/film-marker.png \
+		ionicons-2.0.1/png/512/fireball.png \
+		ionicons-2.0.1/png/512/flag.png \
+		ionicons-2.0.1/png/512/flame.png \
+		ionicons-2.0.1/png/512/flash-off.png \
+		ionicons-2.0.1/png/512/flash.png \
+		ionicons-2.0.1/png/512/flask.png \
+		ionicons-2.0.1/png/512/folder.png \
+		ionicons-2.0.1/png/512/fork-repo.png \
+		ionicons-2.0.1/png/512/fork.png \
+		ionicons-2.0.1/png/512/forward.png \
+		ionicons-2.0.1/png/512/funnel.png \
+		ionicons-2.0.1/png/512/game-controller-a.png \
+		ionicons-2.0.1/png/512/game-controller-b.png \
+		ionicons-2.0.1/png/512/gear-a.png \
+		ionicons-2.0.1/png/512/gear-b.png \
+		ionicons-2.0.1/png/512/grid.png \
+		ionicons-2.0.1/png/512/hammer.png \
+		ionicons-2.0.1/png/512/happy.png \
+		ionicons-2.0.1/png/512/headphone.png \
+		ionicons-2.0.1/png/512/heart-broken.png \
+		ionicons-2.0.1/png/512/heart.png \
+		ionicons-2.0.1/png/512/help-buoy.png \
+		ionicons-2.0.1/png/512/help-circled.png \
+		ionicons-2.0.1/png/512/help.png \
+		ionicons-2.0.1/png/512/home.png \
+		ionicons-2.0.1/png/512/icecream.png \
+		ionicons-2.0.1/png/512/icon-social-google-plus-outline.png \
+		ionicons-2.0.1/png/512/icon-social-google-plus.png \
+		ionicons-2.0.1/png/512/image.png \
+		ionicons-2.0.1/png/512/images.png \
+		ionicons-2.0.1/png/512/information-circled.png \
+		ionicons-2.0.1/png/512/information.png \
+		ionicons-2.0.1/png/512/ionic.png \
+		ionicons-2.0.1/png/512/ios7-alarm-outline.png \
+		ionicons-2.0.1/png/512/ios7-alarm.png \
+		ionicons-2.0.1/png/512/ios7-albums-outline.png \
+		ionicons-2.0.1/png/512/ios7-albums.png \
+		ionicons-2.0.1/png/512/ios7-americanfootball-outline.png \
+		ionicons-2.0.1/png/512/ios7-americanfootball.png \
+		ionicons-2.0.1/png/512/ios7-analytics-outline.png \
+		ionicons-2.0.1/png/512/ios7-analytics.png \
+		ionicons-2.0.1/png/512/ios7-arrow-back.png \
+		ionicons-2.0.1/png/512/ios7-arrow-down.png \
+		ionicons-2.0.1/png/512/ios7-arrow-forward.png \
+		ionicons-2.0.1/png/512/ios7-arrow-left.png \
+		ionicons-2.0.1/png/512/ios7-arrow-right.png \
+		ionicons-2.0.1/png/512/ios7-arrow-thin-down.png \
+		ionicons-2.0.1/png/512/ios7-arrow-thin-left.png \
+		ionicons-2.0.1/png/512/ios7-arrow-thin-right.png \
+		ionicons-2.0.1/png/512/ios7-arrow-thin-up.png \
+		ionicons-2.0.1/png/512/ios7-arrow-up.png \
+		ionicons-2.0.1/png/512/ios7-at-outline.png \
+		ionicons-2.0.1/png/512/ios7-at.png \
+		ionicons-2.0.1/png/512/ios7-barcode-outline.png \
+		ionicons-2.0.1/png/512/ios7-barcode.png \
+		ionicons-2.0.1/png/512/ios7-baseball-outline.png \
+		ionicons-2.0.1/png/512/ios7-baseball.png \
+		ionicons-2.0.1/png/512/ios7-basketball-outline.png \
+		ionicons-2.0.1/png/512/ios7-basketball.png \
+		ionicons-2.0.1/png/512/ios7-bell-outline.png \
+		ionicons-2.0.1/png/512/ios7-bell.png \
+		ionicons-2.0.1/png/512/ios7-bolt-outline.png \
+		ionicons-2.0.1/png/512/ios7-bolt.png \
+		ionicons-2.0.1/png/512/ios7-bookmarks-outline.png \
+		ionicons-2.0.1/png/512/ios7-bookmarks.png \
+		ionicons-2.0.1/png/512/ios7-box-outline.png \
+		ionicons-2.0.1/png/512/ios7-box.png \
+		ionicons-2.0.1/png/512/ios7-briefcase-outline.png \
+		ionicons-2.0.1/png/512/ios7-briefcase.png \
+		ionicons-2.0.1/png/512/ios7-browsers-outline.png \
+		ionicons-2.0.1/png/512/ios7-browsers.png \
+		ionicons-2.0.1/png/512/ios7-calculator-outline.png \
+		ionicons-2.0.1/png/512/ios7-calculator.png \
+		ionicons-2.0.1/png/512/ios7-calendar-outline.png \
+		ionicons-2.0.1/png/512/ios7-calendar.png \
+		ionicons-2.0.1/png/512/ios7-camera-outline.png \
+		ionicons-2.0.1/png/512/ios7-camera.png \
+		ionicons-2.0.1/png/512/ios7-cart-outline.png \
+		ionicons-2.0.1/png/512/ios7-cart.png \
+		ionicons-2.0.1/png/512/ios7-chatboxes-outline.png \
+		ionicons-2.0.1/png/512/ios7-chatboxes.png \
+		ionicons-2.0.1/png/512/ios7-chatbubble-outline.png \
+		ionicons-2.0.1/png/512/ios7-chatbubble.png \
+		ionicons-2.0.1/png/512/ios7-checkmark-empty.png \
+		ionicons-2.0.1/png/512/ios7-checkmark-outline.png \
+		ionicons-2.0.1/png/512/ios7-checkmark.png \
+		ionicons-2.0.1/png/512/ios7-circle-filled.png \
+		ionicons-2.0.1/png/512/ios7-circle-outline.png \
+		ionicons-2.0.1/png/512/ios7-clock-outline.png \
+		ionicons-2.0.1/png/512/ios7-clock.png \
+		ionicons-2.0.1/png/512/ios7-close-empty.png \
+		ionicons-2.0.1/png/512/ios7-close-outline.png \
+		ionicons-2.0.1/png/512/ios7-close.png \
+		ionicons-2.0.1/png/512/ios7-cloud-download-outline.png \
+		ionicons-2.0.1/png/512/ios7-cloud-download.png \
+		ionicons-2.0.1/png/512/ios7-cloud-outline.png \
+		ionicons-2.0.1/png/512/ios7-cloud-upload-outline.png \
+		ionicons-2.0.1/png/512/ios7-cloud-upload.png \
+		ionicons-2.0.1/png/512/ios7-cloud.png \
+		ionicons-2.0.1/png/512/ios7-cloudy-night-outline.png \
+		ionicons-2.0.1/png/512/ios7-cloudy-night.png \
+		ionicons-2.0.1/png/512/ios7-cloudy-outline.png \
+		ionicons-2.0.1/png/512/ios7-cloudy.png \
+		ionicons-2.0.1/png/512/ios7-cog-outline.png \
+		ionicons-2.0.1/png/512/ios7-cog.png \
+		ionicons-2.0.1/png/512/ios7-compose-outline.png \
+		ionicons-2.0.1/png/512/ios7-compose.png \
+		ionicons-2.0.1/png/512/ios7-contact-outline.png \
+		ionicons-2.0.1/png/512/ios7-contact.png \
+		ionicons-2.0.1/png/512/ios7-copy-outline.png \
+		ionicons-2.0.1/png/512/ios7-copy.png \
+		ionicons-2.0.1/png/512/ios7-download-outline.png \
+		ionicons-2.0.1/png/512/ios7-download.png \
+		ionicons-2.0.1/png/512/ios7-drag.png \
+		ionicons-2.0.1/png/512/ios7-email-outline.png \
+		ionicons-2.0.1/png/512/ios7-email.png \
+		ionicons-2.0.1/png/512/ios7-expand.png \
+		ionicons-2.0.1/png/512/ios7-eye-outline.png \
+		ionicons-2.0.1/png/512/ios7-eye.png \
+		ionicons-2.0.1/png/512/ios7-fastforward-outline.png \
+		ionicons-2.0.1/png/512/ios7-fastforward.png \
+		ionicons-2.0.1/png/512/ios7-filing-outline.png \
+		ionicons-2.0.1/png/512/ios7-filing.png \
+		ionicons-2.0.1/png/512/ios7-film-outline.png \
+		ionicons-2.0.1/png/512/ios7-film.png \
+		ionicons-2.0.1/png/512/ios7-flag-outline.png \
+		ionicons-2.0.1/png/512/ios7-flag.png \
+		ionicons-2.0.1/png/512/ios7-folder-outline.png \
+		ionicons-2.0.1/png/512/ios7-folder.png \
+		ionicons-2.0.1/png/512/ios7-football-outline.png \
+		ionicons-2.0.1/png/512/ios7-football.png \
+		ionicons-2.0.1/png/512/ios7-gear-outline.png \
+		ionicons-2.0.1/png/512/ios7-gear.png \
+		ionicons-2.0.1/png/512/ios7-glasses-outline.png \
+		ionicons-2.0.1/png/512/ios7-glasses.png \
+		ionicons-2.0.1/png/512/ios7-heart-outline.png \
+		ionicons-2.0.1/png/512/ios7-heart.png \
+		ionicons-2.0.1/png/512/ios7-help-empty.png \
+		ionicons-2.0.1/png/512/ios7-help-outline.png \
+		ionicons-2.0.1/png/512/ios7-help.png \
+		ionicons-2.0.1/png/512/ios7-home-outline.png \
+		ionicons-2.0.1/png/512/ios7-home.png \
+		ionicons-2.0.1/png/512/ios7-infinite-outline.png \
+		ionicons-2.0.1/png/512/ios7-infinite.png \
+		ionicons-2.0.1/png/512/ios7-information-empty.png \
+		ionicons-2.0.1/png/512/ios7-information-outline.png \
+		ionicons-2.0.1/png/512/ios7-information.png \
+		ionicons-2.0.1/png/512/ios7-ionic-outline.png \
+		ionicons-2.0.1/png/512/ios7-keypad-outline.png \
+		ionicons-2.0.1/png/512/ios7-keypad.png \
+		ionicons-2.0.1/png/512/ios7-lightbulb-outline.png \
+		ionicons-2.0.1/png/512/ios7-lightbulb.png \
+		ionicons-2.0.1/png/512/ios7-location-outline.png \
+		ionicons-2.0.1/png/512/ios7-location.png \
+		ionicons-2.0.1/png/512/ios7-locked-outline.png \
+		ionicons-2.0.1/png/512/ios7-locked.png \
+		ionicons-2.0.1/png/512/ios7-loop-strong.png \
+		ionicons-2.0.1/png/512/ios7-loop.png \
+		ionicons-2.0.1/png/512/ios7-medkit-outline.png \
+		ionicons-2.0.1/png/512/ios7-medkit.png \
+		ionicons-2.0.1/png/512/ios7-mic-off.png \
+		ionicons-2.0.1/png/512/ios7-mic-outline.png \
+		ionicons-2.0.1/png/512/ios7-mic.png \
+		ionicons-2.0.1/png/512/ios7-minus-empty.png \
+		ionicons-2.0.1/png/512/ios7-minus-outline.png \
+		ionicons-2.0.1/png/512/ios7-minus.png \
+		ionicons-2.0.1/png/512/ios7-monitor-outline.png \
+		ionicons-2.0.1/png/512/ios7-monitor.png \
+		ionicons-2.0.1/png/512/ios7-moon-outline.png \
+		ionicons-2.0.1/png/512/ios7-moon.png \
+		ionicons-2.0.1/png/512/ios7-more-outline.png \
+		ionicons-2.0.1/png/512/ios7-more.png \
+		ionicons-2.0.1/png/512/ios7-musical-note.png \
+		ionicons-2.0.1/png/512/ios7-musical-notes.png \
+		ionicons-2.0.1/png/512/ios7-navigate-outline.png \
+		ionicons-2.0.1/png/512/ios7-navigate.png \
+		ionicons-2.0.1/png/512/ios7-paper-outline.png \
+		ionicons-2.0.1/png/512/ios7-paper.png \
+		ionicons-2.0.1/png/512/ios7-paperplane-outline.png \
+		ionicons-2.0.1/png/512/ios7-paperplane.png \
+		ionicons-2.0.1/png/512/ios7-partlysunny-outline.png \
+		ionicons-2.0.1/png/512/ios7-partlysunny.png \
+		ionicons-2.0.1/png/512/ios7-pause-outline.png \
+		ionicons-2.0.1/png/512/ios7-pause.png \
+		ionicons-2.0.1/png/512/ios7-paw-outline.png \
+		ionicons-2.0.1/png/512/ios7-paw.png \
+		ionicons-2.0.1/png/512/ios7-people-outline.png \
+		ionicons-2.0.1/png/512/ios7-people.png \
+		ionicons-2.0.1/png/512/ios7-person-outline.png \
+		ionicons-2.0.1/png/512/ios7-person.png \
+		ionicons-2.0.1/png/512/ios7-personadd-outline.png \
+		ionicons-2.0.1/png/512/ios7-personadd.png \
+		ionicons-2.0.1/png/512/ios7-photos-outline.png \
+		ionicons-2.0.1/png/512/ios7-photos.png \
+		ionicons-2.0.1/png/512/ios7-pie-outline.png \
+		ionicons-2.0.1/png/512/ios7-pie.png \
+		ionicons-2.0.1/png/512/ios7-play-outline.png \
+		ionicons-2.0.1/png/512/ios7-play.png \
+		ionicons-2.0.1/png/512/ios7-plus-empty.png \
+		ionicons-2.0.1/png/512/ios7-plus-outline.png \
+		ionicons-2.0.1/png/512/ios7-plus.png \
+		ionicons-2.0.1/png/512/ios7-pricetag-outline.png \
+		ionicons-2.0.1/png/512/ios7-pricetag.png \
+		ionicons-2.0.1/png/512/ios7-pricetags-outline.png \
+		ionicons-2.0.1/png/512/ios7-pricetags.png \
+		ionicons-2.0.1/png/512/ios7-printer-outline.png \
+		ionicons-2.0.1/png/512/ios7-printer.png \
+		ionicons-2.0.1/png/512/ios7-pulse-strong.png \
+		ionicons-2.0.1/png/512/ios7-pulse.png \
+		ionicons-2.0.1/png/512/ios7-rainy-outline.png \
+		ionicons-2.0.1/png/512/ios7-rainy.png \
+		ionicons-2.0.1/png/512/ios7-recording-outline.png \
+		ionicons-2.0.1/png/512/ios7-recording.png \
+		ionicons-2.0.1/png/512/ios7-redo-outline.png \
+		ionicons-2.0.1/png/512/ios7-redo.png \
+		ionicons-2.0.1/png/512/ios7-refresh-empty.png \
+		ionicons-2.0.1/png/512/ios7-refresh-outline.png \
+		ionicons-2.0.1/png/512/ios7-refresh.png \
+		ionicons-2.0.1/png/512/ios7-reload.png \
+		ionicons-2.0.1/png/512/ios7-reverse-camera-outline.png \
+		ionicons-2.0.1/png/512/ios7-reverse-camera.png \
+		ionicons-2.0.1/png/512/ios7-rewind-outline.png \
+		ionicons-2.0.1/png/512/ios7-rewind.png \
+		ionicons-2.0.1/png/512/ios7-search-strong.png \
+		ionicons-2.0.1/png/512/ios7-search.png \
+		ionicons-2.0.1/png/512/ios7-settings-strong.png \
+		ionicons-2.0.1/png/512/ios7-settings.png \
+		ionicons-2.0.1/png/512/ios7-shrink.png \
+		ionicons-2.0.1/png/512/ios7-skipbackward-outline.png \
+		ionicons-2.0.1/png/512/ios7-skipbackward.png \
+		ionicons-2.0.1/png/512/ios7-skipforward-outline.png \
+		ionicons-2.0.1/png/512/ios7-skipforward.png \
+		ionicons-2.0.1/png/512/ios7-snowy.png \
+		ionicons-2.0.1/png/512/ios7-speedometer-outline.png \
+		ionicons-2.0.1/png/512/ios7-speedometer.png \
+		ionicons-2.0.1/png/512/ios7-star-half.png \
+		ionicons-2.0.1/png/512/ios7-star-outline.png \
+		ionicons-2.0.1/png/512/ios7-star.png \
+		ionicons-2.0.1/png/512/ios7-stopwatch-outline.png \
+		ionicons-2.0.1/png/512/ios7-stopwatch.png \
+		ionicons-2.0.1/png/512/ios7-sunny-outline.png \
+		ionicons-2.0.1/png/512/ios7-sunny.png \
+		ionicons-2.0.1/png/512/ios7-telephone-outline.png \
+		ionicons-2.0.1/png/512/ios7-telephone.png \
+		ionicons-2.0.1/png/512/ios7-tennisball-outline.png \
+		ionicons-2.0.1/png/512/ios7-tennisball.png \
+		ionicons-2.0.1/png/512/ios7-thunderstorm-outline.png \
+		ionicons-2.0.1/png/512/ios7-thunderstorm.png \
+		ionicons-2.0.1/png/512/ios7-time-outline.png \
+		ionicons-2.0.1/png/512/ios7-time.png \
+		ionicons-2.0.1/png/512/ios7-timer-outline.png \
+		ionicons-2.0.1/png/512/ios7-timer.png \
+		ionicons-2.0.1/png/512/ios7-toggle-outline.png \
+		ionicons-2.0.1/png/512/ios7-toggle.png \
+		ionicons-2.0.1/png/512/ios7-trash-outline.png \
+		ionicons-2.0.1/png/512/ios7-trash.png \
+		ionicons-2.0.1/png/512/ios7-undo-outline.png \
+		ionicons-2.0.1/png/512/ios7-undo.png \
+		ionicons-2.0.1/png/512/ios7-unlocked-outline.png \
+		ionicons-2.0.1/png/512/ios7-unlocked.png \
+		ionicons-2.0.1/png/512/ios7-upload-outline.png \
+		ionicons-2.0.1/png/512/ios7-upload.png \
+		ionicons-2.0.1/png/512/ios7-videocam-outline.png \
+		ionicons-2.0.1/png/512/ios7-videocam.png \
+		ionicons-2.0.1/png/512/ios7-volume-high.png \
+		ionicons-2.0.1/png/512/ios7-volume-low.png \
+		ionicons-2.0.1/png/512/ios7-wineglass-outline.png \
+		ionicons-2.0.1/png/512/ios7-wineglass.png \
+		ionicons-2.0.1/png/512/ios7-world-outline.png \
+		ionicons-2.0.1/png/512/ios7-world.png \
+		ionicons-2.0.1/png/512/ipad.png \
+		ionicons-2.0.1/png/512/iphone.png \
+		ionicons-2.0.1/png/512/ipod.png \
+		ionicons-2.0.1/png/512/jet.png \
+		ionicons-2.0.1/png/512/key.png \
+		ionicons-2.0.1/png/512/knife.png \
+		ionicons-2.0.1/png/512/laptop.png \
+		ionicons-2.0.1/png/512/leaf.png \
+		ionicons-2.0.1/png/512/levels.png \
+		ionicons-2.0.1/png/512/lightbulb.png \
+		ionicons-2.0.1/png/512/link.png \
+		ionicons-2.0.1/png/512/load-a.png \
+		ionicons-2.0.1/png/512/load-b.png \
+		ionicons-2.0.1/png/512/load-c.png \
+		ionicons-2.0.1/png/512/load-d.png \
+		ionicons-2.0.1/png/512/location.png \
+		ionicons-2.0.1/png/512/locked.png \
+		ionicons-2.0.1/png/512/log-in.png \
+		ionicons-2.0.1/png/512/log-out.png \
+		ionicons-2.0.1/png/512/loop.png \
+		ionicons-2.0.1/png/512/magnet.png \
+		ionicons-2.0.1/png/512/male.png \
+		ionicons-2.0.1/png/512/man.png \
+		ionicons-2.0.1/png/512/map.png \
+		ionicons-2.0.1/png/512/medkit.png \
+		ionicons-2.0.1/png/512/merge.png \
+		ionicons-2.0.1/png/512/mic-a.png \
+		ionicons-2.0.1/png/512/mic-b.png \
+		ionicons-2.0.1/png/512/mic-c.png \
+		ionicons-2.0.1/png/512/minus-circled.png \
+		ionicons-2.0.1/png/512/minus-round.png \
+		ionicons-2.0.1/png/512/minus.png \
+		ionicons-2.0.1/png/512/model-s.png \
+		ionicons-2.0.1/png/512/monitor.png \
+		ionicons-2.0.1/png/512/more.png \
+		ionicons-2.0.1/png/512/mouse.png \
+		ionicons-2.0.1/png/512/music-note.png \
+		ionicons-2.0.1/png/512/navicon-round.png \
+		ionicons-2.0.1/png/512/navicon.png \
+		ionicons-2.0.1/png/512/navigate.png \
+		ionicons-2.0.1/png/512/network.png \
+		ionicons-2.0.1/png/512/no-smoking.png \
+		ionicons-2.0.1/png/512/nuclear.png \
+		ionicons-2.0.1/png/512/outlet.png \
+		ionicons-2.0.1/png/512/paper-airplane.png \
+		ionicons-2.0.1/png/512/paperclip.png \
+		ionicons-2.0.1/png/512/pause.png \
+		ionicons-2.0.1/png/512/person-add.png \
+		ionicons-2.0.1/png/512/person-stalker.png \
+		ionicons-2.0.1/png/512/person.png \
+		ionicons-2.0.1/png/512/pie-graph.png \
+		ionicons-2.0.1/png/512/pin.png \
+		ionicons-2.0.1/png/512/pinpoint.png \
+		ionicons-2.0.1/png/512/pizza.png \
+		ionicons-2.0.1/png/512/plane.png \
+		ionicons-2.0.1/png/512/planet.png \
+		ionicons-2.0.1/png/512/play.png \
+		ionicons-2.0.1/png/512/playstation.png \
+		ionicons-2.0.1/png/512/plus-circled.png \
+		ionicons-2.0.1/png/512/plus-round.png \
+		ionicons-2.0.1/png/512/plus.png \
+		ionicons-2.0.1/png/512/podium.png \
+		ionicons-2.0.1/png/512/pound.png \
+		ionicons-2.0.1/png/512/power.png \
+		ionicons-2.0.1/png/512/pricetag.png \
+		ionicons-2.0.1/png/512/pricetags.png \
+		ionicons-2.0.1/png/512/printer.png \
+		ionicons-2.0.1/png/512/pull-request.png \
+		ionicons-2.0.1/png/512/qr-scanner.png \
+		ionicons-2.0.1/png/512/quote.png \
+		ionicons-2.0.1/png/512/radio-waves.png \
+		ionicons-2.0.1/png/512/record.png \
+		ionicons-2.0.1/png/512/refresh.png \
+		ionicons-2.0.1/png/512/reply-all.png \
+		ionicons-2.0.1/png/512/reply.png \
+		ionicons-2.0.1/png/512/ribbon-a.png \
+		ionicons-2.0.1/png/512/ribbon-b.png \
+		ionicons-2.0.1/png/512/sad.png \
+		ionicons-2.0.1/png/512/scissors.png \
+		ionicons-2.0.1/png/512/search.png \
+		ionicons-2.0.1/png/512/settings.png \
+		ionicons-2.0.1/png/512/share.png \
+		ionicons-2.0.1/png/512/shuffle.png \
+		ionicons-2.0.1/png/512/skip-backward.png \
+		ionicons-2.0.1/png/512/skip-forward.png \
+		ionicons-2.0.1/png/512/social-android-outline.png \
+		ionicons-2.0.1/png/512/social-android.png \
+		ionicons-2.0.1/png/512/social-apple-outline.png \
+		ionicons-2.0.1/png/512/social-apple.png \
+		ionicons-2.0.1/png/512/social-bitcoin-outline.png \
+		ionicons-2.0.1/png/512/social-bitcoin.png \
+		ionicons-2.0.1/png/512/social-buffer-outline.png \
+		ionicons-2.0.1/png/512/social-buffer.png \
+		ionicons-2.0.1/png/512/social-designernews-outline.png \
+		ionicons-2.0.1/png/512/social-designernews.png \
+		ionicons-2.0.1/png/512/social-dribbble-outline.png \
+		ionicons-2.0.1/png/512/social-dribbble.png \
+		ionicons-2.0.1/png/512/social-dropbox-outline.png \
+		ionicons-2.0.1/png/512/social-dropbox.png \
+		ionicons-2.0.1/png/512/social-facebook-outline.png \
+		ionicons-2.0.1/png/512/social-facebook.png \
+		ionicons-2.0.1/png/512/social-foursquare-outline.png \
+		ionicons-2.0.1/png/512/social-foursquare.png \
+		ionicons-2.0.1/png/512/social-freebsd-devil.png \
+		ionicons-2.0.1/png/512/social-github-outline.png \
+		ionicons-2.0.1/png/512/social-github.png \
+		ionicons-2.0.1/png/512/social-google-outline.png \
+		ionicons-2.0.1/png/512/social-google.png \
+		ionicons-2.0.1/png/512/social-googleplus-outline.png \
+		ionicons-2.0.1/png/512/social-googleplus.png \
+		ionicons-2.0.1/png/512/social-hackernews-outline.png \
+		ionicons-2.0.1/png/512/social-hackernews.png \
+		ionicons-2.0.1/png/512/social-instagram-outline.png \
+		ionicons-2.0.1/png/512/social-instagram.png \
+		ionicons-2.0.1/png/512/social-linkedin-outline.png \
+		ionicons-2.0.1/png/512/social-linkedin.png \
+		ionicons-2.0.1/png/512/social-pinterest-outline.png \
+		ionicons-2.0.1/png/512/social-pinterest.png \
+		ionicons-2.0.1/png/512/social-reddit-outline.png \
+		ionicons-2.0.1/png/512/social-reddit.png \
+		ionicons-2.0.1/png/512/social-rss-outline.png \
+		ionicons-2.0.1/png/512/social-rss.png \
+		ionicons-2.0.1/png/512/social-skype-outline.png \
+		ionicons-2.0.1/png/512/social-skype.png \
+		ionicons-2.0.1/png/512/social-tumblr-outline.png \
+		ionicons-2.0.1/png/512/social-tumblr.png \
+		ionicons-2.0.1/png/512/social-tux.png \
+		ionicons-2.0.1/png/512/social-twitter-outline.png \
+		ionicons-2.0.1/png/512/social-twitter.png \
+		ionicons-2.0.1/png/512/social-usd-outline.png \
+		ionicons-2.0.1/png/512/social-usd.png \
+		ionicons-2.0.1/png/512/social-vimeo-outline.png \
+		ionicons-2.0.1/png/512/social-vimeo.png \
+		ionicons-2.0.1/png/512/social-windows-outline.png \
+		ionicons-2.0.1/png/512/social-windows.png \
+		ionicons-2.0.1/png/512/social-wordpress-outline.png \
+		ionicons-2.0.1/png/512/social-wordpress.png \
+		ionicons-2.0.1/png/512/social-yahoo-outline.png \
+		ionicons-2.0.1/png/512/social-yahoo.png \
+		ionicons-2.0.1/png/512/social-youtube-outline.png \
+		ionicons-2.0.1/png/512/social-youtube.png \
+		ionicons-2.0.1/png/512/speakerphone.png \
+		ionicons-2.0.1/png/512/speedometer.png \
+		ionicons-2.0.1/png/512/spoon.png \
+		ionicons-2.0.1/png/512/star.png \
+		ionicons-2.0.1/png/512/stats-bars.png \
+		ionicons-2.0.1/png/512/steam.png \
+		ionicons-2.0.1/png/512/stop.png \
+		ionicons-2.0.1/png/512/thermometer.png \
+		ionicons-2.0.1/png/512/thumbsdown.png \
+		ionicons-2.0.1/png/512/thumbsup.png \
+		ionicons-2.0.1/png/512/toggle-filled.png \
+		ionicons-2.0.1/png/512/toggle.png \
+		ionicons-2.0.1/png/512/trash-a.png \
+		ionicons-2.0.1/png/512/trash-b.png \
+		ionicons-2.0.1/png/512/trophy.png \
+		ionicons-2.0.1/png/512/umbrella.png \
+		ionicons-2.0.1/png/512/university.png \
+		ionicons-2.0.1/png/512/unlocked.png \
+		ionicons-2.0.1/png/512/upload.png \
+		ionicons-2.0.1/png/512/usb.png \
+		ionicons-2.0.1/png/512/videocamera.png \
+		ionicons-2.0.1/png/512/volume-high.png \
+		ionicons-2.0.1/png/512/volume-low.png \
+		ionicons-2.0.1/png/512/volume-medium.png \
+		ionicons-2.0.1/png/512/volume-mute.png \
+		ionicons-2.0.1/png/512/wand.png \
+		ionicons-2.0.1/png/512/waterdrop.png \
+		ionicons-2.0.1/png/512/wifi.png \
+		ionicons-2.0.1/png/512/wineglass.png \
+		ionicons-2.0.1/png/512/woman.png \
+		ionicons-2.0.1/png/512/wrench.png \
+		ionicons-2.0.1/png/512/xbox.png mainwindow.h \
 		ganttrect.h \
 		ganttflow.h \
 		constants.h \
@@ -84,7 +692,9 @@ DIST          = gantticon.png \
 		gclgms.h \
 		gdxcc.h \
 		wizard.h \
-		exportwizard.h main.cpp \
+		exportwizard.h \
+		ganttgraphicsview.h \
+		ganttline.h main.cpp \
 		mainwindow.cpp \
 		ganttrect.cpp \
 		ganttflow.cpp \
@@ -92,7 +702,9 @@ DIST          = gantticon.png \
 		gclgms.c \
 		gdxcc.c \
 		wizard.cpp \
-		exportwizard.cpp
+		exportwizard.cpp \
+		ganttgraphicsview.cpp \
+		ganttline.cpp
 QMAKE_TARGET  = Gantt
 DESTDIR        = release/ #avoid trailing-slash linebreak
 TARGET         = Gantt.exe
@@ -115,10 +727,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Gantt.zip $(SOURCES) $(DIST) Gantt.pro ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qdevice.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/device_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/common/angle.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qconfig.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_zlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qgenericbearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qico.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qminimal.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qnativewifibearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlite.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlmysql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlodbc.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlpsql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqltds.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qtuiotouchplugin.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qwindows.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_windowsprintersupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_functions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++/qmake.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_post.prf .qmake.stash ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resolve_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/build_pass.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/rtti.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/precompile_header.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/warn_on.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resources.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/moc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/opengl.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/uic.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/file_copies.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/windows.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/testcase_targets.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exceptions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/yacc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/lex.prf Gantt.pro ../mxe/usr/i686-w64-mingw32.static/qt5/lib/qtmain.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5PrintSupport.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Widgets.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Gui.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Core.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/printsupport/windowsprintersupport.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/platforms/qwindows.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/imageformats/qico.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) Gantt.zip $(SOURCES) $(DIST) Gantt.pro ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qdevice.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/device_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/common/angle.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/qconfig.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_concurrent_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_core_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_dbus_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_gui_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_network_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_opengl_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_printsupport_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_sql_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_testlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_widgets_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_xml_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_lib_zlib_private.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qgenericbearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qico.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qminimal.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qnativewifibearer.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlite.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlmysql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlodbc.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqlpsql.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qsqltds.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qtuiotouchplugin.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_qwindows.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/modules/qt_plugin_windowsprintersupport.pri ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_functions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/qt_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++/qmake.conf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/spec_post.prf .qmake.stash ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/default_pre.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resolve_config.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exclusive_builds_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/default_post.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/build_pass.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/rtti.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/precompile_header.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/warn_on.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/qt.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/resources.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/moc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/opengl.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/uic.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/file_copies.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/win32/windows.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/testcase_targets.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/exceptions.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/yacc.prf ../mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/features/lex.prf Gantt.pro icons.qrc ../mxe/usr/i686-w64-mingw32.static/qt5/lib/qtmain.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5PrintSupport.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Widgets.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Gui.prl ../mxe/usr/i686-w64-mingw32.static/qt5/lib/Qt5Core.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/printsupport/windowsprintersupport.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/platforms/qwindows.prl ../mxe/usr/i686-w64-mingw32.static/qt5/plugins/imageformats/qico.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release/main.o release/mainwindow.o release/ganttrect.o release/ganttflow.o release/qtablewidgetnumberitem.o release/gclgms.o release/gdxcc.o release/wizard.o release/exportwizard.o release/gantt_plugin_import.o release/moc_mainwindow.o release/moc_ganttrect.o release/moc_ganttflow.o release/moc_wizard.o release/moc_exportwizard.o
+	-$(DEL_FILE) release/main.o release/mainwindow.o release/ganttrect.o release/ganttflow.o release/qtablewidgetnumberitem.o release/gclgms.o release/gdxcc.o release/wizard.o release/exportwizard.o release/ganttgraphicsview.o release/ganttline.o release/gantt_plugin_import.o release/qrc_icons.o release/moc_mainwindow.o release/moc_ganttrect.o release/moc_ganttflow.o release/moc_wizard.o release/moc_exportwizard.o release/moc_ganttline.o
 	-$(DEL_FILE) release/gantt_res.o
 
 distclean: clean 
@@ -136,11 +748,20 @@ benchmark: first
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all:
+compiler_rcc_make_all: release/qrc_icons.cpp
 compiler_rcc_clean:
-compiler_moc_header_make_all: release/moc_mainwindow.cpp release/moc_ganttrect.cpp release/moc_ganttflow.cpp release/moc_wizard.cpp release/moc_exportwizard.cpp
+	-$(DEL_FILE) release/qrc_icons.cpp
+release/qrc_icons.cpp: icons.qrc \
+		../mxe/usr/i686-w64-mingw32.static/qt5/bin/rcc \
+		ionicons-2.0.1/png/512/minus-round.png \
+		ionicons-2.0.1/png/512/navicon-round.png \
+		ionicons-2.0.1/png/512/plus-round.png \
+		ionicons-2.0.1/png/512/arrow-expand.png
+	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/rcc -name icons icons.qrc -o release/qrc_icons.cpp
+
+compiler_moc_header_make_all: release/moc_mainwindow.cpp release/moc_ganttrect.cpp release/moc_ganttflow.cpp release/moc_wizard.cpp release/moc_exportwizard.cpp release/moc_ganttline.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release/moc_mainwindow.cpp release/moc_ganttrect.cpp release/moc_ganttflow.cpp release/moc_wizard.cpp release/moc_exportwizard.cpp
+	-$(DEL_FILE) release/moc_mainwindow.cpp release/moc_ganttrect.cpp release/moc_ganttflow.cpp release/moc_wizard.cpp release/moc_exportwizard.cpp release/moc_ganttline.cpp
 release/moc_mainwindow.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QMainWindow \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qmainwindow.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
@@ -664,6 +1285,93 @@ release/moc_exportwizard.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtW
 		../mxe/usr/i686-w64-mingw32.static/qt5/bin/moc
 	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/moc $(DEFINES) -D__GNUC__ -DWIN32 -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++ -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtPrintSupport -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include exportwizard.h -o release/moc_exportwizard.cpp
 
+release/moc_ganttline.cpp: ../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QObject \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qconfig.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfeatures.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocessordetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcompilerdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypeinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypetraits.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qisenum.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsysinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlogging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qflags.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasicatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_bootstrap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qgenericatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_cxx11.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_msvc.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobalstatic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmutex.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnumeric.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhashfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpair.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraylist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregexp.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringmatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetatype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsLineItem \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgraphicsitem.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiodevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlocale.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qshareddata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpoint.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qset.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontiguouscache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainterpath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpolygon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qregion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatastream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgba64.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixelformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtransform.h \
+		ganttline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/bin/moc
+	/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/bin/moc $(DEFINES) -D__GNUC__ -DWIN32 -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/mkspecs/win32-g++ -I/Users/juliusnaeumann/Developer/Gantt -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtPrintSupport -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++ -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/i686-w64-mingw32.static -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include/c++/backward -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include -I/Users/juliusnaeumann/Developer/mxe/usr/lib/gcc/i686-w64-mingw32.static/4.9.4/include-fixed -I/Users/juliusnaeumann/Developer/mxe/usr/i686-w64-mingw32.static/include ganttline.h -o release/moc_ganttline.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all: ui_mainwindow.h ui_wizard.h ui_exportwizard.h
@@ -687,7 +1395,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 
 
@@ -1895,8 +2603,418 @@ release/exportwizard.o: exportwizard.cpp exportwizard.h \
 		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWizardPage
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/exportwizard.o exportwizard.cpp
 
+release/ganttgraphicsview.o: ganttgraphicsview.cpp ganttgraphicsview.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsView \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgraphicsview.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetatype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qconfig.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfeatures.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocessordetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcompilerdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypeinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypetraits.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qisenum.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsysinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlogging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qflags.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasicatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_bootstrap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qgenericatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_cxx11.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_msvc.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobalstatic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmutex.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnumeric.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpoint.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhashfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpair.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraylist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregexp.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringmatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgba64.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qshareddata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixelformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtransform.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpolygon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qregion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatastream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiodevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainterpath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextoption.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpen.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbrush.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfont.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontmetrics.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qscrollarea.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractscrollarea.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qframe.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpalette.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qsizepolicy.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcursor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qkeysequence.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlocale.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qset.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontiguouscache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qurlquery.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfiledevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector2d.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtouchdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgraphicsscene.h \
+		ganttrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QPen \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsRectItem \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgraphicsitem.h \
+		ganttflow.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QObject \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsPolygonItem \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QtGui \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QtGuiDepends \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QtCore \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QtCoreDepends \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractanimation.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qanimationgroup.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qparallelanimationgroup.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpauseanimation.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpropertyanimation.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariantanimation.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeasingcurve.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsequentialanimationgroup.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextcodec.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qendian.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlibraryinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatetime.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbuffer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdir.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfileinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdiriterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfileselector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QStringList \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfilesystemwatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlockfile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qloggingcategory.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocess.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qresource.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsavefile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsettings.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstandardpaths.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstorageinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtemporarydir.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QScopedPointer \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtemporaryfile.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractitemmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractproxymodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qidentityproxymodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qitemselectionmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsortfilterproxymodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlistmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qjsonarray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qjsonvalue.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qjsondocument.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qjsonobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstracteventdispatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeventloop.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractnativeeventfilter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasictimer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreapplication.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetaobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmimedata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectcleanuphandler.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedmemory.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsignalmapper.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsocketnotifier.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemsemaphore.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtimer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtranslator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qwineventnotifier.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmimedatabase.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmimetype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfactoryinterface.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlibrary.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qplugin.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpluginloader.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/quuid.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstractstate.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qabstracttransition.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeventtransition.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfinalstate.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhistorystate.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsignaltransition.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstate.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstatemachine.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qexception.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfuture.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfutureinterface.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrunnable.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qresultstore.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfuturesynchronizer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfuturewatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qreadwritelock.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsemaphore.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qthread.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qthreadpool.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qthreadstorage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qwaitcondition.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydataops.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydatapointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbitarray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraymatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcollator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcommandlineoption.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcommandlineparser.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcryptographichash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qelapsedtimer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlinkedlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmessageauthenticationcode.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qqueue.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregularexpression.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedvaluerollback.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstack.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextboundaryfinder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtimeline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtimezone.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversionnumber.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qxmlstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtcoreversion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qaccessible.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qaccessiblebridge.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qaccessibleobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qaccessibleplugin.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbitmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qicon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qiconengine.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qiconengineplugin.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimageiohandler.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimagereader.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimagewriter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmovie.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpicture.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpictureformatplugin.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmapcache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qstandarditemmodel.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qclipboard.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qdrag.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qgenericplugin.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qgenericpluginfactory.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qguiapplication.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qinputmethod.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qoffscreensurface.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qsurface.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qsurfaceformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglcontext.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QSurfaceFormat \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopengl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qt_windows.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopengles2ext.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglext.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglversionfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglwindow.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QPaintDeviceWindow \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevicewindow.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QWindow \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindow.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QEvent \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QMargins \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QRect \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QPaintDevice \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QOpenGLContext \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QImage \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrasterwindow.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qscreen.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QList \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QSize \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QSizeF \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QTransform \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qsessionmanager.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qstylehints.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qgenericmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix4x4.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector3d.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector4d.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qquaternion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglbuffer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopengldebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglextrafunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglframebufferobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglpixeltransferoptions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QSharedDataPointer \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglshaderprogram.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopengltexture.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopengltimerquery.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qopenglvertexarrayobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbackingstore.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpagedpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpagelayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpagesize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintengine.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpdfwriter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qabstracttextdocumentlayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextlayout.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qglyphrun.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrawfont.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontdatabase.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextcursor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextdocument.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qstatictext.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qsyntaxhighlighter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextdocumentfragment.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextdocumentwriter.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtexttable.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qdesktopservices.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvalidator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtguiversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ganttgraphicsview.o ganttgraphicsview.cpp
+
+release/ganttline.o: ganttline.cpp ganttline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/QObject \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qconfig.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfeatures.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsystemdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qprocessordetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcompilerdetection.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypeinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtypetraits.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qisenum.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsysinfo.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlogging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qflags.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbasicatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_bootstrap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qgenericatomic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_cxx11.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qatomic_msvc.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobalstatic.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmutex.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnumeric.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhashfunctions.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpair.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearraylist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringlist.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qregexp.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringmatcher.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreevent.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qscopedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmetatype.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGraphicsLineItem \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgraphicsitem.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdebug.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qhash.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qtextstream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiodevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlocale.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qshareddata.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvector.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qpoint.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qset.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontiguouscache.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsharedpointer_impl.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpainterpath.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qmatrix.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpolygon.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qregion.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qdatastream.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qline.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixmap.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgba64.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qimage.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpixelformat.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtransform.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QPen \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpen.h \
+		../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qbrush.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ganttline.o ganttline.cpp
+
 release/gantt_plugin_import.o: /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/gantt_plugin_import.o /Users/juliusnaeumann/Developer/Gantt/gantt_plugin_import.cpp
+
+release/qrc_icons.o: release/qrc_icons.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/qrc_icons.o release/qrc_icons.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_mainwindow.o release/moc_mainwindow.cpp
@@ -1912,6 +3030,9 @@ release/moc_wizard.o: release/moc_wizard.cpp
 
 release/moc_exportwizard.o: release/moc_exportwizard.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_exportwizard.o release/moc_exportwizard.cpp
+
+release/moc_ganttline.o: release/moc_ganttline.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_ganttline.o release/moc_ganttline.cpp
 
 ####### Install
 
